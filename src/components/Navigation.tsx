@@ -92,6 +92,14 @@ const Navigation = () => {
             >
               About
             </Link>
+            <Link
+              to="/faq"
+              className={`transition-smooth hover:text-accent ${
+                isActive('/faq') ? 'text-accent font-medium' : 'text-foreground'
+              }`}
+            >
+              FAQ
+            </Link>
           </div>
 
           {/* Client Login & CTA */}
@@ -108,6 +116,11 @@ const Navigation = () => {
             >
               Client Login
             </Link>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/faq">
+                <span>FAQ</span>
+              </Link>
+            </Button>
             <Button asChild variant="outline" size="sm" className="hidden md:inline-flex">
               <Link to="/ai-feedback">
                 <Sparkles className="h-4 w-4" />
@@ -172,6 +185,13 @@ const Navigation = () => {
                 onClick={() => setIsOpen(false)}
               >
                 About
+              </Link>
+              <Link
+                to="/faq"
+                className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
+                onClick={() => setIsOpen(false)}
+              >
+                FAQ
               </Link>
               <Link
                 to="/payment"
