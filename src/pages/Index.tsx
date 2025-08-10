@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle, Star, Users, Globe, Shield, Target, Zap, Award, BookOpen, DollarSign, Video, BarChart3 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import LeadMagnet from '@/components/LeadMagnet';
 
 const Index = () => {
   const trustLogos = [
@@ -36,8 +37,8 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Clearline Studio - Building Modern, Trusted Websites</title>
-        <meta name="description" content="We build polished, high-performance digital platforms that close the trust gap, showcase your expertise, and convert discerning visitors into high-value clients." />
+        <title>Websites That Drive Measurable Growth | Clearline Studio</title>
+        <meta name="description" content="Strategy-led, performance-optimized digital platforms for ambitious businesses and nonprofits." />
         <link rel="canonical" href="/" />
       </Helmet>
       
@@ -47,16 +48,15 @@ const Index = () => {
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-6">Professional Digital Presence</Badge>
             <h1 className="mb-6 text-primary">
-              Websites for Professionals Who Trade on Credibility
+              Websites That Drive Measurable Growth — Not Just Look Good
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              We build polished, high-performance digital platforms that close the trust gap, 
-              showcase your expertise, and convert discerning visitors into high-value clients.
+              Strategy-led, performance-optimized digital platforms for ambitious businesses and nonprofits.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Button asChild size="lg" className="gradient-accent text-accent-foreground font-semibold px-8">
-                <Link to="/contact" className="flex items-center space-x-2">
-                  <span>Schedule a Confidential Consultation</span>
+                <Link to="/book" className="flex items-center space-x-2">
+                  <span>Schedule a Strategy Call</span>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
@@ -155,6 +155,15 @@ const Index = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Lead Magnet */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <LeadMagnet />
           </div>
         </div>
       </section>

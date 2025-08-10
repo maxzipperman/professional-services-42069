@@ -66,8 +66,7 @@ const Contact = () => {
               <span className="text-accent"> Clearline Studio</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Ready to transform your online presence? We'd love to learn about your project 
-              and provide a free website audit with actionable recommendations.
+              Fill out the form or schedule directly — we’ll respond within 24 hours.
             </p>
           </div>
         </div>
@@ -89,83 +88,33 @@ const Contact = () => {
               
               <CardContent className="space-y-6">
                 <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name *</Label>
-                      <Input id="firstName" placeholder="John" required />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name *</Label>
-                      <Input id="lastName" placeholder="Smith" required />
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Name *</Label>
+                    <Input id="name" placeholder="Jane Doe" required />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address *</Label>
-                    <Input id="email" type="email" placeholder="john@example.com" required />
+                    <Input id="email" type="email" placeholder="jane@example.com" required />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="company">Company/Organization</Label>
+                    <Label htmlFor="company">Company</Label>
                     <Input id="company" placeholder="Your Company Name" />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="website">Current Website (if any)</Label>
+                    <Label htmlFor="website">Website (optional)</Label>
                     <Input id="website" placeholder="https://yourwebsite.com" />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="industry">Industry</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your industry" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {industries.map(industry => <SelectItem key={industry} value={industry.toLowerCase().replace(/\s+/g, '-')}>
-                            {industry}
-                          </SelectItem>)}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="service">Service Interest</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="What service interests you most?" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {services.map(service => <SelectItem key={service} value={service.toLowerCase().replace(/\s+/g, '-')}>
-                            {service}
-                          </SelectItem>)}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="budget">Project Budget</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your budget range" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="under-2500">Under $2,500</SelectItem>
-                        <SelectItem value="2500-5000">$2,500 - $5,000</SelectItem>
-                        <SelectItem value="5000-10000">$5,000 - $10,000</SelectItem>
-                        <SelectItem value="10000-plus">$10,000+</SelectItem>
-                        <SelectItem value="not-sure">Not sure yet</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Project Details</Label>
-                    <Textarea id="message" placeholder="Tell us about your project goals, challenges, and timeline..." rows={4} />
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea id="message" placeholder="Tell us about your goals, challenges, and timeline..." rows={5} />
                   </div>
 
                   <Button type="submit" className="w-full gradient-accent text-accent-foreground font-semibold hover-lift">
-                    Request Free Audit
+                    Send Message
                   </Button>
                 </form>
               </CardContent>

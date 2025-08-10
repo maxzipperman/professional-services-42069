@@ -55,6 +55,22 @@ const Navigation = () => {
             >
               Services
             </Link>
+            <Link
+              to="/pricing"
+              className={`transition-smooth hover:text-accent ${
+                isActive('/pricing') ? 'text-accent font-medium' : 'text-foreground'
+              }`}
+            >
+              Pricing
+            </Link>
+            <Link
+              to="/resources"
+              className={`transition-smooth hover:text-accent ${
+                isActive('/resources') ? 'text-accent font-medium' : 'text-foreground'
+              }`}
+            >
+              Resources
+            </Link>
             
             {/* Industries Dropdown */}
             <DropdownMenu>
@@ -77,12 +93,12 @@ const Navigation = () => {
             </DropdownMenu>
 
             <Link
-              to="/portfolio"
+              to="/case-studies"
               className={`transition-smooth hover:text-accent ${
-                isActive('/portfolio') ? 'text-accent font-medium' : 'text-foreground'
+                isActive('/case-studies') ? 'text-accent font-medium' : 'text-foreground'
               }`}
             >
-              Portfolio
+              Case Studies
             </Link>
             <Link
               to="/about"
@@ -128,7 +144,7 @@ const Navigation = () => {
               </Link>
             </Button>
             <Button asChild size="sm" className="gradient-accent text-accent-foreground font-medium">
-              <Link to="/book" data-cta="primary" data-page="nav">Book Your Strategy Call</Link>
+              <Link to="/book" data-cta="primary" data-page="nav">Schedule a Strategy Call</Link>
             </Button>
           </div>
 
@@ -159,6 +175,20 @@ const Navigation = () => {
               >
                 Services
               </Link>
+              <Link
+                to="/pricing"
+                className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
+                onClick={() => setIsOpen(false)}
+              >
+                Pricing
+              </Link>
+              <Link
+                to="/resources"
+                className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
+                onClick={() => setIsOpen(false)}
+              >
+                Resources
+              </Link>
               <div className="px-3 py-2">
                 <div className="text-sm font-medium text-muted-foreground mb-2">Industries</div>
                 {industries.map((industry) => (
@@ -173,11 +203,11 @@ const Navigation = () => {
                 ))}
               </div>
               <Link
-                to="/portfolio"
+                to="/case-studies"
                 className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
                 onClick={() => setIsOpen(false)}
               >
-                Portfolio
+                Case Studies
               </Link>
               <Link
                 to="/about"

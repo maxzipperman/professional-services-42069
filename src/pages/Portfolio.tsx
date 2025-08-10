@@ -20,9 +20,9 @@ const Portfolio = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Portfolio | Clearline Studio</title>
-        <meta name="description" content="Selected client work and performance wins across professional services and local businesses." />
-        <link rel="canonical" href="/portfolio" />
+        <title>Case Studies | Clearline Studio</title>
+        <meta name="description" content="Proof that strategy-led design drives measurable results. Explore case studies by industry and service." />
+        <link rel="canonical" href="/case-studies" />
       </Helmet>
 
       <section className="py-12 lg:py-16">
