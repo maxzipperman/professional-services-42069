@@ -26,7 +26,13 @@ serve(async (req: Request) => {
       { auth: { persistSession: false } }
     );
 
-    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY") || "";
+    if (!stripeKey || !stripeKey.startsWith("sk_")) {
+      throw new Error(
+        "Stripe secret key missing or invalid. Please set STRIPE_SECRET_KEY (starts with 'sk_') in Supabase Edge Function secrets."
+      );
+    }
+    const stripe = new Stripe(stripeKey, {
       apiVersion: "2023-10-16",
     });
 
