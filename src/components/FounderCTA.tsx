@@ -50,7 +50,7 @@ export const FounderCTA = ({ ctaText, variant = 'primary' }: FounderCTAProps) =>
             <div className="relative">
               <img 
                 src={founderPhotoUrl} 
-                alt="Founder"
+                alt="Founder with his golden retriever, Chuck, in Los Angeles"
                 className="w-24 h-24 rounded-full object-cover shadow-accent"
               />
               <div className="absolute -bottom-2 -right-2 bg-primary text-primary-foreground rounded-full p-2">

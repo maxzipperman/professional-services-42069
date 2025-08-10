@@ -24,7 +24,7 @@ const About = () => {
         <title>About Clearline Studio | Hand-Coded Websites</title>
         <meta 
           name="description" 
-          content="Learn about Clearline Studio—hand-coded, blazing-fast websites for professional services and local businesses." 
+          content="About Clearline Studio—Ex‑Google with 15+ years in mobile and web. I build fast, SEO‑first sites for professional services and local businesses." 
         />
         <link rel="canonical" href={canonical} />
         <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
@@ -47,15 +47,24 @@ const About = () => {
           <div className="container mx-auto px-4">
             <article className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start max-w-6xl mx-auto">
               <div>
-                <img
-                  src={founderPhotoUrl}
-                  alt="Founder of Clearline Studio"
-                  loading="lazy"
-                  className="w-full h-auto rounded-xl border border-border shadow-large"
-                />
+                <figure>
+                  <img
+                    src={founderPhotoUrl}
+                    alt="Founder with his golden retriever, Chuck, in Los Angeles"
+                    loading="lazy"
+                    className="w-full h-auto rounded-xl border border-border shadow-large"
+                  />
+                  <figcaption className="mt-2 text-sm text-muted-foreground">
+                    I live in Los Angeles with my golden retriever, Chuck.
+                  </figcaption>
+                </figure>
               </div>
               <div>
                 <h2 className="mb-4">Hi, I’m the founder behind Clearline</h2>
+                <p className="text-muted-foreground mb-4">
+                  Before Clearline, I spent nearly a decade at Google and have 15+ years working across the mobile app and website ecosystem.
+                  I bring a unique blend of consulting, business acumen, technical know-how, and SEO experience to every engagement.
+                </p>
                 <p className="text-muted-foreground mb-4">
                   I partner with professional services and local businesses to launch websites that load instantly,
                   rank well, and convert visitors into clients.
@@ -75,6 +84,15 @@ const About = () => {
                       <li>Messaging and design that communicate value</li>
                       <li>Hand-coded build with a performance-first approach</li>
                       <li>Launch with analytics, SEO, and a simple handoff</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2">What you can expect</h3>
+                    <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                      <li>Clear roadmaps and transparent pricing</li>
+                      <li>Senior-level attention and thoughtful communication</li>
+                      <li>Performance, accessibility, and SEO baked in from day one</li>
+                      <li>Measurable results and practical recommendations</li>
                     </ul>
                   </div>
                 </div>
