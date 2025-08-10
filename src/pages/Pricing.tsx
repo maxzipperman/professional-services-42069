@@ -8,44 +8,55 @@ import { Link } from 'react-router-dom';
 const Pricing = () => {
   const packages = [
     {
-      name: 'Starter Site',
-      price: '$7,000–$10,000',
-      desc: 'High-performance 5-page site—fast, accessible, conversion-focused.',
+      name: 'Website Refresh',
+      price: '$995',
+      desc: 'Quick updates to improve your existing site\'s performance and conversion.',
       bullets: [
-        'Strategy kickoff + messaging outline',
+        'Performance optimization',
+        'Mobile responsiveness fixes',
+        'Basic SEO improvements',
+        'CTA and form optimization',
+      ],
+    },
+    {
+      name: 'Professional Site',
+      price: '$2,495',
+      desc: 'Clean, professional 3-5 page site built for results.',
+      bullets: [
         'Custom design + responsive build',
-        'On-page SEO + analytics setup',
-        '90+ Lighthouse targets',
+        'On-page SEO setup',
+        'Contact forms + analytics',
+        'Performance optimization',
       ],
     },
     {
-      name: 'Growth Site',
-      price: '$12,000–$18,000',
-      desc: 'Deeper strategy + pages, CMS content, and CRO foundations.',
+      name: 'Growth Platform',
+      price: '$4,500',
+      desc: 'Strategy-driven site with advanced features and CRO focus.',
       bullets: [
-        'Positioning + messaging framework',
-        'Custom design system + components',
-        'CMS-driven content (blog, case studies)',
-        'CRO-ready layouts + lead capture',
+        'Brand messaging framework',
+        'Custom design system',
+        'Lead capture optimization',
+        'Analytics + conversion tracking',
       ],
     },
     {
-      name: 'Custom Platform',
-      price: '$25,000+',
-      desc: 'Bespoke experience, integrations, and complex requirements.',
+      name: 'Custom Solution',
+      price: '$8,000+',
+      desc: 'Fully custom platform with integrations and advanced requirements.',
       bullets: [
-        'Advanced IA + UX workshops',
-        'Custom features and integrations',
-        'Scalable content architecture',
-        'Analytics + event tracking plan',
+        'Complete UX strategy workshops',
+        'Custom features + integrations',
+        'Scalable architecture',
+        'Comprehensive analytics plan',
       ],
     },
   ];
 
   const retainers = [
-    { name: 'Secure Plan', price: '$150/mo', features: 'Hosting, backups, security, updates, email support' },
-    { name: 'Optimize Plan', price: '$1,500/mo', features: 'Secure + 10 hrs updates/mo, monthly performance reports, priority support' },
-    { name: 'Growth Plan', price: '$4,000+/mo', features: 'Optimize + SEO, CRO, content marketing' },
+    { name: 'Basic Care', price: '$99/mo', features: 'Hosting, backups, security, updates, email support' },
+    { name: 'Growth Care', price: '$299/mo', features: 'Basic + 5 hrs updates/mo, monthly reports, priority support' },
+    { name: 'Pro Care', price: '$699/mo', features: 'Growth + SEO, CRO optimization, content support' },
   ];
 
   const addOns = [
@@ -99,7 +110,7 @@ const Pricing = () => {
             <Card className="hover-lift">
               <CardHeader>
                 <CardTitle>Brand Sprint</CardTitle>
-                <p className="text-primary font-semibold">$8,500 • 2 weeks</p>
+                <p className="text-primary font-semibold">$2,995 • 2 weeks</p>
               </CardHeader>
               <CardContent>
                 <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
