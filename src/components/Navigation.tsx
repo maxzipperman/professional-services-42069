@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-const LOGO_URL = '/lovable-uploads/a26c93e1-90e2-455c-95a4-e7171af84fba.png';
+const LOGO_URL = '/lovable-uploads/451ca319-1b33-4ca5-b055-186a648f57de.png';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);

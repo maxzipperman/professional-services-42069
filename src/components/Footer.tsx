@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Mail, Phone, MapPin } from 'lucide-react';
-const LOGO_URL = '/lovable-uploads/a26c93e1-90e2-455c-95a4-e7171af84fba.png';
+const LOGO_URL = '/lovable-uploads/451ca319-1b33-4ca5-b055-186a648f57de.png';
 
 const Footer = () => {
   const industries = [
