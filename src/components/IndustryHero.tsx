@@ -24,7 +24,7 @@ export const IndustryHero = ({
   iconName
 }: IndustryHeroProps) => {
   return (
-    <section className="relative py-14 lg:py-20 overflow-hidden">
+    <section className="relative py-12 lg:py-16 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
       

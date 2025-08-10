@@ -18,7 +18,9 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center mb-4">
-              <img src={logo} alt="Clearline Studio logo" className="h-12 md:h-14 w-auto object-contain" loading="lazy" decoding="async" />
+              <div className="relative h-10 md:h-12 overflow-hidden flex items-center">
+                <img src={logo} alt="Clearline Studio logo" className="h-12 md:h-14 w-auto object-contain -mt-1 md:-mt-1.5" loading="lazy" decoding="async" />
+              </div>
             </div>
             <p className="text-primary-foreground/80 mb-6 leading-relaxed">
               Boutique consultancy creating high-performance, custom websites with strategic messaging that converts.

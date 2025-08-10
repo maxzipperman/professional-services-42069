@@ -25,7 +25,7 @@ const Portfolio = () => {
         <link rel="canonical" href="/portfolio" />
       </Helmet>
 
-      <section className="py-16 lg:py-24">
+      <section className="py-14 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <Badge variant="secondary" className="mb-4">Our Work</Badge>

@@ -42,7 +42,7 @@ const Index = () => {
       </Helmet>
       
       {/* Hero Section */}
-      <section className="pt-20 md:pt-24 pb-16 lg:pt-28 lg:pb-24 gradient-subtle">
+      <section className="pt-16 md:pt-20 lg:pt-24 pb-12 lg:pb-20 gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-6">Professional Digital Presence</Badge>
@@ -110,7 +110,7 @@ const Index = () => {
       </section>
 
       {/* Problem & Solution */}
-      <section className="py-16 lg:py-24">
+      <section className="py-14 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="mb-6 text-primary">Your Website Should Be Your Most Powerful Asset, Not a Liability</h2>
@@ -130,7 +130,7 @@ const Index = () => {
       </section>
 
       {/* Value Pillars */}
-      <section className="py-16 lg:py-24 gradient-subtle">
+      <section className="py-14 lg:py-20 gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="mb-6 text-primary">Our Strategic Approach</h2>
@@ -160,7 +160,7 @@ const Index = () => {
       </section>
 
       {/* Case Study Highlight */}
-      <section className="py-16 lg:py-24">
+      <section className="py-14 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -233,7 +233,7 @@ const Index = () => {
       </section>
 
       {/* Premium Testimonial */}
-      <section className="py-16 lg:py-24 gradient-primary text-primary-foreground">
+      <section className="py-14 lg:py-20 gradient-primary text-primary-foreground">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-8">
@@ -259,7 +259,7 @@ const Index = () => {
       </section>
 
       {/* Industry Focus */}
-      <section className="py-16 lg:py-24">
+      <section className="py-14 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="mb-6 text-primary">Specialized Expertise for Professional Services</h2>
@@ -310,7 +310,7 @@ const Index = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 lg:py-24 gradient-accent text-accent-foreground">
+      <section className="py-14 lg:py-20 gradient-accent text-accent-foreground">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="mb-6">Ready to Transform Your Digital Presence into a Revenue-Generating Asset?</h2>

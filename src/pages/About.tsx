@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 const founderPhotoUrl = '/lovable-uploads/2a6e14bc-b206-4b6d-b81c-f36e7afc008d.png';
+const founderName = ''; // Set your name here to show: "Hi, I’m {founderName}"
 
 const About = () => {
   const canonical = typeof window !== 'undefined' 
@@ -30,7 +31,7 @@ const About = () => {
         <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
       </Helmet>
 
-      <header className="pt-24 pb-12 gradient-subtle">
+      <header className="pt-20 md:pt-24 pb-8 gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <Badge variant="secondary" className="mb-4">About</Badge>
@@ -43,7 +44,7 @@ const About = () => {
       </header>
 
       <main>
-        <section className="py-12">
+        <section className="py-10">
           <div className="container mx-auto px-4">
             <article className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start max-w-6xl mx-auto">
               <div>
@@ -60,7 +61,7 @@ const About = () => {
                 </figure>
               </div>
               <div>
-                <h2 className="mb-4">Hi, I’m the founder behind Clearline</h2>
+                <h2 className="mb-4">{founderName ? <>Hi, I’m {founderName}</> : 'Hi, I’m the founder behind Clearline'}</h2>
                 <p className="text-muted-foreground mb-4">
                   Before Clearline, I spent nearly a decade at Google and have 15+ years working across the mobile app and website ecosystem.
                   I bring a unique blend of consulting, business acumen, technical know-how, and SEO experience to every engagement.

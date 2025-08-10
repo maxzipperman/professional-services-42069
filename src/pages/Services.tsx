@@ -75,7 +75,7 @@ const Services = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="pt-24 pb-16 gradient-subtle">
+      <section className="pt-16 md:pt-20 pb-12 gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-4">Our Services</Badge>
@@ -92,7 +92,7 @@ const Services = () => {
       </section>
 
       {/* Fixed-Price Packages */}
-      <section className="py-16 lg:py-24">
+      <section className="py-14 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="mb-6">Simple, Fixed-Price Packages</h2>
@@ -192,7 +192,7 @@ const Services = () => {
       <ROICalculator />
 
       {/* Process Section */}
-      <section className="py-16 lg:py-24 gradient-subtle">
+      <section className="py-14 lg:py-20 gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="mb-6">Our Proven Process</h2>
@@ -240,7 +240,7 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 lg:py-24">
+      <section className="py-14 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="mb-6">Ready to Get Started?</h2>

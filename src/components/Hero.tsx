@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <section className="pt-24 pb-16 lg:pb-24 gradient-subtle">
+    <section className="pt-20 lg:pt-24 pb-12 lg:pb-20 gradient-subtle">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
