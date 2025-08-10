@@ -2,7 +2,7 @@ import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Shield } from 'lucide-react';
-const founderPhotoUrl = '/lovable-uploads/2a6e14bc-b206-4b6d-b81c-f36e7afc008d.png';
+const founderPhotoUrl = '/lovable-uploads/aa7fbfa2-499c-4e0b-9795-9aec6456f870.png';
 
 interface FounderCTAProps {
   ctaText: string;
