@@ -192,29 +192,6 @@ const Contact = () => {
               {/* Contact Information */}
               
 
-              {/* Calendly Embed (replaces the previously selected card) */}
-              <Card className="shadow-soft">
-                <CardHeader>
-                  <CardTitle>Schedule a Consultation</CardTitle>
-                  <CardDescription>
-                    Initial 2-hour consultation: $499. After scheduling, you’ll be redirected to secure Stripe checkout to complete payment. One-hour consultations are available for $299.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="rounded-lg border border-border overflow-hidden bg-background">
-                    <iframe
-                      title="Calendly Scheduling"
-                      src={`${CALENDLY_URL}?hide_landing_page_details=1&hide_gdpr_banner=1`}
-                      className="w-full h-[480px] md:h-[520px] lg:h-[560px]"
-                      loading="lazy"
-                    />
-                  </div>
-                  <p className="mt-3 text-xs text-muted-foreground">
-                    Prefer a full page view? <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="underline">Open Calendly</a>.
-                  </p>
-                </CardContent>
-              </Card>
-
               {/* Quick Stats */}
               <Card className="shadow-soft gradient-accent text-accent-foreground">
                 <CardHeader>
@@ -239,6 +216,29 @@ const Contact = () => {
                       <div className="text-sm opacity-90">Monthly fees</div>
                     </div>
                   </div>
+                </CardContent>
+              </Card>
+
+              {/* Calendly Embed (replaces the previously selected card) */}
+              <Card className="shadow-soft">
+                <CardHeader>
+                  <CardTitle>Schedule a Consultation</CardTitle>
+                  <CardDescription>
+                    Initial 2-hour consultation: $499. After scheduling, you’ll be redirected to secure Stripe checkout to complete payment. One-hour consultations are available for $299.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="rounded-lg border border-border overflow-hidden bg-background">
+                    <iframe
+                      title="Calendly Scheduling"
+                      src={`${CALENDLY_URL}?hide_landing_page_details=1&hide_gdpr_banner=1`}
+                      className="w-full h-[480px] md:h-[520px] lg:h-[560px]"
+                      loading="lazy"
+                    />
+                  </div>
+                  <p className="mt-3 text-xs text-muted-foreground">
+                    Prefer a full page view? <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="underline">Open Calendly</a>.
+                  </p>
                 </CardContent>
               </Card>
             </div>
