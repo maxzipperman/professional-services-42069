@@ -134,7 +134,7 @@ export const professionalServicesData: IndustryData = {
     primaryCtaText: "Speak With the Founder"
   },
   seo: {
-    title: "Accountants-First Web Design | Position Digital",
+    title: "Accountants-First Web Design | Clearline Studio",
     description: "Accountants are our top focus. Premium, fast, trust-building sites. Strategy Sprint + Launch Build ($6k–$9.5k) + Care & Content.",
     keywords: ["professional services websites", "law firm web design", "accountant website design", "consultant web design", "therapist websites"]
   }
@@ -181,7 +181,7 @@ export const localBusinessData: IndustryData = {
   comparison: {
     title: "Why Local Businesses Choose Us",
     subtitle: "Clear advantages over DIY builders and traditional retainers",
-    columns: ["Position Digital", "DIY Website Builders", "Traditional Agency Retainer"],
+    columns: ["Clearline Studio", "DIY Website Builders", "Traditional Agency Retainer"],
     rows: [
       { label: "Core Web Vitals pass on real devices", values: ["Yes", "No", "Partial"], emphasis: true },
       { label: "Local SEO setup (GMB, schema, citations)", values: ["Yes", "Partial", "Yes"] },
@@ -249,7 +249,7 @@ export const localBusinessData: IndustryData = {
     primaryCtaText: "Start Your Local Growth"
   },
   seo: {
-    title: "Position Digital — Local Business Websites That Drive Foot Traffic",
+    title: "Clearline Studio — Local Business Websites That Drive Foot Traffic",
     description: "Mobile-first websites for restaurants, retailers, and service providers. Get found by local customers and increase foot traffic.",
     keywords: ["local business websites", "restaurant web design", "retail website design", "local SEO", "mobile-first design"]
   }
@@ -346,7 +346,7 @@ export const nonprofitData: IndustryData = {
     primaryCtaText: "Transform Your Impact"
   },
   seo: {
-    title: "Position Digital — Nonprofit Websites That Drive Donations & Volunteers",
+    title: "Clearline Studio — Nonprofit Websites That Drive Donations & Volunteers",
     description: "Compelling websites for nonprofits, charities, and foundations. Increase donations, recruit volunteers, and amplify your mission.",
     keywords: ["nonprofit website design", "charity web design", "donation platform", "volunteer management", "nonprofit digital marketing"]
   }
@@ -451,7 +451,7 @@ export const creativesData: IndustryData = {
     primaryCtaText: "Elevate Your Portfolio"
   },
   seo: {
-    title: "Position Digital — Portfolio Websites That Convert Visitors to Clients",
+    title: "Clearline Studio — Portfolio Websites That Convert Visitors to Clients",
     description: "Fast-loading, stunning portfolio sites for photographers, designers, artists, and creative agencies. Showcase your work and win more clients.",
     keywords: ["portfolio website design", "photographer website", "artist portfolio", "designer portfolio", "creative agency website"]
   }
@@ -537,7 +537,7 @@ export const consultantsData: IndustryData = {
     primaryCtaText: "Book Your Strategy Call"
   },
   seo: {
-    title: "Position Digital — Websites for Consultants Who Command Premium Fees",
+    title: "Clearline Studio — Websites for Consultants Who Command Premium Fees",
     description: "Authority-building consultant websites that prove ROI, convert qualified leads, and justify premium fees.",
     keywords: ["consultant website", "consulting web design", "authority site", "case study design", "B2B services website"]
   }

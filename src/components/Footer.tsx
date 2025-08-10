@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import logo from '@/assets/logo.svg';
+import logo from '@/assets/clearline-logo.png';
 
 const Footer = () => {
   const industries = [
@@ -18,8 +18,8 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-4">
-              <img src={logo} alt="Position Digital logo" className="h-8 w-8" loading="lazy" />
-              <h3 className="text-xl font-bold">Position Digital</h3>
+              <img src={logo} alt="Clearline Studio logo" className="h-8 w-8" loading="lazy" />
+              <h3 className="text-xl font-bold">Clearline Studio</h3>
             </div>
             <p className="text-primary-foreground/80 mb-6 leading-relaxed">
               Boutique consultancy creating high-performance, custom websites with strategic messaging that converts.
@@ -113,7 +113,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-primary-foreground/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-primary-foreground/60 text-sm">
-            © 2024 Position Digital. All rights reserved.
+            © 2024 Clearline Studio. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link 

@@ -46,13 +46,13 @@ const ROICalculator = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            {/* Position Digital */}
+            {/* Clearline Studio */}
             <Card className="border-2 border-accent/20 shadow-accent">
               <CardHeader className="text-center">
                 <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-3">
                   <DollarSign className="h-6 w-6 text-accent" />
                 </div>
-                <CardTitle className="text-accent">Position Digital</CardTitle>
+                <CardTitle className="text-accent">Clearline Studio</CardTitle>
                 <CardDescription>One-time investment, no ongoing fees</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -135,7 +135,7 @@ const ROICalculator = () => {
                 You Save ${savings.toLocaleString()}
               </h3>
               <p className="text-accent-foreground/80 text-lg">
-                Over {timeframe} years with Position Digital's no-fee approach
+                Over {timeframe} years with Clearline Studio's no-fee approach
               </p>
             </CardContent>
           </Card>

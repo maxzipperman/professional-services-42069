@@ -40,21 +40,22 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
     return 'value-first';
   };
 
+  const canonical = typeof window !== 'undefined' ? `${window.location.origin}${data.slug}` : data.slug;
+
   return (
     <>
       <Helmet>
         <title>{data.seo.title}</title>
         <meta name="description" content={data.seo.description} />
         <meta name="keywords" content={data.seo.keywords.join(', ')} />
-        <link rel="canonical" href={`https://positiondigital.com${data.slug}`} />
+        <link rel="canonical" href={canonical} />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "Position Digital",
+            "name": "Clearline Studio",
             "description": data.seo.description,
-            "url": `https://positiondigital.com${data.slug}`,
-            "sameAs": ["https://twitter.com/positiondigital"]
+            "url": canonical
           })}
         </script>
       </Helmet>

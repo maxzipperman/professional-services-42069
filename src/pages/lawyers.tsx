@@ -44,7 +44,7 @@ const Lawyers = () => {
   ];
 
   const testimonial = {
-    quote: "Position Digital completely transformed our online presence. We went from barely getting any web inquiries to having more qualified leads than we can handle. The website perfectly reflects our firm's professionalism.",
+    quote: "Clearline Studio completely transformed our online presence. We went from barely getting any web inquiries to having more qualified leads than we can handle. The website perfectly reflects our firm's professionalism.",
     author: "Sarah Johnson",
     role: "Managing Partner, Johnson & Associates"
   };
@@ -52,7 +52,7 @@ const Lawyers = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Website Design for Law Firms | Position Digital</title>
+        <title>Website Design for Law Firms | Clearline Studio</title>
         <meta name="description" content="Professional website design for law firms. Credibility-driven websites that attract clients and comply with legal advertising ethics. Get more qualified leads." />
         <meta name="keywords" content="law firm website design, lawyer website, legal website design, attorney website, legal marketing" />
       </Helmet>

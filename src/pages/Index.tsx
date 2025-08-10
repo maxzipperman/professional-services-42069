@@ -36,7 +36,7 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Websites for Professionals Who Trade on Credibility | Position Digital</title>
+        <title>Websites for Professionals Who Trade on Credibility | Clearline Studio</title>
         <meta name="description" content="We build polished, high-performance digital platforms that close the trust gap, showcase your expertise, and convert discerning visitors into high-value clients." />
         <link rel="canonical" href="/" />
       </Helmet>
@@ -239,7 +239,7 @@ const Index = () => {
             <div className="mb-8">
               <Star className="h-8 w-8 text-accent mx-auto mb-4" />
               <blockquote className="text-2xl md:text-3xl font-medium leading-relaxed mb-8">
-                "Position Digital understands that for a law firm, a website is a critical validation tool. 
+                "Clearline Studio understands that for a law firm, a website is a critical validation tool. 
                 Their ROI-driven framework is a fundamental departure from the commoditized view of a website as a digital brochure. 
                 Our initial investment paid for itself within months."
               </blockquote>

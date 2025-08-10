@@ -227,7 +227,7 @@ const Contact = () => {
               {/* Quick Stats */}
               <Card className="shadow-soft gradient-accent text-accent-foreground">
                 <CardHeader>
-                  <CardTitle className="text-accent-foreground">Why Choose Position Digital?</CardTitle>
+                  <CardTitle className="text-accent-foreground">Why Choose Clearline Studio?</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 gap-4">
