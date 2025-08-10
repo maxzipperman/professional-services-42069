@@ -40,14 +40,6 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             <Link
-              to="/"
-              className={`transition-smooth hover:text-accent ${
-                isActive('/') ? 'text-accent font-medium' : 'text-foreground'
-              }`}
-            >
-              Home
-            </Link>
-            <Link
               to="/services"
               className={`transition-smooth hover:text-accent ${
                 isActive('/services') ? 'text-accent font-medium' : 'text-foreground'
@@ -63,19 +55,11 @@ const Navigation = () => {
             >
               Pricing
             </Link>
-            <Link
-              to="/resources"
-              className={`transition-smooth hover:text-accent ${
-                isActive('/resources') ? 'text-accent font-medium' : 'text-foreground'
-              }`}
-            >
-              Resources
-            </Link>
             
-            {/* Industries Dropdown */}
+            {/* Who We Serve Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center space-x-1 transition-smooth hover:text-accent text-foreground">
-                <span>Industries</span>
+                <span>Who We Serve</span>
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-56">
@@ -101,20 +85,20 @@ const Navigation = () => {
               Case Studies
             </Link>
             <Link
-              to="/about"
-              className={`transition-smooth hover:text-accent ${
-                isActive('/about') ? 'text-accent font-medium' : 'text-foreground'
-              }`}
-            >
-              About
-            </Link>
-            <Link
               to="/faq"
               className={`transition-smooth hover:text-accent ${
                 isActive('/faq') ? 'text-accent font-medium' : 'text-foreground'
               }`}
             >
               FAQ
+            </Link>
+            <Link
+              to="/about"
+              className={`transition-smooth hover:text-accent ${
+                isActive('/about') ? 'text-accent font-medium' : 'text-foreground'
+              }`}
+            >
+              About
             </Link>
           </div>
 
@@ -132,15 +116,10 @@ const Navigation = () => {
             >
               Client Login
             </Link>
-            <Button asChild variant="outline" size="sm">
-              <Link to="/faq">
-                <span>FAQ</span>
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="sm" className="hidden md:inline-flex">
+            <Button asChild size="sm" className="hidden md:inline-flex">
               <Link to="/ai-feedback">
                 <Sparkles className="h-4 w-4" />
-                <span>AI Feedback</span>
+                <span>Free AI Website Review</span>
               </Link>
             </Button>
             <Button asChild size="sm" className="gradient-accent text-accent-foreground font-medium">
@@ -162,13 +141,6 @@ const Navigation = () => {
           <div className="md:hidden border-t border-border">
             <div className="px-2 pt-2 pb-3 space-y-1">
               <Link
-                to="/"
-                className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
-                onClick={() => setIsOpen(false)}
-              >
-                Home
-              </Link>
-              <Link
                 to="/services"
                 className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
                 onClick={() => setIsOpen(false)}
@@ -182,15 +154,8 @@ const Navigation = () => {
               >
                 Pricing
               </Link>
-              <Link
-                to="/resources"
-                className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
-                onClick={() => setIsOpen(false)}
-              >
-                Resources
-              </Link>
               <div className="px-3 py-2">
-                <div className="text-sm font-medium text-muted-foreground mb-2">Industries</div>
+                <div className="text-sm font-medium text-muted-foreground mb-2">Who We Serve</div>
                 {industries.map((industry) => (
                   <Link
                     key={industry.href}
@@ -210,18 +175,18 @@ const Navigation = () => {
                 Case Studies
               </Link>
               <Link
-                to="/about"
-                className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
-                onClick={() => setIsOpen(false)}
-              >
-                About
-              </Link>
-              <Link
                 to="/faq"
                 className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
                 onClick={() => setIsOpen(false)}
               >
                 FAQ
+              </Link>
+              <Link
+                to="/about"
+                className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
+                onClick={() => setIsOpen(false)}
+              >
+                About
               </Link>
               <Link
                 to="/payment"
@@ -230,7 +195,13 @@ const Navigation = () => {
               >
                 Make Payment
               </Link>
-              <div className="pt-4">
+              <div className="pt-4 space-y-2">
+                <Button asChild className="w-full">
+                  <Link to="/ai-feedback" onClick={() => setIsOpen(false)}>
+                    <Sparkles className="h-4 w-4" />
+                    Free AI Website Review
+                  </Link>
+                </Button>
                 <Button asChild className="w-full gradient-accent text-accent-foreground">
                   <Link to="/book" onClick={() => setIsOpen(false)} data-cta="primary" data-page="nav">
                     Book Your Strategy Call
