@@ -103,6 +103,9 @@ const Services = () => {
               From strategy to launch, we provide end-to-end solutions that deliver results. 
               No ongoing fees, no platform lock-in — just a website that works for you.
             </p>
+            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+              Consultation pricing: 1 hour $299, 2 hours $499.
+            </p>
           </div>
         </div>
       </section>

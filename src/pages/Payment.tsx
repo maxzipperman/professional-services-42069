@@ -40,6 +40,7 @@ const PaymentPage = () => {
             <p className="mt-4 text-muted-foreground">
               Use this page to complete a secure payment. We process payments via Stripe for your safety and convenience.
             </p>
+            <p className="mt-2 text-sm text-muted-foreground">Consultation pricing: 1 hour $299, 2 hours $499.</p>
           </header>
 
           <div className="mt-8 flex items-center gap-4">

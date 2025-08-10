@@ -2,6 +2,7 @@ import Layout from '@/components/Layout';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const CALENDLY_URL = 'https://calendly.com/maxzipperman';
 
@@ -13,9 +14,21 @@ const Book = () => {
     '@type': 'WebPage',
     name: 'Book Your Strategy Call',
     url: canonical,
-    description: 'Schedule a strategy call on Calendly and make a secure payment via Stripe.'
+    description: 'Schedule a strategy call on Calendly and make a secure payment via Stripe. Consultations: 1 hour $299, 2 hours $499.'
   };
 
+  useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      try {
+        const evt = (e as any)?.data?.event;
+        if (evt === 'calendly.event_scheduled') {
+          window.location.href = '/payment';
+        }
+      } catch (_) {}
+    };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+  }, []);
   return (
     <Layout>
       <Helmet>
@@ -30,7 +43,7 @@ const Book = () => {
           <header className="max-w-3xl">
             <h1 className="text-3xl md:text-4xl font-bold">Book Your Strategy Call</h1>
             <p className="mt-4 text-muted-foreground">
-              Choose a time that works for you and optionally complete a secure payment. No hard pitch — just practical next steps.
+              Consultations: 1 hour $299, 2 hours $499. Choose a time that works for you — after scheduling, you’ll be redirected to secure payment.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild size="lg" className="gradient-accent text-accent-foreground">
