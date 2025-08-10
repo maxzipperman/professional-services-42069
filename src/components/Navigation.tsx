@@ -128,7 +128,7 @@ const Navigation = () => {
               </Link>
             </Button>
             <Button asChild size="sm" className="gradient-accent text-accent-foreground font-medium">
-              <Link to="/contact" data-cta="primary" data-page="nav">Book Your Strategy Call</Link>
+              <Link to="/book" data-cta="primary" data-page="nav">Book Your Strategy Call</Link>
             </Button>
           </div>
 
@@ -202,7 +202,7 @@ const Navigation = () => {
               </Link>
               <div className="pt-4">
                 <Button asChild className="w-full gradient-accent text-accent-foreground">
-                  <Link to="/contact" onClick={() => setIsOpen(false)} data-cta="primary" data-page="nav">
+                  <Link to="/book" onClick={() => setIsOpen(false)} data-cta="primary" data-page="nav">
                     Book Your Strategy Call
                   </Link>
                 </Button>

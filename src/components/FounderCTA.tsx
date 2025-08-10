@@ -73,7 +73,7 @@ export const FounderCTA = ({ ctaText, variant = 'primary' }: FounderCTAProps) =>
             </div>
             
             <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-accent">
-              <Link to="/contact" className="inline-flex items-center gap-2">
+              <Link to="/book" className="inline-flex items-center gap-2">
                 {ctaText}
                 <ArrowRight className="h-4 w-4" />
               </Link>

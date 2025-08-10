@@ -30,6 +30,7 @@ import NonprofitsQuickWins from "./pages/guides/NonprofitsQuickWins";
 import CreativesQuickWins from "./pages/guides/CreativesQuickWins";
 import LocalBusinessesQuickWins from "./pages/guides/LocalBusinessesQuickWins";
 import ProfessionalServicesQuickWins from "./pages/guides/ProfessionalServicesQuickWins";
+import Book from "./pages/Book";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/book" element={<Book />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
             <Route path="/faq" element={<FAQ />} />
