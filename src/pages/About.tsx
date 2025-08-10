@@ -54,8 +54,8 @@ const About = () => {
                     loading="lazy"
                     className="w-full h-auto rounded-xl border border-border shadow-large"
                   />
-                  <figcaption className="mt-2 text-sm text-muted-foreground">
-                    I live in Los Angeles with my golden retriever, Chuck.
+                  <figcaption className="mt-3 text-sm text-muted-foreground md:text-center leading-relaxed">
+                    Based in Los Angeles — when I’m not building fast websites, I’m exploring coffee spots with my golden retriever, Chuck.
                   </figcaption>
                 </figure>
               </div>

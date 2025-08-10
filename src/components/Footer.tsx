@@ -17,9 +17,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <div className="flex items-center space-x-3 mb-4">
-              <img src={logo} alt="Clearline Studio logo" className="h-8 w-8" loading="lazy" />
-              <h3 className="text-xl font-bold">Clearline Studio</h3>
+            <div className="flex items-center mb-4">
+              <img src={logo} alt="Clearline Studio logo" className="h-10 w-auto" loading="lazy" />
             </div>
             <p className="text-primary-foreground/80 mb-6 leading-relaxed">
               Boutique consultancy creating high-performance, custom websites with strategic messaging that converts.
