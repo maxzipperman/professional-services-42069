@@ -14,7 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ai_feedback_usage: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          id: string
+          ip_address: unknown
+          last_used: string | null
+          usage_count: number | null
+          whitelisted: boolean | null
+        }
+        Insert: {
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          ip_address: unknown
+          last_used?: string | null
+          usage_count?: number | null
+          whitelisted?: boolean | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          ip_address?: unknown
+          last_used?: string | null
+          usage_count?: number | null
+          whitelisted?: boolean | null
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          industry: string | null
+          metadata: Json | null
+          page: string | null
+          source: string
+          website: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          industry?: string | null
+          metadata?: Json | null
+          page?: string | null
+          source: string
+          website?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          industry?: string | null
+          metadata?: Json | null
+          page?: string | null
+          source?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
