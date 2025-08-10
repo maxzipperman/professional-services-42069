@@ -8,14 +8,15 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useToast } from '@/hooks/use-toast';
 const CALENDLY_URL = 'https://calendly.com/maxzipperman';
 const Contact = () => {
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const contactInfo = [{
     icon: <Mail className="h-5 w-5" />,
     title: "Email",
@@ -88,7 +89,15 @@ const Contact = () => {
               </CardHeader>
               
               <CardContent className="space-y-6">
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={async (e) => {
+                  e.preventDefault();
+                  setIsSubmitting(true);
+                  
+                  // Simulate form submission
+                  setTimeout(() => {
+                    navigate('/thank-you');
+                  }, 1000);
+                }}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="firstName">First Name *</Label>
@@ -116,45 +125,17 @@ const Contact = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="industry">Industry</Label>
+                    <Label htmlFor="service">What can we help you with?</Label>
                     <Select>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select your industry" />
+                        <SelectValue placeholder="Select primary need" />
                       </SelectTrigger>
                       <SelectContent>
-                        {industries.map(industry => <SelectItem key={industry} value={industry.toLowerCase().replace(/\s+/g, '-')}>
-                            {industry}
-                          </SelectItem>)}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="service">Service Interest</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="What service interests you most?" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {services.map(service => <SelectItem key={service} value={service.toLowerCase().replace(/\s+/g, '-')}>
-                            {service}
-                          </SelectItem>)}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="budget">Project Budget</Label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your budget range" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="under-2500">Under $2,500</SelectItem>
-                        <SelectItem value="2500-5000">$2,500 - $5,000</SelectItem>
-                        <SelectItem value="5000-10000">$5,000 - $10,000</SelectItem>
-                        <SelectItem value="10000-plus">$10,000+</SelectItem>
-                        <SelectItem value="not-sure">Not sure yet</SelectItem>
+                        <SelectItem value="website-redesign">Website Redesign</SelectItem>
+                        <SelectItem value="conversion-optimization">Conversion Optimization</SelectItem>
+                        <SelectItem value="brand-refresh">Brand Refresh</SelectItem>
+                        <SelectItem value="audit">Website Audit</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -164,9 +145,18 @@ const Contact = () => {
                     <Textarea id="message" placeholder="Tell us about your project goals, challenges, and timeline..." rows={4} />
                   </div>
 
-                  <Button type="submit" className="w-full gradient-accent text-accent-foreground font-semibold hover-lift">
-                    Request Free Audit
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="w-full gradient-accent text-accent-foreground font-semibold hover-lift" 
+                    data-cta="contact-form" 
+                    data-page="contact"
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
+                  <p className="text-center text-xs text-muted-foreground mt-2">
+                    We'll respond within 24 hours with next steps.
+                  </p>
                 </form>
               </CardContent>
             </Card>

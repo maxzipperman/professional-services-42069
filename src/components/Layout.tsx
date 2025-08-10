@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 import Footer from './Footer';
 import StickyMobileCTA from './StickyMobileCTA';
 import SlideInCTA from './SlideInCTA';
+import ExitIntentPopup from './ExitIntentPopup';
 import ScrollToTop from './ScrollToTop';
 import { useAnalytics } from '@/hooks/useAnalytics';
 
@@ -22,6 +23,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Footer />
       <StickyMobileCTA />
       <SlideInCTA />
+      <ExitIntentPopup />
     </div>
   );
 };

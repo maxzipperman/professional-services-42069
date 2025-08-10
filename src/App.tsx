@@ -39,6 +39,7 @@ import Resources from "./pages/Resources";
 import WebDesign from "./pages/services/WebDesign";
 import BrandIdentity from "./pages/services/BrandIdentity";
 import CRORetainers from "./pages/services/CRORetainers";
+import ThankYou from "./pages/ThankYou";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const App = () => (
             <Route path="/services/brand-identity" element={<BrandIdentity />} />
             <Route path="/services/cro-retainers" element={<CRORetainers />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/book" element={<Book />} />
             <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/pricing" element={<Pricing />} />
