@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
+// CORS headers must remain
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -11,6 +12,153 @@ interface AIFeedbackRequest {
   website_url: string;
   focus_area?: string;
   industry?: string;
+}
+
+// Helpers: fetch website content (Firecrawl -> fallback to direct fetch)
+async function fetchWithFirecrawl(url: string, apiKey?: string): Promise<string | null> {
+  if (!apiKey) return null
+  try {
+    const res = await fetch('https://api.firecrawl.dev/v1/scrape', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        url,
+        formats: ['markdown', 'text'],
+      }),
+    })
+    if (!res.ok) {
+      const t = await res.text()
+      console.error('Firecrawl error:', res.status, t)
+      return null
+    }
+    const data = await res.json() as any
+    // Try common fields from Firecrawl responses
+    const md = data?.markdown || data?.data?.[0]?.markdown || null
+    const txt = data?.text || data?.data?.[0]?.text || null
+    const content = md || txt
+    return typeof content === 'string' ? content : null
+  } catch (e) {
+    console.error('Firecrawl fetch exception:', e)
+    return null
+  }
+}
+
+function stripHtml(html: string): string {
+  try {
+    // remove scripts/styles/noscript
+    const cleaned = html
+      .replace(/<script[\s\S]*?<\/script>/gi, '')
+      .replace(/<style[\s\S]*?<\/style>/gi, '')
+      .replace(/<noscript[\s\S]*?<\/noscript>/gi, '')
+      .replace(/<!--[\s\S]*?-->/g, '')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+    return cleaned
+  } catch {
+    return html
+  }
+}
+
+async function fetchDirect(url: string): Promise<string | null> {
+  try {
+    const res = await fetch(url, {
+      // Many sites require a UA
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; ClearlineBot/1.0; +https://clearline.studio)',
+        'Accept-Language': 'en-US,en;q=0.9',
+      }
+    })
+    if (!res.ok) {
+      console.error('Direct fetch error:', res.status, await res.text().catch(() => ''))
+      return null
+    }
+    const html = await res.text()
+    return stripHtml(html)
+  } catch (e) {
+    console.error('Direct fetch exception:', e)
+    return null
+  }
+}
+
+async function getSiteContent(url: string): Promise<{ content: string; source: 'firecrawl' | 'direct' | 'none' }> {
+  const firecrawlKey = Deno.env.get('FIRECRAWL_API_KEY') || ''
+  const viaFirecrawl = await fetchWithFirecrawl(url, firecrawlKey)
+  if (viaFirecrawl && typeof viaFirecrawl === 'string' && viaFirecrawl.trim()) {
+    const snippet = viaFirecrawl.slice(0, 8000)
+    return { content: snippet, source: 'firecrawl' }
+  }
+  const viaDirect = await fetchDirect(url)
+  if (viaDirect && viaDirect.trim()) {
+    const snippet = viaDirect.slice(0, 8000)
+    return { content: snippet, source: 'direct' }
+  }
+  return { content: '', source: 'none' }
+}
+
+// Perplexity: try multiple models in order until one succeeds
+const PERPLEXITY_MODELS = [
+  // Try a few options; availability can vary per account
+  'llama-3.1-sonar-large-128k-online',
+  'llama-3.1-sonar-small-128k-online',
+  'llama-3.1-sonar-huge-128k-online',
+  // Fallbacks sometimes available on accounts
+  'sonar-pro',
+  'sonar-small-chat',
+]
+
+async function callPerplexityWithFallback({ apiKey, messages }: { apiKey: string; messages: any[] }) {
+  const tried: Array<{ model: string; status?: number; error?: unknown }> = []
+  let lastError: unknown = null
+
+  for (const model of PERPLEXITY_MODELS) {
+    try {
+      console.log('Perplexity: trying model', model)
+      const resp = await fetch('https://api.perplexity.ai/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model,
+          messages,
+          temperature: 0.2,
+          top_p: 0.9,
+          max_tokens: 2000,
+          return_images: false,
+          return_related_questions: false,
+          frequency_penalty: 1,
+          presence_penalty: 0
+        }),
+      })
+
+      if (!resp.ok) {
+        const text = await resp.text()
+        console.error('Perplexity API error:', resp.status, text)
+        tried.push({ model, status: resp.status, error: text })
+        continue
+      }
+
+      const data = await resp.json()
+      const content = data?.choices?.[0]?.message?.content
+      if (content && typeof content === 'string') {
+        return { content, modelUsed: model }
+      }
+
+      console.error('Perplexity: empty content for model', model, JSON.stringify(data).slice(0, 1000))
+      tried.push({ model, error: 'empty_content' })
+    } catch (e) {
+      console.error('Perplexity request exception for model', model, e)
+      lastError = e
+      tried.push({ model, error: e })
+    }
+  }
+
+  return { error: 'all_models_failed', details: { tried, lastError } }
 }
 
 serve(async (req) => {
@@ -90,6 +238,10 @@ serve(async (req) => {
 
     const industryPrompt = industryPrompts[industry || 'Professional Services'] || industryPrompts['Professional Services']
     
+    // Fetch site content (Firecrawl then direct)
+    const { content: siteContent, source: contentSource } = await getSiteContent(website_url)
+    console.log('Content source:', contentSource, 'length:', siteContent.length)
+
     // Prepare the analysis prompt
     const analysisPrompt = `You are a professional website analyst and conversion optimization expert. ${industryPrompt}
 
@@ -130,62 +282,82 @@ Please provide a comprehensive analysis covering:
 
 Format your response in clear sections with specific, actionable recommendations. Be professional but approachable, focusing on practical improvements that will drive business results.`
 
-    // Call Perplexity API
+    // Rebuild the same prompt as before, but append content when available
+    const contentBlock = siteContent
+      ? `\n\nWebsite content (truncated):\n${siteContent}`
+      : ''
+
+    const finalPrompt = `You are a professional website analyst and conversion optimization expert. ${industryPrompt}
+
+Website URL: ${website_url}
+${focus_area ? `Specific Focus: ${focus_area}` : ''}${contentBlock}
+
+Please provide a comprehensive analysis covering:
+
+1. First Impressions & Design
+   - Visual hierarchy and professional appearance
+   - Brand consistency and trust signals
+   - Mobile responsiveness assessment
+
+2. User Experience & Navigation
+   - Site structure and ease of navigation
+   - Page load considerations
+   - Accessibility factors
+
+3. Content & Messaging
+   - Clarity of value proposition
+   - Service/product presentation
+   - Call-to-action effectiveness
+
+4. Conversion Optimization
+   - Lead generation potential
+   - Contact information accessibility
+   - Trust building elements
+
+5. Industry-Specific Recommendations
+   - Compliance and professional standards
+   - Competitive positioning
+   - Target audience alignment
+
+6. Priority Action Items
+   - Top 3 immediate improvements
+   - Quick wins for better performance
+   - Long-term strategic recommendations
+
+Format your response in clear sections with specific, actionable recommendations. Be professional but approachable, focusing on practical improvements that will drive business results.`
+
+    // Call Perplexity with fallback
     const perplexityApiKey = Deno.env.get('PERPLEXITY_API_KEY')
-    
     if (!perplexityApiKey) {
       throw new Error('Perplexity API key not configured')
     }
 
-    const perplexityResponse = await fetch('https://api.perplexity.ai/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${perplexityApiKey}`,
-        'Content-Type': 'application/json',
+    const messages = [
+      {
+        role: 'system',
+        content: 'You are a professional website analyst and conversion optimization expert. Provide detailed, actionable feedback in a structured format.'
       },
-      body: JSON.stringify({
-        model: 'llama-3.1-sonar-small-128k-online',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are a professional website analyst and conversion optimization expert. Provide detailed, actionable feedback in a structured format.'
-          },
-          {
-            role: 'user',
-            content: analysisPrompt
-          }
-        ],
-        temperature: 0.2,
-        top_p: 0.9,
-        max_tokens: 2000,
-        return_images: false,
-        return_related_questions: false,
-        frequency_penalty: 1,
-        presence_penalty: 0
-      }),
-    })
+      {
+        role: 'user',
+        content: finalPrompt
+      }
+    ]
 
-    if (!perplexityResponse.ok) {
-      const errorText = await perplexityResponse.text()
-      let details: unknown = null
-      try { details = JSON.parse(errorText) } catch (_) { details = errorText }
-      console.error('Perplexity API error:', perplexityResponse.status, errorText)
+    const result = await callPerplexityWithFallback({ apiKey: perplexityApiKey, messages })
+
+    if ((result as any).error) {
+      console.error('Perplexity failed for all models:', (result as any).details)
       return new Response(
-        JSON.stringify({ error: 'Upstream AI error', provider: 'perplexity', status: perplexityResponse.status, details }),
+        JSON.stringify({
+          error: 'Upstream AI error',
+          provider: 'perplexity',
+          details: (result as any).details
+        }),
         { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
 
-    const result = await perplexityResponse.json()
-    const analysis = result.choices?.[0]?.message?.content
-
-    if (!analysis) {
-      console.error('No analysis received from AI:', JSON.stringify(result).slice(0, 1000))
-      return new Response(
-        JSON.stringify({ error: 'No analysis received from AI' }),
-        { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      )
-    }
+    const analysis = (result as any).content as string
 
     // Update usage tracking
     if (!isWhitelisted) {
@@ -211,16 +383,19 @@ Format your response in clear sections with specific, actionable recommendations
     }
 
     return new Response(
-      JSON.stringify({ 
+      JSON.stringify({
         analysis,
         usage: {
           remaining: isWhitelisted ? 999 : Math.max(0, dailyLimit - (isNewDay ? 1 : (usage?.usage_count || 0) + 1)),
           limit: dailyLimit,
           whitelisted: isWhitelisted
+        },
+        meta: {
+          contentSource: contentSource,
         }
       }),
-      { 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+      {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       }
     )
 
@@ -228,9 +403,9 @@ Format your response in clear sections with specific, actionable recommendations
     console.error('Error:', error)
     return new Response(
       JSON.stringify({ error: error.message || 'Unknown error' }),
-      { 
-        status: 500, 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+      {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       }
     )
   }
