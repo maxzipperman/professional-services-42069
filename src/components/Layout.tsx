@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 import Footer from './Footer';
 import StickyMobileCTA from './StickyMobileCTA';
 import SlideInCTA from './SlideInCTA';
+import ScrollToTop from './ScrollToTop';
 import { useAnalytics } from '@/hooks/useAnalytics';
 
 interface LayoutProps {
@@ -14,6 +15,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
+      <ScrollToTop />
       <main className="flex-1">
         {children}
       </main>
