@@ -2,9 +2,30 @@ import Layout from '@/components/Layout';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const PaymentPage = () => {
   const canonical = typeof window !== 'undefined' ? `${window.location.origin}/payment` : '/payment';
+  const { toast } = useToast();
+
+  const handlePayNow = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke('create-payment', {
+        body: { amount: 49900, title: 'Website Conversion Audit' },
+      });
+      if (error) throw error;
+      if (data?.url) {
+        window.open(data.url, '_blank');
+      } else {
+        throw new Error('No checkout URL returned');
+      }
+    } catch (e: any) {
+      console.error('Stripe checkout error:', e);
+      toast({ title: 'Payment unavailable', description: e?.message || 'Please try again later.', variant: 'destructive' });
+    }
+  };
+
   return (
     <Layout>
       <Helmet>
@@ -22,8 +43,8 @@ const PaymentPage = () => {
           </header>
 
           <div className="mt-8 flex items-center gap-4">
-            <Button asChild size="lg" className="gradient-accent text-accent-foreground font-medium">
-              <Link to="/contact">Pay Now</Link>
+            <Button size="lg" className="gradient-accent text-accent-foreground font-medium" onClick={handlePayNow}>
+              Pay Now
             </Button>
             <Button asChild variant="outline" size="lg">
               <Link to="/contact">Have questions? Contact us</Link>

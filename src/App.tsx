@@ -17,6 +17,8 @@ import Accountants from "./pages/accountants";
 import Consultants from "./pages/consultants";
 import Portfolio from "./pages/Portfolio";
 import Payment from "./pages/Payment";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCanceled from "./pages/PaymentCanceled";
 import About from "./pages/About";
 import Timeline from "./pages/Timeline";
 import { AIFeedbackPage } from "./pages/AIFeedbackPage";
@@ -44,8 +46,10 @@ const App = () => (
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/payment-canceled" element={<PaymentCanceled />} />
             <Route path="/timeline" element={<Timeline />} />
-            
+
             {/* Industry Pages */}
             <Route path="/professional-services" element={<ProfessionalServices />} />
             <Route path="/local-businesses" element={<LocalBusinesses />} />
