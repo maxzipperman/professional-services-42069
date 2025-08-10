@@ -7,47 +7,26 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Mail, Phone, MapPin, Clock, CheckCircle } from 'lucide-react';
-
 const Contact = () => {
-  const contactInfo = [
-    {
-      icon: <Mail className="h-5 w-5" />,
-      title: "Email",
-      content: "hello@clearlinestudio.com",
-      description: "We respond within 24 hours"
-    },
-    {
-      icon: <Phone className="h-5 w-5" />,
-      title: "Phone", 
-      content: "(555) 987-6543",
-      description: "Mon-Fri, 9am-6pm EST"
-    },
-    {
-      icon: <Clock className="h-5 w-5" />,
-      title: "Response Time",
-      content: "24 hours",
-      description: "Free audit within 2 business days"
-    }
-  ];
-
-  const services = [
-    "Website Design & Development",
-    "Brand Messaging Strategy", 
-    "Website Optimization & Refresh",
-    "Free Website Audit",
-    "Other"
-  ];
-
-  const industries = [
-    "Professional Services (Law, Accounting, Consulting)",
-    "Local Business (Restaurant, Home Services, Retail)",
-    "Nonprofit & Religious Organizations", 
-    "Independent Creatives (Photography, Art, Coaching)",
-    "Other"
-  ];
-
-  return (
-    <Layout>
+  const contactInfo = [{
+    icon: <Mail className="h-5 w-5" />,
+    title: "Email",
+    content: "hello@clearlinestudio.com",
+    description: "We respond within 24 hours"
+  }, {
+    icon: <Phone className="h-5 w-5" />,
+    title: "Phone",
+    content: "(555) 987-6543",
+    description: "Mon-Fri, 9am-6pm EST"
+  }, {
+    icon: <Clock className="h-5 w-5" />,
+    title: "Response Time",
+    content: "24 hours",
+    description: "Free audit within 2 business days"
+  }];
+  const services = ["Website Design & Development", "Brand Messaging Strategy", "Website Optimization & Refresh", "Free Website Audit", "Other"];
+  const industries = ["Professional Services (Law, Accounting, Consulting)", "Local Business (Restaurant, Home Services, Retail)", "Nonprofit & Religious Organizations", "Independent Creatives (Photography, Art, Coaching)", "Other"];
+  return <Layout>
       {/* Hero Section */}
       <section className="pt-16 md:pt-20 pb-12 gradient-subtle">
         <div className="container mx-auto px-4">
@@ -72,7 +51,7 @@ const Contact = () => {
             {/* Contact Form */}
             <Card className="shadow-medium">
               <CardHeader>
-                <CardTitle className="text-2xl">Request Your Free Website Audit</CardTitle>
+                <CardTitle className="text-2xl">Start the Process</CardTitle>
                 <CardDescription>
                   Tell us about your project and we'll provide a comprehensive audit 
                   with specific recommendations to improve your site's performance.
@@ -114,11 +93,9 @@ const Contact = () => {
                         <SelectValue placeholder="Select your industry" />
                       </SelectTrigger>
                       <SelectContent>
-                        {industries.map((industry) => (
-                          <SelectItem key={industry} value={industry.toLowerCase().replace(/\s+/g, '-')}>
+                        {industries.map(industry => <SelectItem key={industry} value={industry.toLowerCase().replace(/\s+/g, '-')}>
                             {industry}
-                          </SelectItem>
-                        ))}
+                          </SelectItem>)}
                       </SelectContent>
                     </Select>
                   </div>
@@ -130,11 +107,9 @@ const Contact = () => {
                         <SelectValue placeholder="What service interests you most?" />
                       </SelectTrigger>
                       <SelectContent>
-                        {services.map((service) => (
-                          <SelectItem key={service} value={service.toLowerCase().replace(/\s+/g, '-')}>
+                        {services.map(service => <SelectItem key={service} value={service.toLowerCase().replace(/\s+/g, '-')}>
                             {service}
-                          </SelectItem>
-                        ))}
+                          </SelectItem>)}
                       </SelectContent>
                     </Select>
                   </div>
@@ -157,17 +132,10 @@ const Contact = () => {
 
                   <div className="space-y-2">
                     <Label htmlFor="message">Project Details</Label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Tell us about your project goals, challenges, and timeline..."
-                      rows={4}
-                    />
+                    <Textarea id="message" placeholder="Tell us about your project goals, challenges, and timeline..." rows={4} />
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    className="w-full gradient-accent text-accent-foreground font-semibold hover-lift"
-                  >
+                  <Button type="submit" className="w-full gradient-accent text-accent-foreground font-semibold hover-lift">
                     Request Free Audit
                   </Button>
                 </form>
@@ -185,8 +153,7 @@ const Contact = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  {contactInfo.map((info, index) => (
-                    <div key={index} className="flex items-start space-x-4">
+                  {contactInfo.map((info, index) => <div key={index} className="flex items-start space-x-4">
                       <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent">
                         {info.icon}
                       </div>
@@ -195,8 +162,7 @@ const Contact = () => {
                         <p className="text-accent font-medium">{info.content}</p>
                         <p className="text-sm text-muted-foreground">{info.description}</p>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </CardContent>
               </Card>
 
@@ -209,18 +175,10 @@ const Contact = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {[
-                    "We'll review your current website (if you have one)",
-                    "Analyze your industry and competitors", 
-                    "Provide specific recommendations for improvement",
-                    "Discuss your goals and create a custom proposal",
-                    "No obligation — just valuable insights for your business"
-                  ].map((step, index) => (
-                    <div key={index} className="flex items-start space-x-3">
+                  {["We'll review your current website (if you have one)", "Analyze your industry and competitors", "Provide specific recommendations for improvement", "Discuss your goals and create a custom proposal", "No obligation — just valuable insights for your business"].map((step, index) => <div key={index} className="flex items-start space-x-3">
                       <CheckCircle className="h-5 w-5 text-success mt-0.5 flex-shrink-0" />
                       <span className="text-sm text-muted-foreground">{step}</span>
-                    </div>
-                  ))}
+                    </div>)}
                 </CardContent>
               </Card>
 
@@ -254,8 +212,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default Contact;
