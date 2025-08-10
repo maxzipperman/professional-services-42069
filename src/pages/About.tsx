@@ -37,7 +37,7 @@ const About = () => {
             <Badge variant="secondary" className="mb-4">About</Badge>
             <h1 className="mb-4">About Clearline Studio</h1>
             <p className="text-lg text-muted-foreground">
-              I build fast, secure, and conversion-focused websites—without lock-in or monthly platform fees.
+              Max and team build fast, secure, and conversion-focused websites—without lock-in or monthly platform fees.
             </p>
           </div>
         </div>
