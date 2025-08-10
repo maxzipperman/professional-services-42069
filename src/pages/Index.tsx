@@ -332,11 +332,14 @@ const Index = () => {
               </Button>
               <Button 
                 asChild 
-                variant="outline" 
                 size="lg"
-                className="border-white/20 text-white hover:bg-white/10"
+                variant="secondary"
+                className="hover-lift font-semibold bg-white text-primary hover:bg-white/90"
               >
-                <Link to="/portfolio">View Our Authority Sites</Link>
+                <Link to="/ai-feedback" className="flex items-center space-x-2">
+                  <span>Run a free AI site audit</span>
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
               </Button>
             </div>
           </div>
