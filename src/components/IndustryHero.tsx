@@ -1,7 +1,7 @@
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, Play, ShieldCheck } from 'lucide-react';
 import { IndustryIcon } from './IndustryIcon';
 
 interface IndustryHeroProps {
@@ -75,6 +75,14 @@ export const IndustryHero = ({
                 Run a free AI site audit
               </Link>
             </Button>
+          </div>
+
+          {/* Hero micro-value: ownership */}
+          <div className="mt-2 flex justify-center animate-fade-in" style={{ animationDelay: '0.5s' }}>
+            <span className="inline-flex items-center gap-2 rounded-full bg-secondary text-secondary-foreground px-3 py-1">
+              <ShieldCheck className="h-4 w-4 text-primary" />
+              <span className="text-xs sm:text-sm">You own your site — export anytime</span>
+            </span>
           </div>
           
           {/* Trust indicators */}
