@@ -69,7 +69,7 @@ const Footer = () => {
                   to="/contact" 
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm"
                 >
-                  Free Website Audit
+                  Website Audit
                 </Link>
               </li>
             </ul>
@@ -94,17 +94,19 @@ const Footer = () => {
 
           {/* CTA */}
           <div>
-            <h4 className="font-semibold mb-4">Ready to Get Started?</h4>
+            <h4 className="font-semibold mb-4">Ready to Transform Your Digital Presence?</h4>
             <p className="text-primary-foreground/80 text-sm mb-4">
-              Let's discuss how we can elevate your online presence and drive real results.
+              Let's discuss your goals and the smartest next steps.
             </p>
             <Button 
               asChild 
-              variant="secondary" 
-              className="w-full hover-lift"
+              className="w-full gradient-accent text-accent-foreground hover-lift"
+              data-cta="footer"
+              data-page="footer"
             >
-              <Link to="/contact">Get Free Audit</Link>
+              <Link to="/contact">Book Your Strategy Call</Link>
             </Button>
+            <p className="mt-2 text-xs text-primary-foreground/80">No hard pitch—30 minutes to map your best next steps.</p>
           </div>
         </div>
 
