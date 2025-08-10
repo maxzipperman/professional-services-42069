@@ -1,6 +1,7 @@
 import Layout from '@/components/Layout';
 import { IndustryHero } from '@/components/IndustryHero';
 import { Helmet } from 'react-helmet-async';
+import consultantsHero from '@/assets/consultants-hero.jpg';
 
 const ConsultantsPage = () => {
   return (
@@ -10,9 +11,12 @@ const ConsultantsPage = () => {
         <meta name="description" content="Establish unshakeable authority, demonstrate quantifiable ROI, and convert prospects into high-value, long-term clients." />
       </Helmet>
       <IndustryHero
-        heroTitle="Websites for Consultants Who Command Premium Fees"
-        heroSubtitle="Establish unshakeable authority, demonstrate quantifiable ROI, and convert prospects into high-value, long-term clients."
-        heroImage="/src/assets/consultants-hero.jpg"
+        industry="Consultants"
+        headline="Websites for Consultants Who Command Premium Fees"
+        subheadline="Establish unshakeable authority, demonstrate quantifiable ROI, and convert prospects into high-value, long-term clients."
+        primaryCtaText="Speak With the Founder"
+        secondaryCtaText="View Case Studies"
+        backgroundImage={consultantsHero}
       />
     </Layout>
   );
