@@ -46,7 +46,7 @@ const Footer = () => {
                   to="/services" 
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm"
                 >
-                  Website Design & Development
+                  Website Tune-Up
                 </Link>
               </li>
               <li>
@@ -54,7 +54,7 @@ const Footer = () => {
                   to="/services" 
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm"
                 >
-                  Brand Messaging Strategy
+                  Brand Refresh
                 </Link>
               </li>
               <li>
@@ -62,15 +62,15 @@ const Footer = () => {
                   to="/services" 
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm"
                 >
-                  Optimization & Refresh
+                  Premium Brand Experience
                 </Link>
               </li>
               <li>
                 <Link 
-                  to="/contact" 
+                  to="/payment" 
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm"
                 >
-                  Website Audit
+                  Brand & Performance Audit
                 </Link>
               </li>
             </ul>
