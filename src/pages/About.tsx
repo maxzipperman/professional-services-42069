@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
-const founderPhotoUrl = '/lovable-uploads/a26c93e1-90e2-455c-95a4-e7171af84fba.png';
+const founderPhotoUrl = '/lovable-uploads/2a6e14bc-b206-4b6d-b81c-f36e7afc008d.png';
 
 const About = () => {
   const canonical = typeof window !== 'undefined' 
