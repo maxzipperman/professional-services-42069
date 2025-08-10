@@ -4,6 +4,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
 }
 
 interface AIFeedbackRequest {
@@ -18,9 +19,10 @@ serve(async (req) => {
   }
 
   try {
+    // Use service role key so RLS policies allow usage tracking
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
     )
 
     const { website_url, focus_area, industry }: AIFeedbackRequest = await req.json()
@@ -35,9 +37,9 @@ serve(async (req) => {
       .from('ai_feedback_usage')
       .select('*')
       .eq('ip_address', clientIP)
-      .single()
+      .maybeSingle()
 
-    if (usageError && usageError.code !== 'PGRST116') {
+    if (usageError) {
       throw usageError
     }
 
@@ -203,10 +205,10 @@ Format your response in clear sections with specific, actionable recommendations
       }
     )
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error:', error)
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: error.message || 'Unknown error' }),
       { 
         status: 500, 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
