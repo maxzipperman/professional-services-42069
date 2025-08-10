@@ -1,4 +1,3 @@
-
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,12 +10,11 @@ import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-
 const CALENDLY_URL = 'https://calendly.com/maxzipperman';
-
 const Contact = () => {
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const contactInfo = [{
     icon: <Mail className="h-5 w-5" />,
     title: "Email",
@@ -33,10 +31,8 @@ const Contact = () => {
     content: "24 hours",
     description: "Free audit within 2 business days"
   }];
-
   const services = ["Website Design & Development", "Brand Messaging Strategy", "Website Optimization & Refresh", "Free Website Audit", "Other"];
   const industries = ["Professional Services (Law, Accounting, Consulting)", "Local Business (Restaurant, Home Services, Retail)", "Nonprofit & Religious Organizations", "Independent Creatives (Photography, Art, Coaching)", "Other"];
-
   useEffect(() => {
     const handler = async (e: MessageEvent) => {
       try {
@@ -44,8 +40,14 @@ const Contact = () => {
         console.log('Calendly postMessage received:', evt, e);
         if (evt === 'calendly.event_scheduled') {
           console.log('Calendly event scheduled — creating Stripe Checkout for $499');
-          const { data, error } = await supabase.functions.invoke('create-payment', {
-            body: { amount: 49900, title: 'Initial 2-Hour Consultation' },
+          const {
+            data,
+            error
+          } = await supabase.functions.invoke('create-payment', {
+            body: {
+              amount: 49900,
+              title: 'Initial 2-Hour Consultation'
+            }
           });
           if (error) throw error;
           const url = (data as any)?.url;
@@ -61,14 +63,13 @@ const Contact = () => {
         toast({
           title: 'Unable to start checkout',
           description: err?.message || 'Please try again or use the Payment page.',
-          variant: 'destructive',
+          variant: 'destructive'
         });
       }
     };
     window.addEventListener('message', handler);
     return () => window.removeEventListener('message', handler);
   }, [toast]);
-
   return <Layout>
       {/* Hero Section */}
       <section className="pt-16 md:pt-20 pb-12 gradient-subtle">
@@ -188,26 +189,7 @@ const Contact = () => {
             {/* Contact Info & Calendly Embed */}
             <div className="space-y-8">
               {/* Contact Information */}
-              <Card className="shadow-soft">
-                <CardHeader>
-                  <CardTitle>Get in Touch</CardTitle>
-                  <CardDescription>
-                    Ready to discuss your project? We're here to help.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {contactInfo.map((info, index) => <div key={index} className="flex items-start space-x-4">
-                      <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent">
-                        {info.icon}
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">{info.title}</h4>
-                        <p className="text-accent font-medium">{info.content}</p>
-                        <p className="text-sm text-muted-foreground">{info.description}</p>
-                      </div>
-                    </div>)}
-                </CardContent>
-              </Card>
+              
 
               {/* Calendly Embed (replaces the previously selected card) */}
               <Card className="shadow-soft">
@@ -219,13 +201,9 @@ const Contact = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="rounded-lg border border-border overflow-hidden bg-background">
-                    <iframe
-                      title="Calendly Scheduling"
-                      src={`${CALENDLY_URL}?hide_landing_page_details=1&hide_gdpr_banner=1`}
-                      className="w-full"
-                      style={{ height: 620 }}
-                      loading="lazy"
-                    />
+                    <iframe title="Calendly Scheduling" src={`${CALENDLY_URL}?hide_landing_page_details=1&hide_gdpr_banner=1`} className="w-full" style={{
+                    height: 620
+                  }} loading="lazy" />
                   </div>
                   <p className="mt-3 text-xs text-muted-foreground">
                     Prefer a full page view? <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="underline">Open Calendly</a>.
