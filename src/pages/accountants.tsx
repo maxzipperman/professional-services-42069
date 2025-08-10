@@ -84,7 +84,7 @@ const Accountants = () => {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link to="/portfolio">View CPA Websites</Link>
+                <Link to="/ai-feedback">Run a free AI site audit</Link>
               </Button>
             </div>
           </div>

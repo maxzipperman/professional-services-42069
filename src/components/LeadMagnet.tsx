@@ -6,14 +6,15 @@ import { Badge } from '@/components/ui/badge';
 import { Download, Mail, CheckCircle } from 'lucide-react';
 
 interface LeadMagnetProps {
-  industry: 'lawyers' | 'therapists' | 'consultants';
+  industry: string;
   title: string;
   description: string;
   benefits: string[];
-  fileName: string;
+  fileName?: string;
+  downloadUrl?: string;
 }
 
-const LeadMagnet = ({ industry, title, description, benefits, fileName }: LeadMagnetProps) => {
+const LeadMagnet = ({ industry, title, description, benefits, fileName, downloadUrl }: LeadMagnetProps) => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -21,24 +22,19 @@ const LeadMagnet = ({ industry, title, description, benefits, fileName }: LeadMa
     e.preventDefault();
     // Here you would integrate with your email service
     setIsSubmitted(true);
+    if (downloadUrl) {
+      window.open(downloadUrl, '_blank');
+    }
   };
 
-  const industryConfig = {
-    lawyers: {
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
-      icon: '⚖️'
-    },
-    therapists: {
-      color: 'text-green-600', 
-      bgColor: 'bg-green-50',
-      icon: '🧠'
-    },
-    consultants: {
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50', 
-      icon: '📊'
-    }
+  const industryConfig: Record<string, { icon: string }> = {
+    lawyers: { icon: '⚖️' },
+    accountants: { icon: '📊' },
+    consultants: { icon: '🧩' },
+    nonprofits: { icon: '🤝' },
+    creatives: { icon: '🎨' },
+    "local businesses": { icon: '📍' },
+    "professional services": { icon: '🏢' },
   };
 
   const config = industryConfig[industry];
@@ -65,8 +61,8 @@ const LeadMagnet = ({ industry, title, description, benefits, fileName }: LeadMa
   return (
     <Card className="max-w-md mx-auto shadow-medium hover-lift">
       <CardHeader className="text-center">
-        <div className={`w-16 h-16 ${config.bgColor} rounded-lg flex items-center justify-center mx-auto mb-4`}>
-          <span className="text-2xl">{config.icon}</span>
+        <div className={`w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-4`}>
+          <span className="text-2xl">{config?.icon ?? '📘'}</span>
         </div>
         <Badge variant="secondary" className="mb-2">
           <Download className="h-4 w-4 mr-2" />

@@ -84,7 +84,7 @@ const Lawyers = () => {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link to="/portfolio">View Legal Websites</Link>
+                <Link to="/ai-feedback">Run a free AI site audit</Link>
               </Button>
             </div>
           </div>
@@ -234,6 +234,7 @@ const Lawyers = () => {
               "Contact form optimization for legal inquiries"
             ]}
             fileName="Legal Website Mistakes Guide.pdf"
+            downloadUrl="/guides/lawyers-quick-wins"
           />
         </div>
       </section>

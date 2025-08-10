@@ -70,9 +70,9 @@ export const IndustryHero = ({
             </Button>
             
             <Button asChild variant="outline" size="lg" className="hover-scale transition-smooth">
-              <Link to="#case-studies" className="inline-flex items-center gap-2">
+              <Link to="/ai-feedback" className="inline-flex items-center gap-2">
                 <Play className="h-4 w-4" />
-                {secondaryCtaText}
+                Run a free AI site audit
               </Link>
             </Button>
           </div>

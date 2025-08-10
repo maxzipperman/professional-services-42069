@@ -20,6 +20,13 @@ import Payment from "./pages/Payment";
 import About from "./pages/About";
 import Timeline from "./pages/Timeline";
 import { AIFeedbackPage } from "./pages/AIFeedbackPage";
+import LawyersQuickWins from "./pages/guides/LawyersQuickWins";
+import AccountantsQuickWins from "./pages/guides/AccountantsQuickWins";
+import ConsultantsQuickWins from "./pages/guides/ConsultantsQuickWins";
+import NonprofitsQuickWins from "./pages/guides/NonprofitsQuickWins";
+import CreativesQuickWins from "./pages/guides/CreativesQuickWins";
+import LocalBusinessesQuickWins from "./pages/guides/LocalBusinessesQuickWins";
+import ProfessionalServicesQuickWins from "./pages/guides/ProfessionalServicesQuickWins";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +71,15 @@ const App = () => (
             <Route path="/designers" element={<Navigate to="/creatives" replace />} />
             <Route path="/photographers" element={<Navigate to="/creatives" replace />} />
             <Route path="/agencies" element={<Navigate to="/creatives" replace />} />
+            
+            {/* Guides */}
+            <Route path="/guides/lawyers-quick-wins" element={<LawyersQuickWins />} />
+            <Route path="/guides/accountants-quick-wins" element={<AccountantsQuickWins />} />
+            <Route path="/guides/consultants-quick-wins" element={<ConsultantsQuickWins />} />
+            <Route path="/guides/nonprofits-quick-wins" element={<NonprofitsQuickWins />} />
+            <Route path="/guides/creatives-quick-wins" element={<CreativesQuickWins />} />
+            <Route path="/guides/local-businesses-quick-wins" element={<LocalBusinessesQuickWins />} />
+            <Route path="/guides/professional-services-quick-wins" element={<ProfessionalServicesQuickWins />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

@@ -17,6 +17,7 @@ import { iconResolver } from '@/utils/iconResolver';
 import { ComparisonTable } from './ComparisonTable';
 import ROICalculator from './ROICalculator';
 import { IndustryAISection } from './IndustryAISection';
+import LeadMagnet from './LeadMagnet';
 
 interface IndustryPageProps {
   data: IndustryData;
@@ -42,6 +43,96 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
   };
 
   const canonical = typeof window !== 'undefined' ? `${window.location.origin}${data.slug}` : data.slug;
+
+  // Lead magnet content per industry
+  const industryKey = data.industry.toLowerCase();
+  const leadMagnets: Record<string, { title: string; description: string; benefits: string[]; url: string; }> = {
+    'lawyers': {
+      title: '5 Quick Wins for Law Firm Websites',
+      description: 'A concise checklist to boost credibility, speed, and conversions this week.',
+      benefits: [
+        'Compliance-friendly trust signals',
+        'Speed targets and image optimization',
+        'Practice area page structure',
+        'Contact/intake flow optimizations',
+        'Local SEO schema basics'
+      ],
+      url: '/guides/lawyers-quick-wins'
+    },
+    'accountants': {
+      title: 'CPA Website Quick Wins Checklist',
+      description: 'Improve trust and reduce price shopping with these practical upgrades.',
+      benefits: [
+        'Service clarity framework',
+        'Booking/inquiry flow best practices',
+        'Client portal callouts that convert',
+        'Local SEO for accounting searches',
+        'Performance targets that matter'
+      ],
+      url: '/guides/accountants-quick-wins'
+    },
+    'consultants': {
+      title: 'Consulting Site Quick Wins',
+      description: 'Message-market fit and proof architecture to win bigger deals.',
+      benefits: [
+        'Offer ladder and CTA map',
+        'Case study structure that sells',
+        'Lead capture without friction',
+        'Thought leadership SEO basics',
+        'Speed and UX patterns for trust'
+      ],
+      url: '/guides/consultants-quick-wins'
+    },
+    'nonprofits': {
+      title: 'Nonprofit Donation Flow Quick Wins',
+      description: 'Increase donations and volunteers with small but high-impact fixes.',
+      benefits: [
+        '2-click donate patterns',
+        'Impact storytelling blocks',
+        'Accessibility WCAG essentials',
+        'CRM sync sanity checks',
+        'Campaign page checklist'
+      ],
+      url: '/guides/nonprofits-quick-wins'
+    },
+    'creatives': {
+      title: 'Creative Portfolio Quick Wins',
+      description: 'Showcase your work without slowing down your site.',
+      benefits: [
+        'Ultra-fast gallery setup',
+        'Project page narrative framework',
+        'Lightweight embeds for socials',
+        'Inquiry pre-qualification tips',
+        'SEO for niche + location'
+      ],
+      url: '/guides/creatives-quick-wins'
+    },
+    'local businesses': {
+      title: 'Local Business Website Quick Wins',
+      description: 'Turn local searches into calls, directions, and visits.',
+      benefits: [
+        'Tap-to-call/directions placement',
+        'Google Business Profile must-haves',
+        'Review capture and showcase',
+        'Menu/services clarity in 2 clicks',
+        'LocalBusiness schema basics'
+      ],
+      url: '/guides/local-businesses-quick-wins'
+    },
+    'professional services': {
+      title: 'Professional Services Website Quick Wins',
+      description: 'Trust-first fixes to convert research into consultations.',
+      benefits: [
+        'Homepage trust block anatomy',
+        'CTA map for intake flows',
+        'Proof and testimonial patterns',
+        'Core Web Vitals targets',
+        'Service page structure'
+      ],
+      url: '/guides/professional-services-quick-wins'
+    }
+  };
+  const leadMagnet = leadMagnets[industryKey] ?? leadMagnets['professional services'];
 
   return (
     <>
@@ -125,6 +216,25 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
 
         {/* AI Analysis & Expert Audit Section */}
         <IndustryAISection industry={data.industry} />
+
+        {/* Lead Magnet */}
+        <section className="py-14">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-8 max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold mb-3">Get Your Free {data.industry} Website Guide</h2>
+              <p className="text-lg text-muted-foreground">Download a 1-page checklist with quick wins tailored for {data.industry.toLowerCase()}.</p>
+            </div>
+            <div className="max-w-xl mx-auto">
+              <LeadMagnet
+                industry={industryKey}
+                title={leadMagnet.title}
+                description={leadMagnet.description}
+                benefits={leadMagnet.benefits}
+                downloadUrl={leadMagnet.url}
+              />
+            </div>
+          </div>
+        </section>
 
         {/* Services Focus */}
         <section className="py-14 bg-muted/30">
