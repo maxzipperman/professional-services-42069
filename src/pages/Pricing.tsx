@@ -102,39 +102,6 @@ const Pricing = () => {
             ))}
           </div>
 
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="mb-3">Productized Offers</h2>
-            <p className="text-muted-foreground mb-6">Quick, high-impact engagements to unlock ROI fast.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-12">
-            <Card className="hover-lift">
-              <CardHeader>
-                <CardTitle>Brand Sprint</CardTitle>
-                <p className="text-primary font-semibold">$2,995 • 2 weeks</p>
-              </CardHeader>
-              <CardContent>
-                <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                  <li>Brand strategy workshops</li>
-                  <li>Messaging framework</li>
-                  <li>Logo suite, colors, fonts</li>
-                  <li>1-page style guide</li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card className="hover-lift">
-              <CardHeader>
-                <CardTitle>Website Audit & CRO Roadmap</CardTitle>
-                <p className="text-primary font-semibold">$999 • 5 days</p>
-              </CardHeader>
-              <CardContent>
-                <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                  <li>Performance/SEO/Accessibility/UX audit</li>
-                  <li>10 actionable CRO recommendations</li>
-                  <li>60-minute presentation call</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
 
           <div className="max-w-3xl mx-auto text-center mb-8">
             <h2 className="mb-3">Retainers</h2>
