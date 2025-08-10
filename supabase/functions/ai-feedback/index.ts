@@ -26,6 +26,14 @@ serve(async (req) => {
     )
 
     const { website_url, focus_area, industry }: AIFeedbackRequest = await req.json()
+
+    // Basic validation for website_url
+    if (!website_url || !/^https?:\/\//i.test(website_url)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid website_url. Include http(s):// and a valid domain.' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
     
     // Get client IP
     const clientIP = req.headers.get('x-forwarded-for')?.split(',')[0] || 
@@ -136,7 +144,7 @@ Format your response in clear sections with specific, actionable recommendations
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama-3.1-sonar-large-128k-online',
+        model: 'llama-3.1-sonar-small-128k-online',
         messages: [
           {
             role: 'system',
@@ -158,14 +166,25 @@ Format your response in clear sections with specific, actionable recommendations
     })
 
     if (!perplexityResponse.ok) {
-      throw new Error(`Perplexity API error: ${perplexityResponse.status}`)
+      const errorText = await perplexityResponse.text()
+      let details: unknown = null
+      try { details = JSON.parse(errorText) } catch (_) { details = errorText }
+      console.error('Perplexity API error:', perplexityResponse.status, errorText)
+      return new Response(
+        JSON.stringify({ error: 'Upstream AI error', provider: 'perplexity', status: perplexityResponse.status, details }),
+        { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
     }
 
     const result = await perplexityResponse.json()
-    const analysis = result.choices[0]?.message?.content
+    const analysis = result.choices?.[0]?.message?.content
 
     if (!analysis) {
-      throw new Error('No analysis received from AI')
+      console.error('No analysis received from AI:', JSON.stringify(result).slice(0, 1000))
+      return new Response(
+        JSON.stringify({ error: 'No analysis received from AI' }),
+        { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
     }
 
     // Update usage tracking
