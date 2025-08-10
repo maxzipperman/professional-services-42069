@@ -1,8 +1,8 @@
 name: Scheduled Deploy
 on:
   schedule:
-    # Run every hour (temporarily until quota resets)
-    - cron: '0 * * * *'
+    # Run every 8 hours
+    - cron: '0 */8 * * *'
   workflow_dispatch: # Allow manual trigger
 jobs:
   deploy:
