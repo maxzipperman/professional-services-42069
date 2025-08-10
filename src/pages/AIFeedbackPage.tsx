@@ -3,61 +3,86 @@ import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { toast } from "@/components/ui/use-toast";
-import { Sparkles, CheckCircle, Clock, UserCheck } from "lucide-react";
-import { getIndustryPrompt } from "@/utils/industryPrompts";
-import { callLLM } from "@/utils/aiProviders";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Sparkles, Bot, UserCheck, ArrowRight, CheckCircle, AlertCircle, Clock, Mail } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
 
-export default function AIFeedbackPage() {
+export const AIFeedbackPage = () => {
   const [searchParams] = useSearchParams();
-  const [industry, setIndustry] = useState(searchParams.get("industry") || "");
-  const [prompt, setPrompt] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState("");
-  
-  // For demo purposes, we'll use the existing client-side setup
-  // In production, this would call the Supabase Edge Function
-  const [apiKey] = useState(localStorage.getItem("AI_KEY_perplexity") || "");
+  const [industry, setIndustry] = useState<string>("");
+  const [websiteUrl, setWebsiteUrl] = useState<string>("");
+  const [focusArea, setFocusArea] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [analysis, setAnalysis] = useState<string>("");
+  const [usage, setUsage] = useState<{ remaining: number; limit: number; whitelisted: boolean } | null>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
-    if (industry) {
-      setPrompt(getIndustryPrompt(industry));
+    const industryParam = searchParams.get("industry");
+    if (industryParam) {
+      setIndustry(industryParam);
     }
-  }, [industry]);
+  }, [searchParams]);
 
-  const onSubmit = async () => {
-    if (!apiKey) {
-      toast({ 
-        title: "Setup required", 
-        description: "Please configure your API key in the original AI Feedback modal first." 
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!websiteUrl) {
+      toast({
+        title: "Website URL Required",
+        description: "Please enter your website URL to analyze.",
+        variant: "destructive",
       });
       return;
     }
 
+    setIsLoading(true);
+    setAnalysis("");
+
     try {
-      setLoading(true);
-      const pageContent = document.body?.innerText || "";
-      const message = `${prompt}\n\nPage content (truncated):\n${pageContent.slice(0, 8000)}`;
-      
-      const answer = await callLLM({ 
-        provider: "perplexity", 
-        apiKey, 
-        model: "llama-3.1-sonar-small-128k-online", 
-        message 
+      const { data, error } = await supabase.functions.invoke('ai-feedback', {
+        body: {
+          website_url: websiteUrl,
+          focus_area: focusArea,
+          industry: industry
+        }
       });
+
+      if (error) {
+        if (error.message?.includes('Rate limit exceeded')) {
+          const errorData = JSON.parse(error.message);
+          toast({
+            title: "Daily Limit Reached",
+            description: `You've used all ${errorData.limit} free analyses today. Try again tomorrow or contact us for more.`,
+            variant: "destructive",
+          });
+          return;
+        }
+        throw error;
+      }
       
-      setResult(answer);
-      toast({ title: "Analysis complete", description: "Your website analysis is ready!" });
-    } catch (e: any) {
-      toast({ title: "Analysis failed", description: e?.message || "Please try again later." });
+      setAnalysis(data.analysis);
+      setUsage(data.usage);
+      
+      toast({
+        title: "Analysis Complete",
+        description: "Your website analysis is ready!",
+      });
+    } catch (error) {
+      console.error("Error getting AI feedback:", error);
+      toast({
+        title: "Analysis Failed",
+        description: "There was an error analyzing your website. Please try again.",
+        variant: "destructive",
+      });
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -72,88 +97,106 @@ export default function AIFeedbackPage() {
       <Layout>
         <section className="py-20 bg-gradient-subtle">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6">
-                <Sparkles className="h-4 w-4" />
-                <span className="text-sm font-medium">AI-Powered Analysis</span>
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6">
+                  <Sparkles className="h-4 w-4" />
+                  Professional AI Website Analysis
+                  {usage && !usage.whitelisted && (
+                    <Badge variant="secondary" className="ml-2">
+                      {usage.remaining} analyses remaining today
+                    </Badge>
+                  )}
+                </div>
+                {industry && (
+                  <Badge variant="outline" className="mb-4">
+                    Optimized for {industry}
+                  </Badge>
+                )}
+                <h1 className="text-4xl font-bold mb-4">Get Expert-Level Website Feedback</h1>
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                  Receive instant, comprehensive analysis of your website's performance, user experience, and conversion potential - powered by advanced AI.
+                </p>
               </div>
-              
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Professional Website Analysis
-              </h1>
-              
-              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Get instant, expert-level feedback on your website's performance, conversion potential, and user experience — no setup required.
-              </p>
 
-              {industry && (
-                <Badge variant="secondary" className="mb-8 text-sm px-4 py-2">
-                  Optimized for {industry}
-                </Badge>
-              )}
-            </div>
-          </div>
-        </section>
-
-        <section className="py-14">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
               <div className="grid lg:grid-cols-3 gap-8">
                 {/* Main Analysis Form */}
                 <div className="lg:col-span-2">
                   <Card>
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
-                        <Sparkles className="h-5 w-5 text-primary" />
-                        Website Analysis Request
+                        <Bot className="h-5 w-5 text-primary" />
+                        Website Analysis
+                        {industry && (
+                          <span className="text-sm font-normal text-muted-foreground">
+                            for {industry}
+                          </span>
+                        )}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="prompt">Analysis Focus</Label>
-                        <Textarea 
-                          id="prompt" 
-                          value={prompt} 
-                          onChange={(e) => setPrompt(e.target.value)} 
-                          rows={6}
-                          placeholder="Describe what aspects of your website you'd like analyzed..."
-                        />
-                        <p className="text-xs text-muted-foreground">
-                          Current page content will be automatically included in the analysis.
-                        </p>
-                      </div>
+                      <form onSubmit={onSubmit} className="space-y-6">
+                        <div>
+                          <label htmlFor="url" className="block text-sm font-medium mb-2">
+                            Website URL <span className="text-destructive">*</span>
+                          </label>
+                          <Input
+                            id="url"
+                            type="url"
+                            value={websiteUrl}
+                            onChange={(e) => setWebsiteUrl(e.target.value)}
+                            placeholder="https://yourwebsite.com"
+                            required
+                            className="text-base"
+                          />
+                        </div>
 
-                      <div className="flex gap-3">
+                        <div>
+                          <label htmlFor="focus" className="block text-sm font-medium mb-2">
+                            What would you like us to focus on? (Optional)
+                          </label>
+                          <Textarea
+                            id="focus"
+                            value={focusArea}
+                            onChange={(e) => setFocusArea(e.target.value)}
+                            placeholder="e.g., conversion optimization, mobile experience, user flow, accessibility..."
+                            className="min-h-[100px]"
+                          />
+                        </div>
+                        
                         <Button 
-                          onClick={onSubmit} 
-                          disabled={loading || !prompt.trim()} 
-                          className="gradient-accent text-accent-foreground"
+                          type="submit" 
+                          className="w-full" 
+                          size="lg"
+                          disabled={isLoading}
                         >
-                          {loading ? (
+                          {isLoading ? (
                             <>
-                              <Clock className="h-4 w-4 mr-2 animate-spin" />
-                              Analyzing...
+                              <Bot className="h-4 w-4 mr-2 animate-spin" />
+                              Analyzing Website...
                             </>
                           ) : (
                             <>
                               <Sparkles className="h-4 w-4 mr-2" />
-                              Analyze Website
+                              Analyze My Website
                             </>
                           )}
                         </Button>
-                        <Button variant="outline" onClick={() => setResult("")}>
-                          Clear Results
-                        </Button>
-                      </div>
+                      </form>
 
-                      {result && (
-                        <div className="space-y-2">
-                          <Label>Analysis Results</Label>
-                          <ScrollArea className="h-96 border rounded-md p-4">
+                      {analysis && (
+                        <div className="mt-8">
+                          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                            <CheckCircle className="h-5 w-5 text-green-500" />
+                            Analysis Results
+                          </h3>
+                          <ScrollArea className="h-[500px] rounded-md border p-4">
                             <div className="prose prose-sm max-w-none">
-                              <pre className="whitespace-pre-wrap text-sm text-foreground font-sans">
-                                {result}
-                              </pre>
+                              {analysis.split('\n').map((line, index) => (
+                                <p key={index} className="mb-2 whitespace-pre-wrap">
+                                  {line}
+                                </p>
+                              ))}
                             </div>
                           </ScrollArea>
                         </div>
@@ -164,49 +207,80 @@ export default function AIFeedbackPage() {
 
                 {/* Sidebar */}
                 <div className="space-y-6">
-                  {/* What's Included */}
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-lg">What's Included</CardTitle>
+                      <CardTitle className="text-lg">What's Included:</CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3">
-                      <div className="flex items-start gap-3">
-                        <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-medium text-sm">Performance Analysis</p>
-                          <p className="text-xs text-muted-foreground">Page speed, Core Web Vitals, mobile optimization</p>
+                    <CardContent>
+                      <ul className="space-y-3">
+                        <li className="flex items-start gap-3">
+                          <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <strong>Industry-Specific Analysis</strong>
+                            <p className="text-sm text-muted-foreground">
+                              Tailored insights for your industry's best practices and compliance requirements
+                            </p>
+                          </div>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <strong>Performance Review</strong>
+                            <p className="text-sm text-muted-foreground">
+                              Assessment of site speed, mobile responsiveness, and user experience
+                            </p>
+                          </div>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <strong>Conversion Optimization</strong>
+                            <p className="text-sm text-muted-foreground">
+                              Actionable recommendations to improve lead generation and sales
+                            </p>
+                          </div>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <strong>Accessibility & SEO</strong>
+                            <p className="text-sm text-muted-foreground">
+                              Technical review for search visibility and inclusive design
+                            </p>
+                          </div>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <strong>Priority Action Items</strong>
+                            <p className="text-sm text-muted-foreground">
+                              Clear roadmap with immediate wins and long-term improvements
+                            </p>
+                          </div>
+                        </li>
+                      </ul>
+
+                      <div className="mt-6 p-4 bg-muted/50 rounded-lg">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Clock className="h-4 w-4 text-muted-foreground" />
+                          <span className="text-sm font-medium">Usage Limits</span>
                         </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-medium text-sm">Conversion Optimization</p>
-                          <p className="text-xs text-muted-foreground">CTA placement, user flow, trust signals</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-medium text-sm">Accessibility Review</p>
-                          <p className="text-xs text-muted-foreground">WCAG compliance, usability improvements</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-medium text-sm">Industry-Specific Insights</p>
-                          <p className="text-xs text-muted-foreground">Tailored recommendations for your sector</p>
-                        </div>
+                        <p className="text-sm text-muted-foreground">
+                          Free users get 3 analyses per day. Need more? 
+                          <Button variant="link" size="sm" className="px-1 h-auto">
+                            Contact us for unlimited access
+                          </Button>
+                        </p>
                       </div>
                     </CardContent>
                   </Card>
 
-                  {/* Upgrade CTA */}
-                  <Card className="bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20">
+                  {/* Expert Audit CTA */}
+                  <Card className="border-accent/20 bg-gradient-to-br from-accent/5 to-accent/10">
                     <CardHeader>
                       <CardTitle className="text-lg flex items-center gap-2">
                         <UserCheck className="h-5 w-5 text-accent" />
-                        Want Expert Analysis?
+                        Want a Human Expert Audit?
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -214,19 +288,12 @@ export default function AIFeedbackPage() {
                         Get a comprehensive audit from our founder with competitive analysis, custom strategy, and implementation roadmap.
                       </p>
                       <Button asChild className="w-full gradient-accent text-accent-foreground">
-                        <Link to="/contact?utm_source=ai-feedback&utm_medium=upgrade-cta&utm_campaign=expert-audit">
+                        <Link to="/contact?utm_source=ai-feedback&utm_medium=expert-audit&utm_campaign=upgrade-cta" className="inline-flex items-center gap-2">
+                          <UserCheck className="h-4 w-4" />
                           Schedule Expert Audit
+                          <ArrowRight className="h-4 w-4" />
                         </Link>
                       </Button>
-                    </CardContent>
-                  </Card>
-
-                  {/* Usage Note */}
-                  <Card>
-                    <CardContent className="p-4">
-                      <p className="text-xs text-muted-foreground">
-                        <strong>Note:</strong> This analysis uses AI to provide instant feedback. For production deployment, analysis would be rate-limited and processed through secure backend infrastructure.
-                      </p>
                     </CardContent>
                   </Card>
                 </div>
@@ -237,4 +304,4 @@ export default function AIFeedbackPage() {
       </Layout>
     </>
   );
-}
+};

@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { Code, MessageSquare, TrendingUp, ArrowRight, CheckCircle, Search } from 'lucide-react';
 import ROICalculator from '@/components/ROICalculator';
+import { AIFeatureSection } from '@/components/AIFeatureSection';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const Services = () => {
@@ -202,6 +203,9 @@ const Services = () => {
           </div>
         </div>
       </section>
+
+      {/* AI Feature Section */}
+      <AIFeatureSection />
 
       {/* ROI Calculator */}
       <ROICalculator />

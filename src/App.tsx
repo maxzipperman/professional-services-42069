@@ -19,7 +19,7 @@ import Portfolio from "./pages/Portfolio";
 import Payment from "./pages/Payment";
 import About from "./pages/About";
 import Timeline from "./pages/Timeline";
-import AIFeedbackPage from "./pages/AIFeedbackPage";
+import { AIFeedbackPage } from "./pages/AIFeedbackPage";
 
 const queryClient = new QueryClient();
 
