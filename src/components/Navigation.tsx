@@ -45,14 +45,24 @@ const Navigation = () => {
             >
               Home
             </Link>
-            <Link
-              to="/services"
-              className={`transition-smooth hover:text-accent ${
-                isActive('/services') ? 'text-accent font-medium' : 'text-foreground'
-              }`}
-            >
-              Services
-            </Link>
+            {/* Services Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger aria-label="Services" className="flex items-center space-x-1 transition-smooth hover:text-accent text-foreground">
+                <span>Services</span>
+                <ChevronDown className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-64">
+                <DropdownMenuItem asChild>
+                  <Link to="/services/web-design" className="w-full cursor-pointer">Web Design & Development</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/services/brand-identity" className="w-full cursor-pointer">Brand Identity</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/services/cro-retainers" className="w-full cursor-pointer">CRO Retainers</Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             
             {/* Who We Help Dropdown */}
             <DropdownMenu>
@@ -75,12 +85,20 @@ const Navigation = () => {
             </DropdownMenu>
 
             <Link
-              to="/portfolio"
+              to="/case-studies"
               className={`transition-smooth hover:text-accent ${
-                isActive('/portfolio') ? 'text-accent font-medium' : 'text-foreground'
+                isActive('/case-studies') ? 'text-accent font-medium' : 'text-foreground'
               }`}
             >
-              Portfolio
+              Case Studies
+            </Link>
+            <Link
+              to="/pricing"
+              className={`transition-smooth hover:text-accent ${
+                isActive('/pricing') ? 'text-accent font-medium' : 'text-foreground'
+              }`}
+            >
+              Pricing
             </Link>
             <Link
               to="/about"
@@ -91,12 +109,20 @@ const Navigation = () => {
               About
             </Link>
             <Link
-              to="/faq"
+              to="/resources"
               className={`transition-smooth hover:text-accent ${
-                isActive('/faq') ? 'text-accent font-medium' : 'text-foreground'
+                isActive('/resources') ? 'text-accent font-medium' : 'text-foreground'
               }`}
             >
-              FAQ
+              Blog/Resources
+            </Link>
+            <Link
+              to="/contact"
+              className={`transition-smooth hover:text-accent ${
+                isActive('/contact') ? 'text-accent font-medium' : 'text-foreground'
+              }`}
+            >
+              Contact
             </Link>
           </div>
 
@@ -150,13 +176,18 @@ const Navigation = () => {
               >
                 Home
               </Link>
-              <Link
-                to="/services"
-                className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
-                onClick={() => setIsOpen(false)}
-              >
-                Services
-              </Link>
+              <div className="px-3 py-2">
+                <div className="text-sm font-medium text-muted-foreground mb-2">Services</div>
+                <Link to="/services/web-design" className="block px-3 py-1 text-sm text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+                  Web Design & Development
+                </Link>
+                <Link to="/services/brand-identity" className="block px-3 py-1 text-sm text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+                  Brand Identity
+                </Link>
+                <Link to="/services/cro-retainers" className="block px-3 py-1 text-sm text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+                  CRO Retainers
+                </Link>
+              </div>
               <div className="px-3 py-2">
                 <div className="text-sm font-medium text-muted-foreground mb-2">Who We Help</div>
                 {industries.map((industry) => (
@@ -171,11 +202,18 @@ const Navigation = () => {
                 ))}
               </div>
               <Link
-                to="/portfolio"
+                to="/case-studies"
                 className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
                 onClick={() => setIsOpen(false)}
               >
-                Portfolio
+                Case Studies
+              </Link>
+              <Link
+                to="/pricing"
+                className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
+                onClick={() => setIsOpen(false)}
+              >
+                Pricing
               </Link>
               <Link
                 to="/about"
@@ -185,11 +223,18 @@ const Navigation = () => {
                 About
               </Link>
               <Link
-                to="/faq"
+                to="/resources"
                 className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
                 onClick={() => setIsOpen(false)}
               >
-                FAQ
+                Blog/Resources
+              </Link>
+              <Link
+                to="/contact"
+                className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
+                onClick={() => setIsOpen(false)}
+              >
+                Contact
               </Link>
               <Link
                 to="/payment"
