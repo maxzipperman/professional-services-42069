@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Mail, Phone, MapPin } from 'lucide-react';
-const LOGO_URL = '/lovable-uploads/451ca319-1b33-4ca5-b055-186a648f57de.png';
+const LOGO_URL = '/lovable-uploads/6b9a45fe-3941-4430-821a-67a12ae0f924.png';
 
 const Footer = () => {
   const industries = [
@@ -18,8 +18,8 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center mb-4">
-              <div className="relative h-10 md:h-12 overflow-hidden flex items-center">
-                <img src={LOGO_URL} alt="Clearline Studio logo" className="h-10 md:h-12 w-auto object-contain -mt-1 md:-mt-1" loading="lazy" decoding="async" />
+              <div className="relative flex items-center h-8 md:h-10 max-w-[180px] md:max-w-[220px]">
+                <img src={LOGO_URL} alt="Clearline Studio logo" className="h-full w-auto object-contain object-left" loading="lazy" decoding="async" />
               </div>
             </div>
             <p className="text-primary-foreground/80 mb-6 leading-relaxed">

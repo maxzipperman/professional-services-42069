@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Sparkles } from 'lucide-react';
 
-const LOGO_URL = '/lovable-uploads/451ca319-1b33-4ca5-b055-186a648f57de.png';
+const LOGO_URL = '/lovable-uploads/6b9a45fe-3941-4430-821a-67a12ae0f924.png';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,8 +32,8 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-14 md:h-16">
           <Link to="/" className="flex items-center space-x-3 group shrink-0" aria-label="Clearline Studio home">
-            <div className="relative h-10 sm:h-12 md:h-14 overflow-hidden flex items-center">
-              <img src={LOGO_URL} alt="Clearline Studio logo" className="h-10 sm:h-12 md:h-12 w-auto object-contain -mt-1" loading="eager" decoding="async" fetchPriority="high" />
+            <div className="relative flex items-center h-10 sm:h-12 md:h-14 max-w-[180px] md:max-w-[220px]">
+              <img src={LOGO_URL} alt="Clearline Studio logo" className="h-full w-auto object-contain object-left" loading="eager" decoding="async" fetchPriority="high" />
             </div>
           </Link>
 
