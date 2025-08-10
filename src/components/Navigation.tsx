@@ -74,9 +74,7 @@ const Navigation = () => {
 
           {/* Client Login & CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link to="/payment" className="text-sm text-muted-foreground hover:text-accent transition-smooth border border-border px-3 py-1.5 rounded-md">
-              Make Payment
-            </Link>
+            
             
             <Button asChild size="sm" className="hidden md:inline-flex">
               <Link to="/ai-feedback">
