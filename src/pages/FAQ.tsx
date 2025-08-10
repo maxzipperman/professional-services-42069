@@ -38,7 +38,7 @@ const faqs = [
   },
   {
     q: 'What’s the typical project timeline?',
-    a: 'Timelines vary by scope. See our Timeline page for a high‑level overview, or contact us for a personalized plan.'
+    a: "Simple projects can usually be completed within a week or two, and more complex work can take up to 6–8 weeks depending on client feedback.",
   },
   {
     q: 'How do I get support?',
