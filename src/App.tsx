@@ -17,6 +17,7 @@ import Accountants from "./pages/accountants";
 import Consultants from "./pages/consultants";
 import Portfolio from "./pages/Portfolio";
 import Payment from "./pages/Payment";
+import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/about" element={<About />} />
             <Route path="/payment" element={<Payment />} />
             
             {/* Industry Pages */}
