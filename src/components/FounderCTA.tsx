@@ -2,7 +2,7 @@ import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Shield } from 'lucide-react';
-import founderPhoto from '@/assets/founder-photo.jpg';
+const founderPhotoUrl = '/lovable-uploads/a26c93e1-90e2-455c-95a4-e7171af84fba.png';
 
 interface FounderCTAProps {
   ctaText: string;
@@ -49,7 +49,7 @@ export const FounderCTA = ({ ctaText, variant = 'primary' }: FounderCTAProps) =>
           <div className="flex-shrink-0">
             <div className="relative">
               <img 
-                src={founderPhoto} 
+                src={founderPhotoUrl} 
                 alt="Founder"
                 className="w-24 h-24 rounded-full object-cover shadow-accent"
               />

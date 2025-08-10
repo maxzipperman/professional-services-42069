@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
-import founderPhoto from '@/assets/founder-photo.jpg';
+const founderPhotoUrl = '/lovable-uploads/a26c93e1-90e2-455c-95a4-e7171af84fba.png';
 
 const About = () => {
   const canonical = typeof window !== 'undefined' 
@@ -48,7 +48,7 @@ const About = () => {
             <article className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start max-w-6xl mx-auto">
               <div>
                 <img
-                  src={founderPhoto}
+                  src={founderPhotoUrl}
                   alt="Founder of Clearline Studio"
                   loading="lazy"
                   className="w-full h-auto rounded-xl border border-border shadow-large"
