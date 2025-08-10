@@ -20,7 +20,7 @@ const Portfolio = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Portfolio | Clearline Studio</title>
+        <title>Portfolio | Clearline Solutions</title>
         <meta name="description" content="Selected client work and performance wins across professional services and local businesses." />
         <link rel="canonical" href="/portfolio" />
       </Helmet>

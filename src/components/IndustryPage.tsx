@@ -53,7 +53,7 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "Clearline Studio",
+            "name": "Clearline Solutions",
             "description": data.seo.description,
             "url": canonical
           })}

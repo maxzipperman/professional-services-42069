@@ -36,7 +36,7 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Websites for Professionals Who Trade on Credibility | Clearline Studio</title>
+        <title>Clearline Solutions - Building Modern, Trusted Websites</title>
         <meta name="description" content="We build polished, high-performance digital platforms that close the trust gap, showcase your expertise, and convert discerning visitors into high-value clients." />
         <link rel="canonical" href="/" />
       </Helmet>

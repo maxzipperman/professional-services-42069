@@ -8,8 +8,8 @@ const PaymentPage = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Make a Payment | Clearline Studio</title>
-        <meta name="description" content="Secure online payment via Stripe. Pay your invoice quickly and safely with Clearline Studio." />
+        <title>Make a Payment | Clearline Solutions</title>
+        <meta name="description" content="Secure online payment via Stripe. Pay your invoice quickly and safely with Clearline Solutions." />
         <link rel="canonical" href={canonical} />
       </Helmet>
       <section className="py-20 md:py-24 bg-background">

@@ -19,7 +19,7 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <div className="flex items-center mb-4">
               <div className="relative h-10 md:h-12 overflow-hidden flex items-center">
-                <img src={logo} alt="Clearline Studio logo" className="h-12 md:h-14 w-auto object-contain -mt-1 md:-mt-1.5" loading="lazy" decoding="async" />
+                <img src={logo} alt="Clearline Solutions logo" className="h-12 md:h-14 w-auto object-contain -mt-1 md:-mt-1.5" loading="lazy" decoding="async" />
               </div>
             </div>
             <p className="text-primary-foreground/80 mb-6 leading-relaxed">
@@ -114,7 +114,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-primary-foreground/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-primary-foreground/60 text-sm">
-            © 2024 Clearline Studio. All rights reserved.
+            © 2024 Clearline Solutions. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link 

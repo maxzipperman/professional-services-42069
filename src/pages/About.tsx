@@ -15,17 +15,17 @@ const About = () => {
   const orgSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Clearline Studio',
+    name: 'Clearline Solutions',
     url: typeof window !== 'undefined' ? window.location.origin : '',
   };
 
   return (
     <Layout>
       <Helmet>
-        <title>About Clearline Studio | Hand-Coded Websites</title>
+        <title>About Clearline Solutions | Hand-Coded Websites</title>
         <meta 
           name="description" 
-          content="About Clearline Studio—Ex‑Google with 15+ years in mobile and web. I build fast, SEO‑first sites for professional services and local businesses." 
+          content="About Clearline Solutions—Ex‑Google with 15+ years in mobile and web. I build fast, SEO‑first sites for professional services and local businesses." 
         />
         <link rel="canonical" href={canonical} />
         <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
@@ -35,7 +35,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <Badge variant="secondary" className="mb-4">About</Badge>
-            <h1 className="mb-4">About Clearline Studio</h1>
+            <h1 className="mb-4">About Clearline Solutions</h1>
             <p className="text-lg text-muted-foreground">
               I build fast, secure, and conversion-focused websites—without lock-in or monthly platform fees.
             </p>

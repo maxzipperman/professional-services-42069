@@ -52,7 +52,7 @@ const Lawyers = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Website Design for Law Firms | Clearline Studio</title>
+        <title>Website Design for Law Firms | Clearline Solutions</title>
         <meta name="description" content="Professional website design for law firms. Credibility-driven websites that attract clients and comply with legal advertising ethics. Get more qualified leads." />
         <meta name="keywords" content="law firm website design, lawyer website, legal website design, attorney website, legal marketing" />
       </Helmet>
