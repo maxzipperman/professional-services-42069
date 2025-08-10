@@ -161,6 +161,24 @@ async function callPerplexityWithFallback({ apiKey, messages }: { apiKey: string
   return { error: 'all_models_failed', details: { tried, lastError } }
 }
 
+// New: Robust client IP extraction helper
+function getClientIP(req: Request): { ip: string; sourceHeader: string } {
+  const headers = req.headers
+  const cfIp = headers.get('cf-connecting-ip')
+  if (cfIp) return { ip: cfIp.trim(), sourceHeader: 'cf-connecting-ip' }
+
+  const xff = headers.get('x-forwarded-for')
+  if (xff) {
+    const first = xff.split(',')[0]?.trim() || ''
+    if (first) return { ip: first, sourceHeader: 'x-forwarded-for' }
+  }
+
+  const xReal = headers.get('x-real-ip')
+  if (xReal) return { ip: xReal.trim(), sourceHeader: 'x-real-ip' }
+
+  return { ip: '127.0.0.1', sourceHeader: 'fallback' }
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
@@ -182,45 +200,63 @@ serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
-    
-    // Get client IP
-    const clientIP = req.headers.get('x-forwarded-for')?.split(',')[0] || 
-                    req.headers.get('x-real-ip') || 
-                    '127.0.0.1'
 
-    // Check rate limiting
-    const { data: usage, error: usageError } = await supabaseClient
-      .from('ai_feedback_usage')
-      .select('*')
-      .eq('ip_address', clientIP)
-      .maybeSingle()
+    // Get client IP using robust detection and load secrets
+    const { ip: clientIP, sourceHeader } = getClientIP(req)
+    const allowedRaw = (Deno.env.get('ALLOWED_OWNER_IPS') || '').trim()
+    const allowedOwnerIPs = allowedRaw
+      ? allowedRaw.split(',').map(s => s.trim()).filter(Boolean)
+      : []
+    const dailyLimit = Number.parseInt(Deno.env.get('AI_FEEDBACK_DAILY_LIMIT') || '3', 10) || 3
 
-    if (usageError) {
-      throw usageError
-    }
+    const isOwnerWhitelisted = allowedOwnerIPs.includes(clientIP)
+    console.log('[ai-feedback] ip:', clientIP, 'via:', sourceHeader, 'ownerWhitelisted:', isOwnerWhitelisted)
 
-    // Check if IP is whitelisted or within daily limit
-    const isWhitelisted = usage?.whitelisted || false
-    const dailyLimit = 3
-    const now = new Date()
-    const lastUsed = usage?.last_used ? new Date(usage.last_used) : null
-    const isNewDay = !lastUsed || lastUsed.toDateString() !== now.toDateString()
+    // Usage tracking and rate limiting
+    let isWhitelisted = isOwnerWhitelisted
+    let usage: any = null
+    let now = new Date()
+    let lastUsed: Date | null = null
+    let isNewDay = true
+    let currentUsage = 0
 
     if (!isWhitelisted) {
-      const currentUsage = isNewDay ? 0 : (usage?.usage_count || 0)
-      
-      if (currentUsage >= dailyLimit) {
+      const { data: usageRow, error: usageError } = await supabaseClient
+        .from('ai_feedback_usage')
+        .select('*')
+        .eq('ip_address', clientIP)
+        .maybeSingle()
+
+      if (usageError) {
+        throw usageError
+      }
+
+      usage = usageRow
+      isWhitelisted = !!usage?.whitelisted
+
+      lastUsed = usage?.last_used ? new Date(usage.last_used) : null
+      isNewDay = !lastUsed || lastUsed.toDateString() !== now.toDateString()
+      currentUsage = isNewDay ? 0 : (usage?.usage_count || 0)
+
+      if (!isWhitelisted && currentUsage >= dailyLimit) {
+        const remaining = 0
+        const headers = {
+          ...corsHeaders,
+          'Content-Type': 'application/json',
+          'X-RateLimit-Limit': String(dailyLimit),
+          'X-RateLimit-Remaining': String(remaining),
+          'X-RateLimit-Bypass': 'false',
+          'X-Detected-IP': clientIP,
+        }
         return new Response(
-          JSON.stringify({ 
-            error: 'Rate limit exceeded', 
+          JSON.stringify({
+            error: 'Rate limit exceeded',
             limit: dailyLimit,
             usage: currentUsage,
-            resetTime: new Date(now.getTime() + (24 * 60 * 60 * 1000) - (now.getTime() % (24 * 60 * 60 * 1000)))
+            resetTime: new Date(now.getTime() + (24 * 60 * 60 * 1000) - (now.getTime() % (24 * 60 * 60 * 1000))),
+            meta: { whitelisted: false, detectedIP: clientIP }
           }),
-          { 
-            status: 429, 
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-          }
+          { status: 429, headers }
         )
       }
     }
@@ -242,8 +278,8 @@ serve(async (req) => {
     const { content: siteContent, source: contentSource } = await getSiteContent(website_url)
     console.log('Content source:', contentSource, 'length:', siteContent.length)
 
-    // Prepare the analysis prompt
-    const analysisPrompt = `You are a professional website analyst and conversion optimization expert. ${industryPrompt}
+    // Prepare final prompt
+    const finalPrompt = `You are a professional website analyst and conversion optimization expert. ${industryPrompt}
 
 Website URL: ${website_url}
 ${focus_area ? `Specific Focus: ${focus_area}` : ''}
@@ -282,12 +318,23 @@ Please provide a comprehensive analysis covering:
 
 Format your response in clear sections with specific, actionable recommendations. Be professional but approachable, focusing on practical improvements that will drive business results.`
 
-    // Rebuild the same prompt as before, but append content when available
-    const contentBlock = siteContent
-      ? `\n\nWebsite content (truncated):\n${siteContent}`
-      : ''
+    // Call Perplexity with fallback
+    const perplexityApiKey = Deno.env.get('PERPLEXITY_API_KEY')
+    if (!perplexityApiKey) {
+      throw new Error('Perplexity API key not configured')
+    }
 
-    const finalPrompt = `You are a professional website analyst and conversion optimization expert. ${industryPrompt}
+    const messages = [
+      {
+        role: 'system',
+        content: 'You are a professional website analyst and conversion optimization expert. Provide detailed, actionable feedback in a structured format.'
+      },
+      {
+        role: 'user',
+        content: (() => {
+          // Rebuild the same prompt as before, but append content when available
+          const contentBlock = siteContent ? `\n\nWebsite content (truncated):\n${siteContent}` : ''
+          return `You are a professional website analyst and conversion optimization expert. ${industryPrompt}
 
 Website URL: ${website_url}
 ${focus_area ? `Specific Focus: ${focus_area}` : ''}${contentBlock}
@@ -325,21 +372,7 @@ Please provide a comprehensive analysis covering:
    - Long-term strategic recommendations
 
 Format your response in clear sections with specific, actionable recommendations. Be professional but approachable, focusing on practical improvements that will drive business results.`
-
-    // Call Perplexity with fallback
-    const perplexityApiKey = Deno.env.get('PERPLEXITY_API_KEY')
-    if (!perplexityApiKey) {
-      throw new Error('Perplexity API key not configured')
-    }
-
-    const messages = [
-      {
-        role: 'system',
-        content: 'You are a professional website analyst and conversion optimization expert. Provide detailed, actionable feedback in a structured format.'
-      },
-      {
-        role: 'user',
-        content: finalPrompt
+        })()
       }
     ]
 
@@ -359,10 +392,14 @@ Format your response in clear sections with specific, actionable recommendations
 
     const analysis = (result as any).content as string
 
-    // Update usage tracking
+    // Update usage tracking (skip if whitelisted)
     if (!isWhitelisted) {
-      const newUsageCount = isNewDay ? 1 : (usage?.usage_count || 0) + 1
-      
+      const newUsageCount = (usage && !isNaN(usage?.usage_count))
+        ? ((lastUsed && lastUsed.toDateString() === now.toDateString())
+            ? (usage.usage_count + 1)
+            : 1)
+        : 1
+
       if (usage) {
         await supabaseClient
           .from('ai_feedback_usage')
@@ -380,23 +417,58 @@ Format your response in clear sections with specific, actionable recommendations
             last_used: now.toISOString() 
           })
       }
+      // Recompute for response headers
+      const usedToday = newUsageCount
+      const remaining = Math.max(0, dailyLimit - usedToday)
+      const headers = {
+        ...corsHeaders,
+        'Content-Type': 'application/json',
+        'X-RateLimit-Limit': String(dailyLimit),
+        'X-RateLimit-Remaining': String(remaining),
+        'X-RateLimit-Bypass': 'false',
+        'X-Detected-IP': clientIP,
+      }
+      return new Response(
+        JSON.stringify({
+          analysis,
+          usage: {
+            remaining,
+            limit: dailyLimit,
+            whitelisted: false
+          },
+          meta: {
+            contentSource: contentSource,
+            detectedIP: clientIP
+          }
+        }),
+        { headers }
+      )
+    }
+
+    // Whitelisted: no rate limiting, return generous remaining
+    const headers = {
+      ...corsHeaders,
+      'Content-Type': 'application/json',
+      'X-RateLimit-Limit': String(dailyLimit),
+      'X-RateLimit-Remaining': '999',
+      'X-RateLimit-Bypass': 'true',
+      'X-Detected-IP': clientIP,
     }
 
     return new Response(
       JSON.stringify({
         analysis,
         usage: {
-          remaining: isWhitelisted ? 999 : Math.max(0, dailyLimit - (isNewDay ? 1 : (usage?.usage_count || 0) + 1)),
+          remaining: 999,
           limit: dailyLimit,
-          whitelisted: isWhitelisted
+          whitelisted: true
         },
         meta: {
           contentSource: contentSource,
+          detectedIP: clientIP
         }
       }),
-      {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-      }
+      { headers }
     )
 
   } catch (error: any) {
