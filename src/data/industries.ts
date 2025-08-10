@@ -263,7 +263,7 @@ export const nonprofitData: IndustryData = {
   hero: {
     headline: "Websites That Inspire Action",
     subheadline: "We help nonprofits build compelling digital experiences that turn visitors into donors, volunteers, and advocates.",
-    primaryCtaText: "Get Your Free Strategy Session",
+    primaryCtaText: "Book Your Strategy Call",
     secondaryCtaText: "See Impact Stories"
   },
   whyMatters: [
@@ -454,5 +454,91 @@ export const creativesData: IndustryData = {
     title: "Position Digital — Portfolio Websites That Convert Visitors to Clients",
     description: "Fast-loading, stunning portfolio sites for photographers, designers, artists, and creative agencies. Showcase your work and win more clients.",
     keywords: ["portfolio website design", "photographer website", "artist portfolio", "designer portfolio", "creative agency website"]
+  }
+};
+
+export const consultantsData: IndustryData = {
+  industry: "Consultants",
+  icon: "briefcase",
+  slug: "/consultants",
+  vanityAliases: ["/advisors", "/coaches", "/fractional-executives"],
+  hero: {
+    headline: "Websites for Consultants Who Command Premium Fees",
+    subheadline: "Establish unshakeable authority, prove ROI fast, and convert qualified prospects into long-term clients.",
+    primaryCtaText: "Book Your Strategy Call",
+    secondaryCtaText: "View Case Studies"
+  },
+  whyMatters: [
+    "Your site must signal expertise in seconds — or prospects bounce.",
+    "Proof beats promises: outcomes and case studies close deals.",
+    "A clear offer + frictionless booking flow increases conversions."
+  ],
+  proof: [
+    "3× more qualified inquiries after repositioning and copy overhaul.",
+    "Discovery-to-close rate up 35% with authority-focused case studies.",
+    "Site speed to 1.2s LCP — more demos booked from mobile."
+  ],
+  servicesFocus: [
+    "Positioning and message architecture",
+    "Authority-building case study system",
+    "High-converting offer and CTA flows",
+    "Long-form sales page that actually loads fast",
+    "Calendar + CRM integrations"
+  ],
+  valueProps: [
+    "Crystal-clear offer above the fold (no guessing)",
+    "Outcome-led case studies with metrics and narrative",
+    "Pricing anchors that support premium positioning",
+    "Book-a-call flow with qualification questions",
+    "SEO for problem-aware and solution-aware keywords",
+    "No templates — ownable, fast, compliant build"
+  ],
+  caseStudies: [
+    {
+      title: "Fractional CMO Authority Site",
+      client: "Northstar Advisory",
+      challenge: "Template site failed to communicate outcomes or credibility.",
+      solution: "Positioning refresh, authority case studies, and conversion-focused layout.",
+      outcome: "Pipeline value up 2.3× within 60 days."
+    },
+    {
+      title: "Operations Consultant Funnel",
+      client: "ScaleCraft Consulting",
+      challenge: "Low-quality leads and long sales cycles.",
+      solution: "Clarified offer + qualifying form + scheduler embedded.",
+      outcome: "Lead quality up 70% and close time reduced by 30%."
+    }
+  ],
+  beforeAfter: [
+    {
+      beforeImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop",
+      afterImage: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=600&fit=crop",
+      caption: "From generic brochure to authority engine that books calls."
+    },
+    {
+      beforeImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=600&fit=crop",
+      afterImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+      caption: "From slow pages to fast, narrative-driven sales flow."
+    }
+  ],
+  testimonial: {
+    quote: "I stopped justifying my rates. The site does it for me — and the right clients book themselves.",
+    author: "Alex P.",
+    role: "Principal Consultant"
+  },
+  faqs: [
+    { q: "Can you help define my offer?", a: "Yes — we run a positioning sprint to sharpen your offer and message." },
+    { q: "Do you write the copy?", a: "We collaborate on voice, then write conversion-focused copy for key pages." },
+    { q: "What tools do you integrate?", a: "Calendly/Cal.com, HubSpot, Pipedrive, and your preferred analytics." }
+  ],
+  endCta: {
+    heading: "Ready to Win Premium Engagements?",
+    subheading: "Let's transform your site into an authority-driven sales asset.",
+    primaryCtaText: "Book Your Strategy Call"
+  },
+  seo: {
+    title: "Position Digital — Websites for Consultants Who Command Premium Fees",
+    description: "Authority-building consultant websites that prove ROI, convert qualified leads, and justify premium fees.",
+    keywords: ["consultant website", "consulting web design", "authority site", "case study design", "B2B services website"]
   }
 };

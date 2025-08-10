@@ -24,7 +24,7 @@ export const IndustryHero = ({
   iconName
 }: IndustryHeroProps) => {
   return (
-    <section className="relative py-20 lg:py-32 overflow-hidden">
+    <section className="relative py-14 lg:py-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
       
@@ -53,11 +53,11 @@ export const IndustryHero = ({
             {industry}
           </Badge>
           
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent animate-fade-in">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent animate-fade-in">
             {headline}
           </h1>
           
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <p className="text-xl text-muted-foreground mb-6 max-w-2xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
             {subheadline}
           </p>
           
@@ -78,7 +78,7 @@ export const IndustryHero = ({
           </div>
           
           {/* Trust indicators */}
-          <div className="mt-12 flex flex-wrap justify-center items-center gap-8 text-sm text-muted-foreground animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <div className="mt-8 flex flex-wrap justify-center items-center gap-8 text-sm text-muted-foreground animate-fade-in" style={{ animationDelay: '0.6s' }}>
             <span className="flex items-center gap-2">
               <div className="w-2 h-2 bg-success rounded-full" />
               100+ Satisfied Clients

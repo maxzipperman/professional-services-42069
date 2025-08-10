@@ -38,11 +38,11 @@ const AnimatedCounter = ({ value, duration = 2000 }: { value: string; duration?:
 
 export const AnimatedStats = ({ stats }: AnimatedStatsProps) => {
   return (
-    <div className="grid md:grid-cols-3 gap-6">
+    <div className="grid md:grid-cols-3 gap-4">
       {stats.map((stat, index) => (
         <Card key={index} className="text-center hover-lift transition-smooth border-0 shadow-soft">
-          <CardContent className="p-6">
-            <div className="text-4xl font-bold text-primary mb-2">
+          <CardContent className="p-4">
+            <div className="text-3xl font-bold text-primary mb-2">
               <AnimatedCounter value={stat.value} />
             </div>
             <h3 className="font-semibold mb-2">{stat.label}</h3>

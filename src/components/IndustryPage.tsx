@@ -71,14 +71,14 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         />
 
         {/* Why This Matters */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-14 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">Why This Matters</h2>
-              <div className="grid md:grid-cols-3 gap-6">
+              <h2 className="text-3xl font-bold text-center mb-8">Why This Matters to You</h2>
+              <div className="grid md:grid-cols-3 gap-4">
                 {data.whyMatters.map((point, index) => (
                   <Card key={index} className="border-0 shadow-sm">
-                    <CardContent className="p-6">
+                    <CardContent className="p-4">
                       <IndustryIcon name={iconResolver(point, data.industry)} className="h-8 w-8 text-primary mb-4" />
                       <p className="text-muted-foreground">{point}</p>
                     </CardContent>
@@ -90,14 +90,14 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         </section>
 
         {/* Client-Centric Value */}
-        <section className="py-20">
+        <section className="py-14">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">Client-Centric Value for {data.industry}</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <h2 className="text-3xl font-bold text-center mb-8">What You'll Get</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {(data.valueProps ?? data.servicesFocus).map((val, idx) => (
                   <Card key={idx} className="border-0 shadow-sm">
-                    <CardContent className="p-6">
+                    <CardContent className="p-4">
                       <IndustryIcon name={iconResolver(val, data.industry)} className="h-6 w-6 text-primary mb-3" />
                       <p className="text-sm">{val}</p>
                     </CardContent>
@@ -109,17 +109,17 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         </section>
 
         {/* Animated Proof Points */}
-        <section className="py-20">
+        <section className="py-14">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold mb-4">Proven Results</h2>
                 <p className="text-lg text-muted-foreground">Real performance improvements for businesses like yours</p>
               </div>
               <AnimatedStats stats={statsData} />
               
               {/* Performance Metrics Visual */}
-              <div className="mt-16 max-w-4xl mx-auto">
+              <div className="mt-10 max-w-4xl mx-auto">
                 <Card className="overflow-hidden shadow-large border-0">
                   <CardContent className="p-0">
                     <img 
@@ -135,10 +135,10 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         </section>
 
         {/* Services Focus */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-14 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">What We Focus On</h2>
+              <h2 className="text-3xl font-bold text-center mb-8">What We'll Do For You</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {data.servicesFocus.map((service, index) => (
                   <div key={index} className="flex items-center space-x-3 p-4 bg-background rounded-lg">
@@ -153,11 +153,11 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
 
         {/* Offer Architecture */}
         {data.offers?.length ? (
-          <section className="py-20">
+          <section className="py-14">
             <div className="container mx-auto px-4">
               <div className="max-w-5xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-12">Offer Architecture</h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <h2 className="text-3xl font-bold text-center mb-8">Offer Architecture</h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {data.offers.map((offer, idx) => (
                     <Card key={idx} className="border-0 shadow-sm">
                       <CardHeader>
@@ -181,7 +181,7 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
 
         {/* Go-To-Market Quick Hits */}
         {data.gtm ? (
-          <section className="py-20 bg-muted/30">
+          <section className="py-14 bg-muted/30">
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-6">
@@ -200,13 +200,13 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
 
         {/* Who We Serve */}
         {data.subProfessions?.length ? (
-          <section className="py-20">
+          <section className="py-14">
             <div className="container mx-auto px-4">
               <div className="max-w-6xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-12">Who We Serve</h2>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <h2 className="text-3xl font-bold text-center mb-8">Who We Serve</h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {data.subProfessions!.map((sp, idx) => (
-                    <Card key={idx} className="p-8 text-center border-0 shadow-sm hover-lift transition-smooth">
+                    <Card key={idx} className="p-6 text-center border-0 shadow-sm hover-lift transition-smooth">
                       <IndustryIcon name={sp.icon || data.icon} className="h-10 w-10 text-primary mx-auto mb-4" />
                       <div className="text-2xl md:text-3xl font-bold">{sp.name}</div>
                     </Card>
@@ -218,11 +218,11 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         ) : null}
 
         {/* Before/After Showcase */}
-        <section id="case-studies" className="py-20">
+        <section id="case-studies" className="py-14">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">Before & After</h2>
-              <div className="grid lg:grid-cols-2 gap-8">
+              <h2 className="text-3xl font-bold text-center mb-8">Before & After</h2>
+              <div className="grid lg:grid-cols-2 gap-6">
                 {data.beforeAfter.map((comparison, index) => (
                   <BeforeAfterSlider
                     key={index}
@@ -239,7 +239,7 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
 
         {/* Us vs Competitors */}
         {data.industry === 'Local Businesses' && (
-          <section className="py-20">
+          <section className="py-14">
             <div className="container mx-auto px-4">
               <div className="max-w-6xl mx-auto animate-fade-in">
                 <ComparisonTable data={data.comparison!} />
@@ -250,10 +250,10 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
 
         {/* ROI Calculator */}
         {data.industry === 'Local Businesses' && (
-          <section className="py-20 bg-muted/30">
+          <section className="py-14 bg-muted/30">
             <div className="container mx-auto px-4">
               <div className="max-w-5xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-12">Your ROI vs Typical Retainers</h2>
+                <h2 className="text-3xl font-bold text-center mb-8">Your ROI vs Typical Retainers</h2>
                 <ROICalculator />
               </div>
             </div>
@@ -261,11 +261,11 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         )}
 
         {/* Case Studies */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-14 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">Case Studies</h2>
-              <div className="grid lg:grid-cols-2 gap-8">
+              <h2 className="text-3xl font-bold text-center mb-8">Case Studies</h2>
+              <div className="grid lg:grid-cols-2 gap-6">
                 {data.caseStudies.map((study, index) => (
                   <Card key={index} className="overflow-hidden">
                     <CardHeader>
@@ -294,11 +294,11 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         </section>
 
         {/* Enhanced Testimonial */}
-        <section className="py-20">
+        <section className="py-14">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <Card className="text-center shadow-accent border-0 bg-gradient-subtle">
-                <CardContent className="p-12">
+                <CardContent className="p-8">
                   <div className="flex justify-center mb-6">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="h-6 w-6 text-yellow-400 fill-current" />
@@ -318,7 +318,7 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         </section>
 
         {/* Founder CTA Section */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-14 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <FounderCTA 
@@ -330,10 +330,10 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         </section>
 
         {/* FAQs */}
-        <section className="py-20 bg-muted/30">
+        <section className="py-14 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+              <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
               <Accordion type="single" collapsible className="space-y-4">
                 {data.faqs.map((faq, index) => (
                   <AccordionItem key={index} value={`item-${index}`} className="bg-background rounded-lg px-6">
@@ -347,7 +347,7 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
         </section>
 
         {/* End CTA */}
-        <section className="py-20 bg-gradient-to-r from-primary to-primary-foreground text-primary-foreground">
+        <section className="py-14 bg-gradient-to-r from-primary to-primary-foreground text-primary-foreground">
           <div className="container mx-auto px-4 text-center">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">

@@ -1,25 +1,8 @@
-import Layout from '@/components/Layout';
-import { IndustryHero } from '@/components/IndustryHero';
-import { Helmet } from 'react-helmet-async';
-import consultantsHero from '@/assets/consultants-hero.jpg';
+import { IndustryPage } from '@/components/IndustryPage';
+import { consultantsData } from '@/data/industries';
 
 const ConsultantsPage = () => {
-  return (
-    <Layout>
-      <Helmet>
-        <title>Websites for Consultants Who Command Premium Fees | Position Digital</title>
-        <meta name="description" content="Establish unshakeable authority, demonstrate quantifiable ROI, and convert prospects into high-value, long-term clients." />
-      </Helmet>
-      <IndustryHero
-        industry="Consultants"
-        headline="Websites for Consultants Who Command Premium Fees"
-        subheadline="Establish unshakeable authority, demonstrate quantifiable ROI, and convert prospects into high-value, long-term clients."
-        primaryCtaText="Speak With the Founder"
-        secondaryCtaText="View Case Studies"
-        backgroundImage={consultantsHero}
-      />
-    </Layout>
-  );
+  return <IndustryPage data={consultantsData} />;
 };
 
 export default ConsultantsPage;
