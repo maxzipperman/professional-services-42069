@@ -48,7 +48,18 @@ const Resources = () => {
           </div>
 
           <div className="max-w-3xl mx-auto mb-12">
-            <LeadMagnet />
+            <LeadMagnet
+              industry="professional services"
+              title="SMB’s Guide to Website ROI"
+              description="A concise playbook to measure, improve, and communicate your website’s ROI."
+              benefits={[
+                "ROI model template",
+                "10 CRO quick wins",
+                "Analytics setup checklist",
+                "Executive summary one-pager",
+              ]}
+              fileName="smb-website-roi.pdf"
+            />
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

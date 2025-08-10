@@ -16,7 +16,7 @@ interface LeadMagnetProps {
   downloadUrl?: string;
 }
 
-const LeadMagnet = ({ industry, title, description, benefits, fileName, downloadUrl }: LeadMagnetProps) => {
+const LeadMagnet = ({ industry, title, description, benefits = [], fileName, downloadUrl }: LeadMagnetProps) => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
