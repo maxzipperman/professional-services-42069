@@ -19,16 +19,18 @@ interface LeadMagnetProps {
 const LeadMagnet = ({ industry, title, description, benefits, fileName, downloadUrl }: LeadMagnetProps) => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  const [isSending, setIsSending] = useState(false);
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isSupabaseConnected()) {
-      if (downloadUrl) window.open(downloadUrl, '_blank');
       setIsSubmitted(true);
       return;
     }
     try {
-      const { error } = await supabase!.functions.invoke('capture-lead', {
+      setIsSending(true);
+      // 1) Capture lead
+      const { error: leadErr } = await supabase!.functions.invoke('capture-lead', {
         body: {
           email,
           source: 'lead_magnet',
@@ -37,13 +39,26 @@ const LeadMagnet = ({ industry, title, description, benefits, fileName, download
           metadata: { fileName, downloadUrl }
         }
       });
-      if (error) throw error;
+      if (leadErr) throw leadErr;
+
+      // 2) Send the guide via email
+      const { error: emailErr } = await supabase!.functions.invoke('send-guide', {
+        body: {
+          email,
+          title,
+          fileName,
+          downloadUrl,
+          industry,
+          page: typeof window !== 'undefined' ? window.location.pathname : undefined,
+        }
+      });
+      if (emailErr) throw emailErr;
+
       setIsSubmitted(true);
-      if (downloadUrl) {
-        window.open(downloadUrl, '_blank');
-      }
     } catch (err: any) {
-      console.error('Lead capture failed:', err);
+      console.error('Lead capture/email failed:', err);
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -118,9 +133,9 @@ const LeadMagnet = ({ industry, title, description, benefits, fileName, download
               className="w-full"
             />
           </div>
-          <Button type="submit" className="w-full gradient-accent text-accent-foreground">
+          <Button type="submit" disabled={isSending} aria-busy={isSending} className="w-full gradient-accent text-accent-foreground">
             <Mail className="h-4 w-4 mr-2" />
-            Get Free Guide
+            {isSending ? "Sending..." : "Get Free Guide"}
           </Button>
         </form>
         
