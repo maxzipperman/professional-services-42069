@@ -14,7 +14,7 @@ const OwnershipBanner = () => {
               You own your site — export anytime and make changes easily. No agency lock-in.
             </p>
           </div>
-          <Link to="/contact" className="text-sm font-medium text-primary hover:underline">
+          <Link to="#what-you-get" className="text-sm font-medium text-primary hover:underline">
             How export works
           </Link>
         </div>
