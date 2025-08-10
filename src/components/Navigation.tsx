@@ -30,15 +30,15 @@ const Navigation = () => {
   const isActive = (path: string) => location.pathname === path;
   return <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-14 md:h-16">
-          <Link to="/" className="flex items-center space-x-3 group shrink-0" aria-label="Clearline Studio home">
-            <div className="relative flex items-center h-10 sm:h-12 md:h-14 max-w-[180px] md:max-w-[220px]">
+        <div className="flex items-center justify-between h-16">
+          <Link to="/" className="flex items-center group shrink-0" aria-label="Clearline Studio home">
+            <div className="relative flex items-center h-8 md:h-10 max-w-[160px] md:max-w-[200px]">
               <img src={LOGO_URL} alt="Clearline Studio logo" className="h-full w-auto object-contain object-left" loading="eager" decoding="async" fetchPriority="high" />
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-8">
             <Link to="/services" className={`transition-smooth hover:text-accent ${isActive('/services') ? 'text-accent font-medium' : 'text-foreground'}`}>
               Services
             </Link>
@@ -73,12 +73,10 @@ const Navigation = () => {
           </div>
 
           {/* Client Login & CTA */}
-          <div className="hidden md:flex items-center space-x-4">
-            
-            
-            <Button asChild size="sm" className="hidden md:inline-flex">
+          <div className="hidden md:flex items-center space-x-3">
+            <Button asChild size="sm" className="text-primary-foreground bg-primary hover:bg-primary/90">
               <Link to="/ai-feedback">
-                <Sparkles className="h-4 w-4" />
+                <Sparkles className="h-4 w-4 mr-2" />
                 <span>Free AI Website Review</span>
               </Link>
             </Button>
