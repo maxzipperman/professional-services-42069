@@ -18,6 +18,8 @@ import { ComparisonTable } from './ComparisonTable';
 import ROICalculator from './ROICalculator';
 import { IndustryAISection } from './IndustryAISection';
 import LeadMagnet from './LeadMagnet';
+import { WhatYouGet } from './WhatYouGet';
+import OwnershipBanner from './OwnershipBanner';
 
 interface IndustryPageProps {
   data: IndustryData;
@@ -163,6 +165,8 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
           iconName={data.icon}
         />
 
+        <OwnershipBanner />
+
         {/* Why This Matters */}
         <section className="py-14 bg-muted/30">
           <div className="container mx-auto px-4">
@@ -182,24 +186,8 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
           </div>
         </section>
 
-        {/* Client-Centric Value */}
-        <section className="py-14">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-8">What You'll Get</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {(data.valueProps ?? data.servicesFocus).map((val, idx) => (
-                  <Card key={idx} className="border-0 shadow-sm">
-                    <CardContent className="p-4">
-                      <IndustryIcon name={iconResolver(val, data.industry)} className="h-6 w-6 text-primary mb-3" />
-                      <p className="text-sm">{val}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* What You'll Get - Enhanced */}
+        <WhatYouGet items={(data.valueProps ?? data.servicesFocus)} industry={data.industry} />
 
         {/* Animated Proof Points */}
         <section className="py-14">
