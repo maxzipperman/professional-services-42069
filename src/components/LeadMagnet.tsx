@@ -4,6 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Download, Mail, CheckCircle } from 'lucide-react';
+import { useToast } from '@/components/ui/use-toast';
+import { supabase, isSupabaseConnected } from '@/integrations/supabase/client';
 
 interface LeadMagnetProps {
   industry: string;
@@ -18,12 +20,30 @@ const LeadMagnet = ({ industry, title, description, benefits, fileName, download
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would integrate with your email service
-    setIsSubmitted(true);
-    if (downloadUrl) {
-      window.open(downloadUrl, '_blank');
+    if (!isSupabaseConnected()) {
+      if (downloadUrl) window.open(downloadUrl, '_blank');
+      setIsSubmitted(true);
+      return;
+    }
+    try {
+      const { error } = await supabase!.functions.invoke('capture-lead', {
+        body: {
+          email,
+          source: 'lead_magnet',
+          industry,
+          page: typeof window !== 'undefined' ? window.location.pathname : undefined,
+          metadata: { fileName, downloadUrl }
+        }
+      });
+      if (error) throw error;
+      setIsSubmitted(true);
+      if (downloadUrl) {
+        window.open(downloadUrl, '_blank');
+      }
+    } catch (err: any) {
+      console.error('Lead capture failed:', err);
     }
   };
 

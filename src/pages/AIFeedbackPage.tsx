@@ -21,6 +21,7 @@ export const AIFeedbackPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [analysis, setAnalysis] = useState<string>("");
   const [usage, setUsage] = useState<{ remaining: number; limit: number; whitelisted: boolean } | null>(null);
+  const [email, setEmail] = useState<string>("");
   const { toast } = useToast();
 
   useEffect(() => {
@@ -37,6 +38,14 @@ export const AIFeedbackPage = () => {
       toast({
         title: "Website URL Required",
         description: "Please enter your website URL to analyze.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (!email) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email to receive the analysis.",
         variant: "destructive",
       });
       return;
@@ -60,7 +69,8 @@ export const AIFeedbackPage = () => {
         body: {
           website_url: websiteUrl,
           focus_area: focusArea,
-          industry: industry
+          industry: industry,
+          email: email,
         }
       });
 
@@ -156,6 +166,21 @@ export const AIFeedbackPage = () => {
                             value={websiteUrl}
                             onChange={(e) => setWebsiteUrl(e.target.value)}
                             placeholder="https://yourwebsite.com"
+                            required
+                            className="text-base"
+                          />
+                        </div>
+
+                        <div>
+                          <label htmlFor="email" className="block text-sm font-medium mb-2">
+                            Your Email <span className="text-destructive">*</span>
+                          </label>
+                          <Input
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="you@company.com"
                             required
                             className="text-base"
                           />

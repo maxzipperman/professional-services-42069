@@ -12,6 +12,7 @@ interface AIFeedbackRequest {
   website_url: string;
   focus_area?: string;
   industry?: string;
+  email: string;
 }
 
 // Helpers: fetch website content (Firecrawl -> fallback to direct fetch)
@@ -191,12 +192,19 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
     )
 
-    const { website_url, focus_area, industry }: AIFeedbackRequest = await req.json()
+    const { website_url, focus_area, industry, email }: AIFeedbackRequest = await req.json()
 
     // Basic validation for website_url
     if (!website_url || !/^https?:\/\//i.test(website_url)) {
       return new Response(
         JSON.stringify({ error: 'Invalid website_url. Include http(s):// and a valid domain.' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+    // Basic validation for email
+    if (!email || !/.+@.+\..+/.test(email)) {
+      return new Response(
+        JSON.stringify({ error: 'Valid email is required.' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
@@ -379,8 +387,17 @@ Be specific, actionable, and professional. Keep fluff to a minimum.`
       )
     }
 
+    // After successful analysis, record lead
     const analysis = (result as any).content as string
 
+    // Record lead (email + website analyzed)
+    await supabaseClient.from('leads').insert({
+      email,
+      website: website_url,
+      source: 'ai_analyzer',
+      industry: industry || null,
+      metadata: { contentSource }
+    })
     // Update usage tracking (skip if whitelisted)
     if (!isWhitelisted) {
       const newUsageCount = (usage && !isNaN(usage?.usage_count))
@@ -394,7 +411,8 @@ Be specific, actionable, and professional. Keep fluff to a minimum.`
           .from('ai_feedback_usage')
           .update({ 
             usage_count: newUsageCount, 
-            last_used: now.toISOString() 
+            last_used: now.toISOString(),
+            email: email
           })
           .eq('ip_address', clientIP)
       } else {
@@ -403,7 +421,8 @@ Be specific, actionable, and professional. Keep fluff to a minimum.`
           .insert({ 
             ip_address: clientIP, 
             usage_count: 1, 
-            last_used: now.toISOString() 
+            last_used: now.toISOString(),
+            email: email
           })
       }
       // Recompute for response headers
