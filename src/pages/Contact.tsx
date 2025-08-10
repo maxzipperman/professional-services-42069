@@ -54,8 +54,8 @@ const Contact = () => {
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-4">Get Started</Badge>
             <h1 className="mb-6">
-              Let's Create Something 
-              <span className="text-accent"> Amazing Together</span>
+              Contact
+              <span className="text-accent"> Clearline Studio</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Ready to transform your online presence? We'd love to learn about your project 
