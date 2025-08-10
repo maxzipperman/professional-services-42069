@@ -3,7 +3,6 @@ import Navigation from './Navigation';
 import Footer from './Footer';
 import StickyMobileCTA from './StickyMobileCTA';
 import SlideInCTA from './SlideInCTA';
-import ExitIntentPopup from './ExitIntentPopup';
 import ScrollToTop from './ScrollToTop';
 import { useAnalytics } from '@/hooks/useAnalytics';
 
@@ -17,13 +16,12 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="min-h-screen flex flex-col">
       <Navigation />
       <ScrollToTop />
-      <main id="main-content" className="flex-1">
+      <main className="flex-1">
         {children}
       </main>
       <Footer />
       <StickyMobileCTA />
       <SlideInCTA />
-      <ExitIntentPopup />
     </div>
   );
 };

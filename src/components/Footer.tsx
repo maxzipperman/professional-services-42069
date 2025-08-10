@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { LOGO_URL } from '@/constants/brand';
-import LeadMagnetForm from './LeadMagnetForm';
 
 const Footer = () => {
   const industries = [
-    { name: 'Lawyers', href: '/lawyers' },
-    { name: 'Accountants', href: '/accountants' },
-    { name: 'Consultants', href: '/consultants' },
+    { name: 'Local Businesses', href: '/local-businesses' },
+    { name: 'Nonprofits & Religious', href: '/nonprofits' },
+    { name: 'Independent Creatives', href: '/creatives' },
+    { name: 'Professional Services', href: '/professional-services' },
   ];
 
   return (
@@ -78,7 +78,7 @@ const Footer = () => {
 
           {/* Industries */}
           <div>
-            <h4 className="font-semibold mb-4">Who We Help</h4>
+            <h4 className="font-semibold mb-4">Industries</h4>
             <ul className="space-y-2">
               {industries.map((industry) => (
                 <li key={industry.href}>
@@ -93,29 +93,21 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter & CTA */}
+          {/* CTA */}
           <div>
-            <h4 className="font-semibold mb-4">Get Our Free Growth Guide</h4>
+            <h4 className="font-semibold mb-4">Ready to Transform Your Digital Presence?</h4>
             <p className="text-primary-foreground/80 text-sm mb-4">
-              Weekly insights on conversion optimization & growth strategies.
+              Let's discuss your goals and the smartest next steps.
             </p>
-            <LeadMagnetForm 
-              source="footer"
-              placeholder="Your email"
-              buttonText="Get Guide"
-              className="mb-4"
-            />
-            <div className="border-t border-primary-foreground/20 pt-4">
-              <Button 
-                asChild 
-                variant="outline"
-                className="w-full border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-                data-cta="footer-call"
-                data-page="footer"
-              >
-                <Link to="/book">Book Strategy Call</Link>
-              </Button>
-            </div>
+            <Button 
+              asChild 
+              className="w-full gradient-accent text-accent-foreground hover-lift"
+              data-cta="footer"
+              data-page="footer"
+            >
+              <Link to="/book">Book Your Strategy Call</Link>
+            </Button>
+            <p className="mt-2 text-xs text-primary-foreground/80">No hard pitch—30 minutes to map your best next steps.</p>
           </div>
         </div>
 

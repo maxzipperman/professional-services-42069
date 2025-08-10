@@ -9,7 +9,6 @@ import { AIFeatureSection } from '@/components/AIFeatureSection';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Helmet } from 'react-helmet-async';
 import { ComparisonTable } from '@/components/ComparisonTable';
-import ContextualCTA from '@/components/ContextualCTA';
 import type { ComparisonTableData } from '@/types/industry';
 
 const Services = () => {
@@ -261,26 +260,6 @@ const Services = () => {
               </CardContent>
             </Card>
           </div>
-        </div>
-      </section>
-
-      {/* Contextual CTA */}
-      <section className="py-14">
-        <div className="container mx-auto px-4">
-          <ContextualCTA 
-            title="Not sure which package fits your needs?"
-            description="Schedule a free 30-minute strategy call to discuss your goals and get personalized recommendations."
-            primaryAction={{
-              text: "Book Strategy Call",
-              href: "/book"
-            }}
-            secondaryAction={{
-              text: "View Pricing",
-              href: "/pricing"
-            }}
-            context="services"
-            className="max-w-2xl mx-auto"
-          />
         </div>
       </section>
 

@@ -33,13 +33,6 @@ import ProfessionalServicesQuickWins from "./pages/guides/ProfessionalServicesQu
 import Book from "./pages/Book";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
-import Pricing from "./pages/Pricing";
-import CaseStudies from "./pages/CaseStudies";
-import Resources from "./pages/Resources";
-import WebDesign from "./pages/services/WebDesign";
-import BrandIdentity from "./pages/services/BrandIdentity";
-import CRORetainers from "./pages/services/CRORetainers";
-import ThankYou from "./pages/ThankYou";
 
 const queryClient = new QueryClient();
 
@@ -53,15 +46,13 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/services/web-design" element={<WebDesign />} />
-            <Route path="/services/brand-identity" element={<BrandIdentity />} />
-            <Route path="/services/cro-retainers" element={<CRORetainers />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/book" element={<Book />} />
-            <Route path="/case-studies" element={<CaseStudies />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/resources" element={<Resources />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/payment-canceled" element={<PaymentCanceled />} />
@@ -73,7 +64,6 @@ const App = () => (
             <Route path="/nonprofits" element={<Nonprofits />} />
             <Route path="/creatives" element={<Creatives />} />
             
-            {/* Niche Landing Pages */}
             {/* Niche Landing Pages */}
             <Route path="/lawyers" element={<Lawyers />} />
             <Route path="/accountants" element={<Accountants />} />
