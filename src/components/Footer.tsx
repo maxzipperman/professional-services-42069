@@ -5,10 +5,9 @@ import { LOGO_URL } from '@/constants/brand';
 
 const Footer = () => {
   const industries = [
-    { name: 'Local Businesses', href: '/local-businesses' },
-    { name: 'Nonprofits & Religious', href: '/nonprofits' },
-    { name: 'Independent Creatives', href: '/creatives' },
-    { name: 'Professional Services', href: '/professional-services' },
+    { name: 'Lawyers', href: '/lawyers' },
+    { name: 'Accountants', href: '/accountants' },
+    { name: 'Consultants', href: '/consultants' },
   ];
 
   return (
@@ -78,7 +77,7 @@ const Footer = () => {
 
           {/* Industries */}
           <div>
-            <h4 className="font-semibold mb-4">Industries</h4>
+            <h4 className="font-semibold mb-4">Who We Help</h4>
             <ul className="space-y-2">
               {industries.map((industry) => (
                 <li key={industry.href}>

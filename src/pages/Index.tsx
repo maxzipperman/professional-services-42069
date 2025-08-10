@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle, Star, Users, Globe, Shield, Target, Zap, Award, BookOpen, DollarSign, Video, BarChart3 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import HeroGraphic from '@/components/HeroGraphic';
 
 const Index = () => {
   const trustLogos = [
@@ -36,72 +37,86 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Clearline Studio - Building Modern, Trusted Websites</title>
-        <meta name="description" content="We build polished, high-performance digital platforms that close the trust gap, showcase your expertise, and convert discerning visitors into high-value clients." />
+        <title>Websites that Win Clients for Law Firms, Accountants, and Consultants | Clearline Studio</title>
+        <meta name="description" content="Strategy-led websites that convert visitors into clients for law firms, accountants, and consultants. Outcome-driven design, measurable ROI, and industry expertise." />
         <link rel="canonical" href="/" />
       </Helmet>
       
       {/* Hero Section */}
       <section className="pt-14 md:pt-16 lg:pt-20 pb-10 lg:pb-16 gradient-subtle">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6">Professional Digital Presence</Badge>
-            <h1 className="mb-6 text-primary">
-              Websites for Professionals Who Trade on Credibility
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              We build polished, high-performance digital platforms that close the trust gap, 
-              showcase your expertise, and convert discerning visitors into high-value clients.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button asChild size="lg" className="gradient-accent text-accent-foreground font-semibold px-8">
-                <Link to="/contact" className="flex items-center space-x-2">
-                  <span>Schedule a Confidential Consultation</span>
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="border-primary/20">
-                <Link to="/ai-feedback">Run a free AI site audit</Link>
-              </Button>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            {/* Copy */}
+            <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
+              <Badge variant="secondary" className="mb-6">Strategy-led websites for professionals</Badge>
+              <h1 className="mb-6 text-primary">
+                Websites that Win Clients for Law Firms, Accountants, and Consultants.
+              </h1>
+              <p className="text-xl text-muted-foreground mb-8 max-w-3xl lg:max-w-none mx-auto lg:mx-0">
+                Get a site that converts visitors into clients, built by experts who understand your industry.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4">
+                <Button asChild size="lg" className="gradient-accent text-accent-foreground font-semibold px-8">
+                  <Link to="/book" className="flex items-center space-x-2">
+                    <span>Schedule a Strategy Call</span>
+                    <ArrowRight className="h-5 w-5" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="border-primary/20">
+                  <Link to="/portfolio">See Our Work</Link>
+                </Button>
+              </div>
             </div>
-            
-            {/* Trust Indicators */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
-              <div className="flex flex-col items-center text-center space-y-3">
-                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-                  <Shield className="h-6 w-6 text-accent" />
-                </div>
-                <h3 className="font-semibold text-lg">Secure & Professional</h3>
-                <p className="text-sm text-muted-foreground">Enterprise-grade security and compliance standards</p>
+
+            {/* Visual */}
+            <div className="max-w-3xl mx-auto w-full">
+              <div className="bg-card rounded-2xl shadow-soft p-4 border border-border">
+                <HeroGraphic />
               </div>
-              <div className="flex flex-col items-center text-center space-y-3">
-                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-                  <Award className="h-6 w-6 text-accent" />
-                </div>
-                <h3 className="font-semibold text-lg">Industry Authority</h3>
-                <p className="text-sm text-muted-foreground">Deep expertise in professional services</p>
+            </div>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+            <div className="flex flex-col items-center text-center space-y-3">
+              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                <Shield className="h-6 w-6 text-accent" />
               </div>
-              <div className="flex flex-col items-center text-center space-y-3">
-                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-                  <BarChart3 className="h-6 w-6 text-accent" />
-                </div>
-                <h3 className="font-semibold text-lg">Measurable ROI</h3>
-                <p className="text-sm text-muted-foreground">Proven results that impact your bottom line</p>
+              <h3 className="font-semibold text-lg">Secure & Yours</h3>
+              <p className="text-sm text-muted-foreground">Hand-coded, plugin-light, ownership-first build</p>
+            </div>
+            <div className="flex flex-col items-center text-center space-y-3">
+              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                <Award className="h-6 w-6 text-accent" />
               </div>
+              <h3 className="font-semibold text-lg">Industry Expertise</h3>
+              <p className="text-sm text-muted-foreground">Built for law, accounting, and consulting</p>
+            </div>
+            <div className="flex flex-col items-center text-center space-y-3">
+              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                <BarChart3 className="h-6 w-6 text-accent" />
+              </div>
+              <h3 className="font-semibold text-lg">Outcome-Driven</h3>
+              <p className="text-sm text-muted-foreground">Designed to increase qualified inquiries</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Trust Bar */}
-      <section className="py-8 border-b border-border">
+      <section className="py-8 border-b border-border" aria-labelledby="trusted-by">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-4">Featured In & Trusted By</p>
-            <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
+            <p id="trusted-by" className="text-sm text-muted-foreground mb-2">Trusted by leading law, accounting, and consulting firms</p>
+            <p className="text-xs text-muted-foreground mb-4">Proof: results-driven projects and long-term partnerships (placeholder)</p>
+            <div className="flex flex-wrap items-center justify-center gap-8 opacity-90" role="list" aria-label="Trusted by logos">
               {trustLogos.map((logo, index) => (
-                <div key={index} className="text-sm font-medium text-muted-foreground px-4 py-2 border border-border rounded-md">
-                  {logo}
+                <div key={index} role="listitem" className="px-2">
+                  <svg width="140" height="32" viewBox="0 0 140 32" className="" aria-hidden="true" focusable="false">
+                    <rect x="0" y="0" width="140" height="32" rx="6" fill="hsl(var(--muted))" />
+                    <text x="70" y="21" text-anchor="middle" fontSize="10" fill="hsl(var(--muted-foreground))">{logo}</text>
+                  </svg>
+                  <span className="sr-only">{logo}</span>
                 </div>
               ))}
             </div>

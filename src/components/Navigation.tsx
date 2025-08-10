@@ -20,15 +20,13 @@ const Navigation = () => {
     { name: 'Lawyers', href: '/lawyers' },
     { name: 'Accountants', href: '/accountants' },
     { name: 'Consultants', href: '/consultants' },
-    { name: 'Local Businesses', href: '/local-businesses' },
-    { name: 'Nonprofits & Religious', href: '/nonprofits' },
-    { name: 'Independent Creatives', href: '/creatives' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-background focus:text-foreground focus:border focus:border-ring focus:px-4 focus:py-2 focus:rounded">Skip to content</a>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-14 md:h-16">
           <Link to="/" className="flex items-center space-x-3 group shrink-0" aria-label="Clearline Studio home">
@@ -56,10 +54,10 @@ const Navigation = () => {
               Services
             </Link>
             
-            {/* Industries Dropdown */}
+            {/* Who We Help Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center space-x-1 transition-smooth hover:text-accent text-foreground">
-                <span>Industries</span>
+              <DropdownMenuTrigger aria-label="Who We Help" className="flex items-center space-x-1 transition-smooth hover:text-accent text-foreground">
+                <span>Who We Help</span>
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-56">
@@ -128,7 +126,7 @@ const Navigation = () => {
               </Link>
             </Button>
             <Button asChild size="sm" className="gradient-accent text-accent-foreground font-medium">
-              <Link to="/book" data-cta="primary" data-page="nav">Book Your Strategy Call</Link>
+              <Link to="/book" data-cta="primary" data-page="nav">Schedule a Strategy Call</Link>
             </Button>
           </div>
 
@@ -160,7 +158,7 @@ const Navigation = () => {
                 Services
               </Link>
               <div className="px-3 py-2">
-                <div className="text-sm font-medium text-muted-foreground mb-2">Industries</div>
+                <div className="text-sm font-medium text-muted-foreground mb-2">Who We Help</div>
                 {industries.map((industry) => (
                   <Link
                     key={industry.href}
@@ -203,7 +201,7 @@ const Navigation = () => {
               <div className="pt-4">
                 <Button asChild className="w-full gradient-accent text-accent-foreground">
                   <Link to="/book" onClick={() => setIsOpen(false)} data-cta="primary" data-page="nav">
-                    Book Your Strategy Call
+                    Schedule a Strategy Call
                   </Link>
                 </Button>
               </div>
