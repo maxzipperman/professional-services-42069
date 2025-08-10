@@ -1,0 +1,20 @@
+name: Scheduled Deploy
+
+on:
+  schedule:
+    # Run every 2 hours
+    - cron: '0 */2 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Trigger Vercel Deploy
+      run: |
+        curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK_URL }}"
+    
+    - name: Log deployment trigger
+      run: |
+        echo "Deployment hook triggered at $(date)"
