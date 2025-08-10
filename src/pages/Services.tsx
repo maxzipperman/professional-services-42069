@@ -8,6 +8,8 @@ import ROICalculator from '@/components/ROICalculator';
 import { AIFeatureSection } from '@/components/AIFeatureSection';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Helmet } from 'react-helmet-async';
+import { ComparisonTable } from '@/components/ComparisonTable';
+import type { ComparisonTableData } from '@/types/industry';
 
 const Services = () => {
   const packages = [
@@ -54,10 +56,31 @@ const Services = () => {
         "Priority support",
         "Custom maintenance plan"
       ],
-      price: "Custom Quote",
+      price: "From $8,500",
       popular: false
     }
   ];
+
+  const comparisonData: ComparisonTableData = {
+    title: "Compare Packages",
+    subtitle: "Quick view of scope, timeline, and deliverables",
+    columns: ["Website Tune-Up", "Brand Refresh", "Premium Brand Experience"],
+    rows: [
+      { label: "Typical Investment", values: ["$2,500", "$4,500", "From $8,500"], emphasis: true },
+      { label: "Estimated Timeline", values: ["1–2 weeks", "3–4 weeks", "4–8+ weeks"] },
+      { label: "Pages / Scope", values: ["Existing site", "Up to 5 pages", "Unlimited / Custom"] },
+      { label: "Design", values: ["Refinements", "Custom design", "Advanced bespoke"] },
+      { label: "Development", values: ["Optimization", "Hand-coded build", "Custom features & integrations"] },
+      { label: "SEO", values: ["Technical fixes", "On-page SEO", "Technical + Content architecture"] },
+      { label: "Performance target", values: ["90+ mobile", "90+ mobile", "90+ mobile"] },
+      { label: "Deliverables", values: [
+        "Audit, fixes, analytics",
+        "New site, copy, SEO setup",
+        "Scope defined in brief"
+      ]},
+      { label: "Support", values: ["30-day guarantee", "30-day guarantee", "Priority + maintenance"] },
+    ],
+  };
 
   const auditProduct = {
     icon: <CheckCircle className="h-8 w-8 text-accent" />,
@@ -166,6 +189,15 @@ const Services = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          {/* Package Comparison */}
+          <div className="max-w-6xl mx-auto mb-16">
+            <div className="text-center mb-6">
+              <h3 className="text-xl font-semibold">Package Comparison</h3>
+              <p className="text-muted-foreground">See scope, timeline, and deliverables at a glance.</p>
+            </div>
+            <ComparisonTable data={comparisonData} />
           </div>
 
           {/* Media & File Storage: BYOS Blurb */}
