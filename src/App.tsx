@@ -31,6 +31,8 @@ import CreativesQuickWins from "./pages/guides/CreativesQuickWins";
 import LocalBusinessesQuickWins from "./pages/guides/LocalBusinessesQuickWins";
 import ProfessionalServicesQuickWins from "./pages/guides/ProfessionalServicesQuickWins";
 import Book from "./pages/Book";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +51,8 @@ const App = () => (
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/payment-canceled" element={<PaymentCanceled />} />
