@@ -7,6 +7,7 @@ import { Code, MessageSquare, TrendingUp, ArrowRight, CheckCircle, Search } from
 import ROICalculator from '@/components/ROICalculator';
 import { AIFeatureSection } from '@/components/AIFeatureSection';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Helmet } from 'react-helmet-async';
 
 const Services = () => {
   const packages = [
@@ -76,6 +77,19 @@ const Services = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {"@type":"Question","name":"Do you host our images and files?","acceptedAnswer":{"@type":"Answer","text":"By default, no. We set up direct uploads to your own storage or media platform. You keep ownership, control, and billing. If you prefer, we can host temporarily with strict quotas and auto-deletion policies."}},
+            {"@type":"Question","name":"What storage providers do you support?","acceptedAnswer":{"@type":"Answer","text":"Amazon S3, Cloudflare R2, Google Cloud Storage, Azure Blob, Supabase Storage (on your project), Cloudinary, ImageKit, and Uploadcare."}},
+            {"@type":"Question","name":"Is the upload secure?","acceptedAnswer":{"@type":"Answer","text":"Yes. We use short-lived, pre-signed upload URLs or signed parameters so your secret keys are never exposed. Files go directly from the browser to your storage (no large files through our servers)."}},
+            {"@type":"Question","name":"Can you add limits (file size, types, quotas)?","acceptedAnswer":{"@type":"Answer","text":"Yes. We enforce limits in both the UI and backend. We also recommend lifecycle rules (e.g., auto-delete old temp files) to keep costs low."}},
+            {"@type":"Question","name":"Who pays for bandwidth and storage?","acceptedAnswer":{"@type":"Answer","text":"You do—directly to your provider. We don’t add any markup."}}
+          ]
+        })}</script>
+      </Helmet>
       {/* Hero Section */}
       <section className="pt-16 md:pt-20 pb-12 gradient-subtle">
         <div className="container mx-auto px-4">
@@ -150,6 +164,16 @@ const Services = () => {
               </Card>
             ))}
           </div>
+
+          {/* Media & File Storage: BYOS Blurb */}
+          <Card className="mb-16 shadow-medium">
+            <CardHeader>
+              <CardTitle>Media & File Storage: Bring Your Own</CardTitle>
+              <CardDescription>
+                For uploads and media hosting, we connect your site directly to your own cloud storage or media platform (S3, Cloudflare R2, GCS, Cloudinary, etc.). You keep full ownership and pay your provider directly—no markups from us. We configure everything and ensure a smooth, secure upload experience.
+              </CardDescription>
+            </CardHeader>
+          </Card>
 
           {/* Audit Product */}
           <div className="max-w-2xl mx-auto">
@@ -227,6 +251,65 @@ const Services = () => {
               <li>Private or public access options depending on your use case.</li>
               <li>Easy to switch providers later without changing the website UI.</li>
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Uploads & Media - FAQ */}
+      <section className="py-14 lg:py-20 gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-8">
+            <h2 className="mb-4">Uploads & Media: Frequently Asked Questions</h2>
+            <p className="text-lg text-muted-foreground">Short answers about how we handle uploads, storage, and security.</p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible>
+              <AccordionItem value="q1">
+                <AccordionTrigger>Do you host our images and files?</AccordionTrigger>
+                <AccordionContent>
+                  By default, no. We set up direct uploads to your own storage or media platform. You keep ownership, control, and billing. If you prefer, we can host temporarily with strict quotas and auto-deletion policies.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="q2">
+                <AccordionTrigger>What storage providers do you support?</AccordionTrigger>
+                <AccordionContent>
+                  Amazon S3, Cloudflare R2, Google Cloud Storage, Azure Blob, Supabase Storage (on your project), Cloudinary, ImageKit, and Uploadcare.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="q3">
+                <AccordionTrigger>Is the upload secure?</AccordionTrigger>
+                <AccordionContent>
+                  Yes. We use short-lived, pre-signed upload URLs or signed parameters so your secret keys are never exposed. Files go directly from the browser to your storage (no large files through our servers).
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="q4">
+                <AccordionTrigger>Can you add limits (file size, types, quotas)?</AccordionTrigger>
+                <AccordionContent>
+                  Yes. We enforce limits in both the UI and backend. We also recommend lifecycle rules (e.g., auto-delete old temp files) to keep costs low.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="q5">
+                <AccordionTrigger>Who pays for bandwidth and storage?</AccordionTrigger>
+                <AccordionContent>
+                  You do—directly to your provider. We don’t add any markup.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+
+            <div className="mt-10 space-y-6">
+              <article>
+                <h3 className="font-semibold mb-2">Data Ownership &amp; Portability</h3>
+                <p className="text-muted-foreground">
+                  You own your media and files. We never lock you in; we simply connect your site to your chosen storage. You can export or switch providers anytime.
+                </p>
+              </article>
+              <article>
+                <h3 className="font-semibold mb-2">Privacy &amp; Compliance</h3>
+                <p className="text-muted-foreground">
+                  We minimize data we store (typically file URLs and basic metadata). For sensitive uploads, we can enable extra safeguards (virus scanning, encryption, data residency, or provider-level compliance).
+                </p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
