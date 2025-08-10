@@ -1,1 +1,4 @@
 project_id = "memsytfgkmdotevwssqm"
+
+[functions.ai-feedback]
+verify_jwt = false
