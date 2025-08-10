@@ -21,6 +21,16 @@ const LeadMagnet = ({ industry, title, description, benefits, fileName, download
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   
+  
+  const toAbsoluteUrl = (url?: string) => {
+    if (!url) return undefined;
+    if (/^https?:\/\//i.test(url)) return url;
+    if (typeof window !== 'undefined' && url.startsWith('/')) {
+      return `${window.location.origin}${url}`;
+    }
+    return url;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isSupabaseConnected()) {
@@ -29,14 +39,16 @@ const LeadMagnet = ({ industry, title, description, benefits, fileName, download
     }
     try {
       setIsSending(true);
+      const absoluteDownloadUrl = toAbsoluteUrl(downloadUrl);
+      const pageUrl = typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}` : undefined;
       // 1) Capture lead
       const { error: leadErr } = await supabase!.functions.invoke('capture-lead', {
         body: {
           email,
           source: 'lead_magnet',
           industry,
-          page: typeof window !== 'undefined' ? window.location.pathname : undefined,
-          metadata: { fileName, downloadUrl }
+          page: pageUrl,
+          metadata: { fileName, downloadUrl: absoluteDownloadUrl }
         }
       });
       if (leadErr) throw leadErr;
@@ -47,9 +59,9 @@ const LeadMagnet = ({ industry, title, description, benefits, fileName, download
           email,
           title,
           fileName,
-          downloadUrl,
+          downloadUrl: absoluteDownloadUrl,
           industry,
-          page: typeof window !== 'undefined' ? window.location.pathname : undefined,
+          page: pageUrl,
         }
       });
       if (emailErr) throw emailErr;

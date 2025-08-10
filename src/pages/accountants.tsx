@@ -222,7 +222,7 @@ const Accountants = () => {
           </div>
           
           <LeadMagnet
-            industry="consultants"
+            industry="accountants"
             title="The CPA's Guide to a Client-Attracting Website"
             description="Essential strategies for accounting professionals to build trust and showcase expertise online."
             benefits={[
@@ -233,6 +233,7 @@ const Accountants = () => {
               "Integration guide for accounting software and client portals"
             ]}
             fileName="CPA Website Success Guide.pdf"
+            downloadUrl="/guides/accountants-quick-wins"
           />
         </div>
       </section>
