@@ -19,6 +19,7 @@ import Portfolio from "./pages/Portfolio";
 import Payment from "./pages/Payment";
 import About from "./pages/About";
 import Timeline from "./pages/Timeline";
+import AIFeedbackPage from "./pages/AIFeedbackPage";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/lawyers" element={<Lawyers />} />
             <Route path="/accountants" element={<Accountants />} />
             <Route path="/consultants" element={<Consultants />} />
+            <Route path="/ai-feedback" element={<AIFeedbackPage />} />
             
             {/* Vanity URL Redirects */}
             <Route path="/law-firms" element={<Navigate to="/lawyers" replace />} />

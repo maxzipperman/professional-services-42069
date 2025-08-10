@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import AIFeedback from '@/components/AIFeedback';
+import { Sparkles } from 'lucide-react';
 
 const LOGO_URL = '/lovable-uploads/451ca319-1b33-4ca5-b055-186a648f57de.png';
 
@@ -108,7 +108,12 @@ const Navigation = () => {
             >
               Client Login
             </Link>
-            <AIFeedback />
+            <Button asChild variant="outline" size="sm" className="hidden md:inline-flex">
+              <Link to="/ai-feedback">
+                <Sparkles className="h-4 w-4" />
+                <span>AI Feedback</span>
+              </Link>
+            </Button>
             <Button asChild size="sm" className="gradient-accent text-accent-foreground font-medium">
               <Link to="/contact" data-cta="primary" data-page="nav">Book Your Strategy Call</Link>
             </Button>

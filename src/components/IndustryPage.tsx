@@ -16,6 +16,7 @@ import { iconResolver } from '@/utils/iconResolver';
 
 import { ComparisonTable } from './ComparisonTable';
 import ROICalculator from './ROICalculator';
+import { IndustryAISection } from './IndustryAISection';
 
 interface IndustryPageProps {
   data: IndustryData;
@@ -118,10 +119,12 @@ export const IndustryPage = ({ data }: IndustryPageProps) => {
                 <p className="text-lg text-muted-foreground">Real performance improvements for businesses like yours</p>
               </div>
               <AnimatedStats stats={statsData} />
-              
             </div>
           </div>
         </section>
+
+        {/* AI Analysis & Expert Audit Section */}
+        <IndustryAISection industry={data.industry} />
 
         {/* Services Focus */}
         <section className="py-14 bg-muted/30">
