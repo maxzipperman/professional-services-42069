@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+
 import { useToast } from '@/hooks/use-toast';
 const CALENDLY_URL = 'https://calendly.com/maxzipperman';
 const Contact = () => {
@@ -40,24 +40,8 @@ const Contact = () => {
         const evt = (e as any)?.data?.event;
         console.log('Calendly postMessage received:', evt, e);
         if (evt === 'calendly.event_scheduled') {
-          console.log('Calendly event scheduled — creating Stripe Checkout for $499');
-          const {
-            data,
-            error
-          } = await supabase.functions.invoke('create-payment', {
-            body: {
-              amount: 49900,
-              title: 'Initial 2-Hour Consultation'
-            }
-          });
-          if (error) throw error;
-          const url = (data as any)?.url;
-          if (url) {
-            // Open Stripe checkout in a new tab (recommended default)
-            window.open(url, '_blank');
-          } else {
-            throw new Error('No checkout URL returned');
-          }
+          console.log('Calendly event scheduled — redirecting to /payment');
+          window.location.href = '/payment';
         }
       } catch (err: any) {
         console.error('Failed to start checkout:', err);
