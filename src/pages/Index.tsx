@@ -42,7 +42,7 @@ const Index = () => {
       </Helmet>
       
       {/* Hero Section */}
-      <section className="pt-20 pb-16 lg:pt-28 lg:pb-24 gradient-subtle">
+      <section className="pt-20 md:pt-24 pb-16 lg:pt-28 lg:pb-24 gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-6">Professional Digital Presence</Badge>
