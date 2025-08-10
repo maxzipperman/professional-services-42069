@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Bot, UserCheck, ArrowRight, CheckCircle, AlertCircle, Clock, Mail } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase, isSupabaseConnected } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
 
 export const AIFeedbackPage = () => {
@@ -42,11 +42,21 @@ export const AIFeedbackPage = () => {
       return;
     }
 
+    // Check if Supabase is connected
+    if (!isSupabaseConnected()) {
+      toast({
+        title: "Backend Not Ready",
+        description: "The AI analysis backend is not connected yet. Please ensure Supabase is properly connected.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
     setAnalysis("");
 
     try {
-      const { data, error } = await supabase.functions.invoke('ai-feedback', {
+      const { data, error } = await supabase!.functions.invoke('ai-feedback', {
         body: {
           website_url: websiteUrl,
           focus_area: focusArea,
