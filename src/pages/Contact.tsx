@@ -1,3 +1,4 @@
+
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,8 +7,16 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Mail, Phone, MapPin, Clock, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+
+const CALENDLY_URL = 'https://calendly.com/maxzipperman';
+
 const Contact = () => {
+  const { toast } = useToast();
+
   const contactInfo = [{
     icon: <Mail className="h-5 w-5" />,
     title: "Email",
@@ -24,8 +33,42 @@ const Contact = () => {
     content: "24 hours",
     description: "Free audit within 2 business days"
   }];
+
   const services = ["Website Design & Development", "Brand Messaging Strategy", "Website Optimization & Refresh", "Free Website Audit", "Other"];
   const industries = ["Professional Services (Law, Accounting, Consulting)", "Local Business (Restaurant, Home Services, Retail)", "Nonprofit & Religious Organizations", "Independent Creatives (Photography, Art, Coaching)", "Other"];
+
+  useEffect(() => {
+    const handler = async (e: MessageEvent) => {
+      try {
+        const evt = (e as any)?.data?.event;
+        console.log('Calendly postMessage received:', evt, e);
+        if (evt === 'calendly.event_scheduled') {
+          console.log('Calendly event scheduled — creating Stripe Checkout for $499');
+          const { data, error } = await supabase.functions.invoke('create-payment', {
+            body: { amount: 49900, title: 'Initial 2-Hour Consultation' },
+          });
+          if (error) throw error;
+          const url = (data as any)?.url;
+          if (url) {
+            // Open Stripe checkout in a new tab (recommended default)
+            window.open(url, '_blank');
+          } else {
+            throw new Error('No checkout URL returned');
+          }
+        }
+      } catch (err: any) {
+        console.error('Failed to start checkout:', err);
+        toast({
+          title: 'Unable to start checkout',
+          description: err?.message || 'Please try again or use the Payment page.',
+          variant: 'destructive',
+        });
+      }
+    };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+  }, [toast]);
+
   return <Layout>
       {/* Hero Section */}
       <section className="pt-16 md:pt-20 pb-12 gradient-subtle">
@@ -142,7 +185,7 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            {/* Contact Info & What to Expect */}
+            {/* Contact Info & Calendly Embed */}
             <div className="space-y-8">
               {/* Contact Information */}
               <Card className="shadow-soft">
@@ -166,19 +209,27 @@ const Contact = () => {
                 </CardContent>
               </Card>
 
-              {/* What to Expect */}
+              {/* Calendly Embed (replaces the previously selected card) */}
               <Card className="shadow-soft">
                 <CardHeader>
-                  <CardTitle>What to Expect</CardTitle>
+                  <CardTitle>Schedule a Consultation</CardTitle>
                   <CardDescription>
-                    Our free audit process and next steps
+                    Initial 2-hour consultation: $499. After scheduling, you’ll be redirected to secure Stripe checkout to complete payment. One-hour consultations are available for $299.
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  {["We'll review your current website (if you have one)", "Analyze your industry and competitors", "Provide specific recommendations for improvement", "Discuss your goals and create a custom proposal", "No obligation — just valuable insights for your business"].map((step, index) => <div key={index} className="flex items-start space-x-3">
-                      <CheckCircle className="h-5 w-5 text-success mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-muted-foreground">{step}</span>
-                    </div>)}
+                <CardContent>
+                  <div className="rounded-lg border border-border overflow-hidden bg-background">
+                    <iframe
+                      title="Calendly Scheduling"
+                      src={`${CALENDLY_URL}?hide_landing_page_details=1&hide_gdpr_banner=1`}
+                      className="w-full"
+                      style={{ height: 620 }}
+                      loading="lazy"
+                    />
+                  </div>
+                  <p className="mt-3 text-xs text-muted-foreground">
+                    Prefer a full page view? <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="underline">Open Calendly</a>.
+                  </p>
                 </CardContent>
               </Card>
 
