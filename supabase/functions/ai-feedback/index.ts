@@ -327,51 +327,40 @@ Format your response in clear sections with specific, actionable recommendations
     const messages = [
       {
         role: 'system',
-        content: 'You are a professional website analyst and conversion optimization expert. Provide detailed, actionable feedback in a structured format.'
+        content: 'You are a professional website analyst and conversion optimization expert. Produce a concise, structured report: a markdown checklist, category scores, an overall score out of 100, prioritized improvements, and discussion ideas for Max.'
       },
       {
         role: 'user',
         content: (() => {
-          // Rebuild the same prompt as before, but append content when available
           const contentBlock = siteContent ? `\n\nWebsite content (truncated):\n${siteContent}` : ''
-          return `You are a professional website analyst and conversion optimization expert. ${industryPrompt}
+          return `You are an expert website analyst evaluating a site against industry best practices. ${industryPrompt}
 
 Website URL: ${website_url}
 ${focus_area ? `Specific Focus: ${focus_area}` : ''}${contentBlock}
 
-Please provide a comprehensive analysis covering:
+Return your analysis in markdown with this exact structure:
 
-1. First Impressions & Design
-   - Visual hierarchy and professional appearance
-   - Brand consistency and trust signals
-   - Mobile responsiveness assessment
+## 1) Checklist
+Use markdown checkboxes for each item. For any that need work, add 1–2 bullets with specifics.
+- [ ] First Impressions & Design
+- [ ] UX & Navigation
+- [ ] Content & Messaging
+- [ ] Conversion (CRO)
+- [ ] Performance & Accessibility
+- [ ] SEO Basics
+- [ ] Industry-specific Compliance
 
-2. User Experience & Navigation
-   - Site structure and ease of navigation
-   - Page load considerations
-   - Accessibility factors
+## 2) Scores
+- Category scores (0–10 each) for the areas above
+- Overall score: NN/100 with a one-sentence rationale
 
-3. Content & Messaging
-   - Clarity of value proposition
-   - Service/product presentation
-   - Call-to-action effectiveness
+## 3) Top Opportunities (Prioritized)
+List 5 improvements with Expected Impact (Low/Med/High) and Effort (Low/Med/High).
 
-4. Conversion Optimization
-   - Lead generation potential
-   - Contact information accessibility
-   - Trust building elements
+## 4) Ideas to Discuss with Max
+Provide 5 strategic enhancements, experiments, or positioning ideas to review with Max.
 
-5. Industry-Specific Recommendations
-   - Compliance and professional standards
-   - Competitive positioning
-   - Target audience alignment
-
-6. Priority Action Items
-   - Top 3 immediate improvements
-   - Quick wins for better performance
-   - Long-term strategic recommendations
-
-Format your response in clear sections with specific, actionable recommendations. Be professional but approachable, focusing on practical improvements that will drive business results.`
+Be specific, actionable, and professional. Keep fluff to a minimum.`
         })()
       }
     ]

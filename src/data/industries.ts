@@ -466,7 +466,7 @@ export const consultantsData: IndustryData = {
     headline: "Websites for Consultants Who Command Premium Fees",
     subheadline: "Establish unshakeable authority, prove ROI fast, and convert qualified prospects into long-term clients.",
     primaryCtaText: "Book Your Strategy Call",
-    secondaryCtaText: "View Case Studies"
+    secondaryCtaText: "Run a free AI site audit"
   },
   whyMatters: [
     "Your site must signal expertise in seconds — or prospects bounce.",

@@ -43,7 +43,7 @@ export default function AIFeedback() {
   const [apiKey, setApiKey] = useState("");
   const [model, setModel] = useState(PROVIDERS[0].defaultModel);
   const [includePage, setIncludePage] = useState(true);
-  const [prompt, setPrompt] = useState("Please review this page and suggest improvements to conversion, clarity, and accessibility.");
+  const [prompt, setPrompt] = useState("Analyze this website against industry best practices. Return: 1) a markdown checklist with pass/needs-work for key areas, 2) category scores and an overall score out of 100 with rationale, 3) five prioritized improvements, and 4) five ideas to discuss with Max.");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState("");
 
