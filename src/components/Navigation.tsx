@@ -95,6 +95,12 @@ const Navigation = () => {
           {/* Client Login & CTA */}
           <div className="hidden md:flex items-center space-x-4">
             <Link 
+              to="/payment" 
+              className="text-sm text-muted-foreground hover:text-accent transition-smooth border border-border px-3 py-1.5 rounded-md"
+            >
+              Make Payment
+            </Link>
+            <Link 
               to="#" 
               className="text-sm text-muted-foreground hover:text-accent transition-smooth border border-border px-3 py-1.5 rounded-md"
             >
@@ -158,6 +164,13 @@ const Navigation = () => {
                 onClick={() => setIsOpen(false)}
               >
                 About
+              </Link>
+              <Link
+                to="/payment"
+                className="block px-3 py-2 text-foreground hover:text-accent transition-smooth"
+                onClick={() => setIsOpen(false)}
+              >
+                Make Payment
               </Link>
               <div className="pt-4">
                 <Button asChild className="w-full gradient-accent text-accent-foreground">
