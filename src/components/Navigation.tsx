@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import AIFeedback from '@/components/AIFeedback';
 
 const LOGO_URL = '/lovable-uploads/451ca319-1b33-4ca5-b055-186a648f57de.png';
 
@@ -107,6 +108,7 @@ const Navigation = () => {
             >
               Client Login
             </Link>
+            <AIFeedback />
             <Button asChild size="sm" className="gradient-accent text-accent-foreground font-medium">
               <Link to="/contact" data-cta="primary" data-page="nav">Book Your Strategy Call</Link>
             </Button>

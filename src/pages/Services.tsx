@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { Code, MessageSquare, TrendingUp, ArrowRight, CheckCircle, Search } from 'lucide-react';
 import ROICalculator from '@/components/ROICalculator';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const Services = () => {
   const packages = [
@@ -120,14 +121,21 @@ const Services = () => {
                 </CardHeader>
                 
                 <CardContent className="space-y-6">
-                  <ul className="space-y-3">
-                    {pkg.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start space-x-3">
-                        <CheckCircle className="h-5 w-5 text-success mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-muted-foreground">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="features">
+                      <AccordionTrigger className="text-sm">What's included</AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="space-y-3">
+                          {pkg.features.map((feature, featureIndex) => (
+                            <li key={featureIndex} className="flex items-start space-x-3">
+                              <CheckCircle className="h-5 w-5 text-success mt-0.5 flex-shrink-0" />
+                              <span className="text-sm text-muted-foreground">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                   
                   <div className="pt-4 border-t border-border">
                     <div className="text-2xl font-bold text-accent mb-4">
@@ -161,14 +169,21 @@ const Services = () => {
               </CardHeader>
               
               <CardContent className="space-y-6">
-                <ul className="space-y-3">
-                  {auditProduct.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start space-x-3">
-                      <CheckCircle className="h-5 w-5 text-success mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-muted-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                <Accordion type="single" collapsible>
+                  <AccordionItem value="features">
+                    <AccordionTrigger className="text-sm">What's included</AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="space-y-3">
+                        {auditProduct.features.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-start space-x-3">
+                            <CheckCircle className="h-5 w-5 text-success mt-0.5 flex-shrink-0" />
+                            <span className="text-sm text-muted-foreground">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
                 
                 <div className="pt-4 border-t border-border space-y-4">
                   <div className="flex items-center justify-between">
