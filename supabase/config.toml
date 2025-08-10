@@ -2,3 +2,7 @@ project_id = "memsytfgkmdotevwssqm"
 
 [functions.ai-feedback]
 verify_jwt = false
+
+[functions.sign-upload]
+verify_jwt = false
+

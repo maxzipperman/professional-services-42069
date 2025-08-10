@@ -210,6 +210,27 @@ const Services = () => {
       {/* ROI Calculator */}
       <ROICalculator />
 
+      {/* BYOS Uploads Policy */}
+      <section className="py-14 lg:py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-8">
+            <h2 className="mb-4">How Uploads Work: Bring Your Own Storage (BYOS)</h2>
+            <p className="text-lg text-muted-foreground">
+              For customers who need file or photo uploads, we connect your site directly to your own storage (S3, Cloudflare R2, GCS, or Supabase Storage).
+              You keep control and pay your provider directly — we don’t add platform fees.
+            </p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+              <li>Direct browser-to-storage uploads via secure, short‑lived links (no server middleman).</li>
+              <li>Granular controls for file types and max size (default 10MB, adjustable to your needs).</li>
+              <li>Private or public access options depending on your use case.</li>
+              <li>Easy to switch providers later without changing the website UI.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Process Section */}
       <section className="py-14 lg:py-20 gradient-subtle">
         <div className="container mx-auto px-4">
