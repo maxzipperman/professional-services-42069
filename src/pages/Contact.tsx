@@ -13,13 +13,13 @@ const Contact = () => {
     {
       icon: <Mail className="h-5 w-5" />,
       title: "Email",
-      content: "hello@positiondigital.com",
+      content: "hello@clearlinestudio.com",
       description: "We respond within 24 hours"
     },
     {
       icon: <Phone className="h-5 w-5" />,
       title: "Phone", 
-      content: "(555) 123-4567",
+      content: "(555) 987-6543",
       description: "Mon-Fri, 9am-6pm EST"
     },
     {
