@@ -52,7 +52,7 @@ const Accountants = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Website Design for Accounting Firms | Clearline Solutions</title>
+        <title>Website Design for Accounting Firms | Clearline Studio</title>
         <meta name="description" content="Professional website design for CPAs and accounting firms. Build trust, showcase expertise, and attract higher-value clients with a modern accounting website." />
         <meta name="keywords" content="accounting website design, CPA website, accounting firm marketing, tax professional website, bookkeeping website" />
       </Helmet>

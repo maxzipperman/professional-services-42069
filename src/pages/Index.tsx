@@ -36,13 +36,13 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Clearline Solutions - Building Modern, Trusted Websites</title>
+        <title>Clearline Studio - Building Modern, Trusted Websites</title>
         <meta name="description" content="We build polished, high-performance digital platforms that close the trust gap, showcase your expertise, and convert discerning visitors into high-value clients." />
         <link rel="canonical" href="/" />
       </Helmet>
       
       {/* Hero Section */}
-      <section className="pt-16 md:pt-20 lg:pt-24 pb-12 lg:pb-20 gradient-subtle">
+      <section className="pt-14 md:pt-16 lg:pt-20 pb-10 lg:pb-16 gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-6">Professional Digital Presence</Badge>
@@ -130,7 +130,7 @@ const Index = () => {
       </section>
 
       {/* Value Pillars */}
-      <section className="py-14 lg:py-20 gradient-subtle">
+      <section className="py-12 lg:py-16 gradient-subtle">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="mb-6 text-primary">Our Strategic Approach</h2>
@@ -160,7 +160,7 @@ const Index = () => {
       </section>
 
       {/* Case Study Highlight */}
-      <section className="py-14 lg:py-20">
+      <section className="py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -233,7 +233,7 @@ const Index = () => {
       </section>
 
       {/* Premium Testimonial */}
-      <section className="py-14 lg:py-20 gradient-primary text-primary-foreground">
+      <section className="py-12 lg:py-16 gradient-primary text-primary-foreground">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-8">
@@ -259,7 +259,7 @@ const Index = () => {
       </section>
 
       {/* Industry Focus */}
-      <section className="py-14 lg:py-20">
+      <section className="py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="mb-6 text-primary">Specialized Expertise for Professional Services</h2>
@@ -310,7 +310,7 @@ const Index = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-14 lg:py-20 gradient-accent text-accent-foreground">
+      <section className="py-12 lg:py-16 gradient-accent text-accent-foreground">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="mb-6">Ready to Transform Your Digital Presence into a Revenue-Generating Asset?</h2>

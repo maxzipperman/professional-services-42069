@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import logo from '@/assets/clearline-logo.png';
+const LOGO_URL = '/lovable-uploads/a26c93e1-90e2-455c-95a4-e7171af84fba.png';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,15 +29,15 @@ const Navigation = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <Link to="/" className="flex items-center space-x-3 group shrink-0" aria-label="Clearline Solutions home">
+        <div className="flex items-center justify-between h-14 md:h-16">
+          <Link to="/" className="flex items-center space-x-3 group shrink-0" aria-label="Clearline Studio home">
             <div className="relative h-10 sm:h-12 md:h-14 overflow-hidden flex items-center">
-              <img src={logo} alt="Clearline Solutions logo" className="h-12 sm:h-14 md:h-16 w-auto object-contain -mt-1 sm:-mt-1.5 md:-mt-2" loading="eager" decoding="async" fetchPriority="high" />
+              <img src={LOGO_URL} alt="Clearline Studio logo" className="h-10 sm:h-12 md:h-12 w-auto object-contain -mt-1" loading="eager" decoding="async" fetchPriority="high" />
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             <Link
               to="/"
               className={`transition-smooth hover:text-accent ${

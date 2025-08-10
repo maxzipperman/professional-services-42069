@@ -20,12 +20,12 @@ const Portfolio = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Portfolio | Clearline Solutions</title>
+        <title>Portfolio | Clearline Studio</title>
         <meta name="description" content="Selected client work and performance wins across professional services and local businesses." />
         <link rel="canonical" href="/portfolio" />
       </Helmet>
 
-      <section className="py-14 lg:py-20">
+      <section className="py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <Badge variant="secondary" className="mb-4">Our Work</Badge>
