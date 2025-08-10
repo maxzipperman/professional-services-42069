@@ -16,10 +16,12 @@ const Navigation = () => {
   const location = useLocation();
 
   const industries = [
+    { name: 'Lawyers', href: '/lawyers' },
+    { name: 'Accountants', href: '/accountants' },
+    { name: 'Consultants', href: '/consultants' },
     { name: 'Local Businesses', href: '/local-businesses' },
     { name: 'Nonprofits & Religious', href: '/nonprofits' },
     { name: 'Independent Creatives', href: '/creatives' },
-    { name: 'Professional Services', href: '/professional-services' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -90,10 +92,16 @@ const Navigation = () => {
             </Link>
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* Client Login & CTA */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Link 
+              to="#" 
+              className="text-sm text-muted-foreground hover:text-accent transition-smooth border border-border px-3 py-1.5 rounded-md"
+            >
+              Client Login
+            </Link>
             <Button asChild size="sm" className="gradient-accent text-accent-foreground font-medium">
-              <Link to="/contact">Get Started</Link>
+              <Link to="/contact">Schedule Consultation</Link>
             </Button>
           </div>
 

@@ -1,161 +1,156 @@
 import Layout from '@/components/Layout';
-import Hero from '@/components/Hero';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Star, Users, Globe, Rocket, DollarSign, Video, Cog } from 'lucide-react';
+import { ArrowRight, CheckCircle, Star, Users, Globe, Shield, Target, Zap, Award, BookOpen, DollarSign, Video, BarChart3 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
 const Index = () => {
-  const differentiators = [
-    {
-      title: "Hand-coded Excellence",
-      description: "Custom-coded, secure, plugin-light builds that you own outright",
-      icon: <CheckCircle className="h-6 w-6 text-success" />
-    },
-    {
-      title: "Strategic Copy Included",
-      description: "No generic filler — every word is crafted to convert your ideal clients",
-      icon: <Star className="h-6 w-6 text-accent" />
-    },
-    {
-      title: "No Lock-in or Monthly Fees",
-      description: "Competitive pricing with boutique service, and the site is yours forever",
-      icon: <Users className="h-6 w-6 text-accent" />
-    },
-    {
-      title: "Performance Guaranteed",
-      description: "90+ PageSpeed scores on mobile and desktop — fast sites that rank well",
-      icon: <Rocket className="h-6 w-6 text-success" />
-    }
+  const trustLogos = [
+    "AICPA Member",
+    "American Bar Association", 
+    "Forbes",
+    "Inc.",
+    "Chamber of Commerce"
   ];
 
-  const results = [
-    { metric: "6s to 1.2s", description: "Average load time improvement" },
-    { metric: "25%+", description: "Boost in bookings/conversions" },
-    { metric: "90+", description: "Google PageSpeed scores" },
-    { metric: "100%", description: "Client satisfaction rate" }
+  const valuePillars = [
+    {
+      title: "Niche-Specific Authority",
+      description: "We demonstrate a deep, insider-level understanding of your industry, from compliance standards to client expectations, reducing your risk and cognitive load.",
+      icon: <Target className="h-6 w-6 text-accent" />
+    },
+    {
+      title: "Quantifiable Trust Signals",
+      description: "We move beyond generic testimonials to showcase data-backed case studies, authoritative endorsements, and clear proof of your success to build unshakeable trust.",
+      icon: <BarChart3 className="h-6 w-6 text-accent" />
+    },
+    {
+      title: "Frictionless Client Journey",
+      description: "We design an intuitive, streamlined digital experience that guides visitors toward a specific, profitable action, making it effortless for them to engage your firm.",
+      icon: <Zap className="h-6 w-6 text-accent" />
+    }
   ];
 
   return (
     <Layout>
       <Helmet>
-        <title>Accountant Websites & Strategy | Position Digital</title>
-        <meta name="description" content="Accountants-first go-to-market: custom websites, pricing $6k–$9.5k, Loom audits, and an automation stack to scale." />
+        <title>Websites for Professionals Who Trade on Credibility | Position Digital</title>
+        <meta name="description" content="We build polished, high-performance digital platforms that close the trust gap, showcase your expertise, and convert discerning visitors into high-value clients." />
         <link rel="canonical" href="/" />
       </Helmet>
-      <Hero />
       
-      {/* Strategic Focus: Accountants First */}
-      <section className="py-16 lg:py-24 gradient-subtle">
+      {/* Hero Section */}
+      <section className="pt-20 pb-16 lg:pt-28 lg:pb-24 gradient-subtle">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto text-center mb-12">
-            <Badge variant="secondary" className="mb-4">Strategic Focus</Badge>
-            <h2 className="mb-4">Accountants Are Our Premier Market</h2>
-            <p className="text-lg text-muted-foreground">
-              Our analysis identifies accountants as the most attractive, underserved opportunity — ideal market size, budget, and clear, solvable pain points.
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge variant="secondary" className="mb-6">Professional Digital Presence</Badge>
+            <h1 className="mb-6 text-primary">
+              Websites for Professionals Who Trade on Credibility
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+              We build polished, high-performance digital platforms that close the trust gap, 
+              showcase your expertise, and convert discerning visitors into high-value clients.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <Card className="hover-lift shadow-soft">
-              <CardHeader>
-                <div className="flex items-center space-x-3">
-                  <DollarSign className="h-6 w-6 text-accent" />
-                  <CardTitle className="text-lg">Price for Value</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Your research shows pricing was far too low. Position the flagship Brand Refresh Website at <span className="font-semibold text-foreground">$6,000–$9,500</span> to attract serious clients and signal quality.
-                </CardDescription>
-              </CardContent>
-            </Card>
-            <Card className="hover-lift shadow-soft">
-              <CardHeader>
-                <div className="flex items-center space-x-3">
-                  <Video className="h-6 w-6 text-accent" />
-                  <CardTitle className="text-lg">Lead With Value</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Open with a personalized Loom video site review — it builds immediate trust, showcases expertise, and clearly differentiates you.
-                </CardDescription>
-              </CardContent>
-            </Card>
-            <Card className="hover-lift shadow-soft">
-              <CardHeader>
-                <div className="flex items-center space-x-3">
-                  <Cog className="h-6 w-6 text-accent" />
-                  <CardTitle className="text-lg">Scale With Automation</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Run a lean stack: <span className="font-medium">HubSpot</span> for CRM, <span className="font-medium">Apollo.io</span> for lead sourcing, and <span className="font-medium">Instantly.ai</span> for outreach.
-                </CardDescription>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Customer-Centric Offerings */}
-          <div className="max-w-4xl mx-auto mt-12">
-            <h3 className="text-center mb-6">Customer-Centric Packages</h3>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              {[
-                'The Authority Site',
-                'The Credibility Engine',
-                'The Practice-Builder Package',
-                'The Digital Handshake'
-              ].map((label) => (
-                <Badge key={label} variant="secondary" className="text-sm py-2 px-3">
-                  {label}
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          <div className="text-center mt-12">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="gradient-accent text-accent-foreground font-semibold">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Button asChild size="lg" className="gradient-accent text-accent-foreground font-semibold px-8">
                 <Link to="/contact" className="flex items-center space-x-2">
-                  <span>Book a Discovery Call</span>
+                  <span>Schedule a Confidential Consultation</span>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link to="/accountants">See our approach for Accountants</Link>
+              <Button asChild variant="outline" size="lg" className="border-primary/20">
+                <Link to="/portfolio">View Case Studies</Link>
               </Button>
+            </div>
+            
+            {/* Trust Indicators */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+              <div className="flex flex-col items-center text-center space-y-3">
+                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                  <Shield className="h-6 w-6 text-accent" />
+                </div>
+                <h3 className="font-semibold text-lg">Secure & Professional</h3>
+                <p className="text-sm text-muted-foreground">Enterprise-grade security and compliance standards</p>
+              </div>
+              <div className="flex flex-col items-center text-center space-y-3">
+                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                  <Award className="h-6 w-6 text-accent" />
+                </div>
+                <h3 className="font-semibold text-lg">Industry Authority</h3>
+                <p className="text-sm text-muted-foreground">Deep expertise in professional services</p>
+              </div>
+              <div className="flex flex-col items-center text-center space-y-3">
+                <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                  <BarChart3 className="h-6 w-6 text-accent" />
+                </div>
+                <h3 className="font-semibold text-lg">Measurable ROI</h3>
+                <p className="text-sm text-muted-foreground">Proven results that impact your bottom line</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Differentiators Section */}
-      {/* Differentiators Section */}
+      {/* Trust Bar */}
+      <section className="py-8 border-b border-border">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground mb-4">Featured In & Trusted By</p>
+            <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
+              {trustLogos.map((logo, index) => (
+                <div key={index} className="text-sm font-medium text-muted-foreground px-4 py-2 border border-border rounded-md">
+                  {logo}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Problem & Solution */}
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="mb-6 text-primary">Your Website Should Be Your Most Powerful Asset, Not a Liability</h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              For a sophisticated client, a website is not a line-item expense but a critical, revenue-generating asset. 
+              Yet, many professionals are held back by generic, outdated sites that fail to convey their true expertise, 
+              creating a "trust gap" with potential clients.
+            </p>
+            <div className="bg-accent/5 border border-accent/20 rounded-lg p-8">
+              <p className="text-lg font-medium text-primary">
+                We solve this by engineering every design element as a business decision with financial implications, 
+                turning your digital presence into a predictable engine for growth.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Value Pillars */}
+      <section className="py-16 lg:py-24 gradient-subtle">
+        <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="mb-6">Why Position Digital?</h2>
+            <h2 className="mb-6 text-primary">Our Strategic Approach</h2>
             <p className="text-lg text-muted-foreground">
-              We're not just another web agency. We're your strategic partner in creating 
-              a digital presence that actually works for your business.
+              We don't just build websites — we architect digital platforms that systematically build trust and convert prospects.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {differentiators.map((item, index) => (
-              <Card key={index} className="hover-lift shadow-soft">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {valuePillars.map((pillar, index) => (
+              <Card key={index} className="hover-lift shadow-soft text-center">
                 <CardHeader>
-                  <div className="flex items-center space-x-3">
-                    {item.icon}
-                    <CardTitle className="text-lg">{item.title}</CardTitle>
+                  <div className="w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    {pillar.icon}
                   </div>
+                  <CardTitle className="text-xl">{pillar.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-base">
-                    {item.description}
+                    {pillar.description}
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -163,82 +158,150 @@ const Index = () => {
           </div>
         </div>
       </section>
-      <section className="py-16 lg:py-24 gradient-subtle">
+
+      {/* Case Study Highlight */}
+      <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <Badge variant="secondary" className="mb-4">Proven Results</Badge>
-            <h2 className="mb-6">The Numbers Speak for Themselves</h2>
-            <p className="text-lg text-muted-foreground">
-              Our clients see real, measurable improvements that impact their bottom line.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            {results.map((result, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-accent mb-2">
-                  {result.metric}
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <Badge variant="secondary" className="mb-4">Case Study</Badge>
+                <h2 className="mb-6 text-primary">How a Boutique Law Firm Increased Qualified Inquiries by 75%</h2>
+                
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2 flex items-center">
+                      <Target className="h-5 w-5 text-accent mr-2" />
+                      Challenge
+                    </h3>
+                    <p className="text-muted-foreground">
+                      A 12-partner employment law firm was losing potential clients to larger competitors due to an outdated website that failed to convey their specialized expertise.
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2 flex items-center">
+                      <Zap className="h-5 w-5 text-accent mr-2" />
+                      Solution
+                    </h3>
+                    <p className="text-muted-foreground">
+                      We rebuilt their digital presence with industry-specific case studies, detailed attorney profiles, and a streamlined consultation booking system.
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="font-semibold text-lg mb-2 flex items-center">
+                      <BarChart3 className="h-5 w-5 text-success mr-2" />
+                      Result
+                    </h3>
+                    <p className="text-muted-foreground">
+                      75% increase in qualified inquiries within 6 months, with average case value increasing by 40%.
+                    </p>
+                  </div>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  {result.description}
-                </p>
+                
+                <Button asChild variant="outline" className="mt-8">
+                  <Link to="/portfolio" className="flex items-center space-x-2">
+                    <span>Read the Full Case Study</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
               </div>
-            ))}
+              
+              <div className="relative">
+                <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl p-8 shadow-large">
+                  <div className="bg-white rounded-lg shadow-medium p-6 space-y-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-accent rounded-full"></div>
+                      <div className="font-semibold">Employment Law Specialists</div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="h-4 bg-gray-200 rounded"></div>
+                      <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                    </div>
+                    <div className="flex space-x-2">
+                      <div className="bg-accent text-accent-foreground px-4 py-2 rounded text-sm">
+                        Schedule Consultation
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Industries Preview */}
+      {/* Premium Testimonial */}
+      <section className="py-16 lg:py-24 gradient-primary text-primary-foreground">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="mb-8">
+              <Star className="h-8 w-8 text-accent mx-auto mb-4" />
+              <blockquote className="text-2xl md:text-3xl font-medium leading-relaxed mb-8">
+                "Position Digital understands that for a law firm, a website is a critical validation tool. 
+                Their ROI-driven framework is a fundamental departure from the commoditized view of a website as a digital brochure. 
+                Our initial investment paid for itself within months."
+              </blockquote>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                <Users className="h-8 w-8 text-white" />
+              </div>
+              <div className="text-center sm:text-left">
+                <div className="font-semibold text-lg">Michael T. Richardson</div>
+                <div className="text-primary-foreground/80">Managing Partner, Richardson & Associates LLC</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Industry Focus */}
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="mb-6">We Understand Your Industry</h2>
+            <h2 className="mb-6 text-primary">Specialized Expertise for Professional Services</h2>
             <p className="text-lg text-muted-foreground">
-              Every industry has unique challenges. We speak your language and know what works.
+              We understand the unique challenges and opportunities in professional services. 
+              Our industry-specific approach ensures your website speaks directly to your target clients.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
               {
-                title: "Local Businesses", 
-                description: "Drive bookings and dominate local search",
-                href: "/local-businesses",
-                icon: <Users className="h-8 w-8 text-accent" />
+                title: "Lawyers",
+                description: "Build credibility, showcase expertise, attract high-value cases",
+                href: "/lawyers",
+                icon: <BookOpen className="h-8 w-8 text-accent" />
               },
               {
-                title: "Nonprofits & Religious",
-                description: "Increase donations and community engagement", 
-                href: "/nonprofits",
-                icon: <CheckCircle className="h-8 w-8 text-success" />
+                title: "Accountants", 
+                description: "Demonstrate trust, highlight credentials, grow your practice",
+                href: "/accountants",
+                icon: <BarChart3 className="h-8 w-8 text-accent" />
               },
               {
-                title: "Independent Creatives",
-                description: "Showcase your work and book more clients",
-                href: "/creatives", 
-                icon: <Star className="h-8 w-8 text-accent" />
-              },
-              {
-                title: "Professional Services",
-                description: "Build credibility and attract higher-value clients",
-                href: "/professional-services",
-                icon: <Globe className="h-8 w-8 text-accent" />
+                title: "Consultants",
+                description: "Establish authority, prove ROI, convert prospects to clients",
+                href: "/consultants",
+                icon: <Target className="h-8 w-8 text-accent" />
               }
             ].map((industry, index) => (
-              <Card key={index} className="hover-lift shadow-soft group cursor-pointer">
-                <Link to={industry.href} className="block p-6">
-                  <div className="flex flex-col items-center text-center space-y-4">
-                    <div className="w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center group-hover:bg-accent/20 transition-smooth">
-                      {industry.icon}
-                    </div>
-                    <h3 className="font-semibold group-hover:text-accent transition-smooth">
-                      {industry.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {industry.description}
-                    </p>
-                    <ArrowRight className="h-4 w-4 text-accent opacity-0 group-hover:opacity-100 transition-smooth" />
+              <Card key={index} className="hover-lift shadow-soft group cursor-pointer text-center">
+                <Link to={industry.href} className="block p-8">
+                  <div className="w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-accent/20 transition-smooth">
+                    {industry.icon}
                   </div>
+                  <h3 className="font-semibold text-xl mb-3 group-hover:text-accent transition-smooth">
+                    {industry.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    {industry.description}
+                  </p>
+                  <ArrowRight className="h-5 w-5 text-accent mx-auto opacity-0 group-hover:opacity-100 transition-smooth" />
                 </Link>
               </Card>
             ))}
@@ -246,23 +309,24 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 lg:py-24 gradient-primary text-primary-foreground">
+      {/* Final CTA */}
+      <section className="py-16 lg:py-24 gradient-accent text-accent-foreground">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="mb-6 text-primary-foreground">Ready to Transform Your Online Presence?</h2>
-            <p className="text-lg text-primary-foreground/80 mb-8">
-              Let's create a website that doesn't just look great — it works harder for your business.
+            <h2 className="mb-6">Ready to Transform Your Digital Presence into a Revenue-Generating Asset?</h2>
+            <p className="text-lg text-accent-foreground/90 mb-8">
+              Let's discuss how a strategic website investment can enhance your credibility, 
+              attract premium clients, and provide a significant competitive advantage.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 asChild 
                 size="lg" 
                 variant="secondary"
-                className="hover-lift font-semibold"
+                className="hover-lift font-semibold bg-white text-primary hover:bg-white/90"
               >
                 <Link to="/contact" className="flex items-center space-x-2">
-                  <span>Request Free Audit</span>
+                  <span>Book Your Strategic Roadmap Call</span>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
@@ -270,9 +334,9 @@ const Index = () => {
                 asChild 
                 variant="outline" 
                 size="lg"
-                className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10"
+                className="border-white/20 text-white hover:bg-white/10"
               >
-                <Link to="/portfolio">View Our Work</Link>
+                <Link to="/portfolio">View Our Authority Sites</Link>
               </Button>
             </div>
           </div>
