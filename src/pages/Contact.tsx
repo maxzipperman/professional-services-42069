@@ -1,3 +1,4 @@
+
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -201,9 +202,12 @@ const Contact = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="rounded-lg border border-border overflow-hidden bg-background">
-                    <iframe title="Calendly Scheduling" src={`${CALENDLY_URL}?hide_landing_page_details=1&hide_gdpr_banner=1`} className="w-full" style={{
-                    height: 620
-                  }} loading="lazy" />
+                    <iframe
+                      title="Calendly Scheduling"
+                      src={`${CALENDLY_URL}?hide_landing_page_details=1&hide_gdpr_banner=1`}
+                      className="w-full h-[480px] md:h-[520px] lg:h-[560px]"
+                      loading="lazy"
+                    />
                   </div>
                   <p className="mt-3 text-xs text-muted-foreground">
                     Prefer a full page view? <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="underline">Open Calendly</a>.
