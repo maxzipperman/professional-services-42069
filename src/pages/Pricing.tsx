@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const Pricing = () => {
   const packages = [
@@ -12,10 +13,10 @@ const Pricing = () => {
       price: '$995',
       desc: 'Quick updates to improve your existing site\'s performance and conversion.',
       bullets: [
-        'Performance optimization',
-        'Mobile responsiveness fixes',
-        'Basic SEO improvements',
-        'CTA and form optimization',
+        { text: 'Performance optimization', detail: 'Speed improvements, image optimization, code minification for faster load times' },
+        { text: 'Mobile responsiveness fixes', detail: 'Ensure your site works perfectly on all devices and screen sizes' },
+        { text: 'Basic SEO improvements', detail: 'Meta tags, alt text, basic keyword optimization for better search rankings' },
+        { text: 'CTA and form optimization', detail: 'Improve button placement, form usability, and conversion paths' },
       ],
     },
     {
@@ -23,10 +24,10 @@ const Pricing = () => {
       price: '$2,495',
       desc: 'Clean, professional 3-5 page site built for results.',
       bullets: [
-        'Custom design + responsive build',
-        'On-page SEO setup',
-        'Contact forms + analytics',
-        'Performance optimization',
+        { text: 'Custom design + responsive build', detail: 'Fully custom design tailored to your brand, built to work on all devices' },
+        { text: 'On-page SEO setup', detail: 'Complete SEO foundation with optimized content, schema markup, and technical SEO' },
+        { text: 'Contact forms + analytics', detail: 'Lead capture forms with spam protection plus Google Analytics setup' },
+        { text: 'Performance optimization', detail: 'Fast loading times with 90+ Lighthouse performance scores' },
       ],
     },
     {
@@ -34,10 +35,10 @@ const Pricing = () => {
       price: '$4,500',
       desc: 'Strategy-driven site with advanced features and CRO focus.',
       bullets: [
-        'Brand messaging framework',
-        'Custom design system',
-        'Lead capture optimization',
-        'Analytics + conversion tracking',
+        { text: 'Brand messaging framework', detail: 'Clear value proposition, messaging hierarchy, and compelling copy strategy' },
+        { text: 'Custom design system', detail: 'Cohesive visual identity with reusable components and style guidelines' },
+        { text: 'Lead capture optimization', detail: 'Advanced forms, pop-ups, and conversion-focused landing page elements' },
+        { text: 'Analytics + conversion tracking', detail: 'Goal tracking, event monitoring, and detailed performance reporting setup' },
       ],
     },
     {
@@ -45,10 +46,10 @@ const Pricing = () => {
       price: '$8,000+',
       desc: 'Fully custom platform with integrations and advanced requirements.',
       bullets: [
-        'Complete UX strategy workshops',
-        'Custom features + integrations',
-        'Scalable architecture',
-        'Comprehensive analytics plan',
+        { text: 'Complete UX strategy workshops', detail: 'User research, journey mapping, wireframing, and usability testing' },
+        { text: 'Custom features + integrations', detail: 'Third-party APIs, databases, payment systems, and custom functionality' },
+        { text: 'Scalable architecture', detail: 'Enterprise-grade hosting, CDN setup, and infrastructure planning' },
+        { text: 'Comprehensive analytics plan', detail: 'Advanced tracking, custom dashboards, and detailed performance reporting' },
       ],
     },
   ];
@@ -83,23 +84,36 @@ const Pricing = () => {
             <p className="text-lg text-muted-foreground">We price for outcomes. Choose a package or talk to us about a custom build.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
-            {packages.map((p) => (
-              <Card key={p.name} className="hover-lift shadow-soft">
-                <CardHeader>
-                  <CardTitle className="text-xl">{p.name}</CardTitle>
-                  <p className="text-primary font-semibold">{p.price}</p>
-                  <CardDescription>{p.desc}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                    {p.bullets.map((b) => (
-                      <li key={b}>{b}</li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto mb-12">
+            <TooltipProvider>
+              {packages.map((p) => (
+                <Card key={p.name} className="hover-lift shadow-soft">
+                  <CardHeader>
+                    <CardTitle className="text-xl">{p.name}</CardTitle>
+                    <p className="text-primary font-semibold">{p.price}</p>
+                    <CardDescription>{p.desc}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                      {p.bullets.map((bullet, index) => (
+                        <li key={`${p.name}-${index}`}>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="cursor-help hover:text-foreground transition-colors">
+                                {bullet.text}
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p className="max-w-xs">{bullet.detail}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              ))}
+            </TooltipProvider>
           </div>
 
 
