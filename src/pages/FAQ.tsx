@@ -2,101 +2,84 @@ import Layout from '@/components/Layout';
 import { Helmet } from 'react-helmet-async';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Link } from 'react-router-dom';
+import { useMemo, useState } from 'react';
 
-const faqs = [
-  {
-    q: 'How do document uploads work?',
-    a: 'We use secure, short‑lived signed URLs so files go directly from your browser to your storage provider (no large files passing through our servers). You keep ownership and control.'
-  },
-  {
-    q: 'What file types and size limits are supported?',
-    a: 'Common types like images and PDFs are supported by default, with a typical 10MB limit. Both file types and size limits are configurable for your needs.'
-  },
-  {
-    q: 'Where are files stored?',
-    a: 'We can connect to your preferred storage (S3, Cloudflare R2, GCS, Azure, Supabase Storage, etc.). You pay your provider directly; we do not add platform fees.'
-  },
-  {
-    q: 'Are uploads secure?',
-    a: 'Yes. Uploads use short‑lived credentials (pre‑signed URLs/parameters). Your secret keys are never exposed to the browser.'
-  },
-  {
-    q: 'Can you enforce limits or auto‑delete temp files?',
-    a: 'Yes. We enforce limits in the UI and backend, and can set lifecycle policies (e.g., auto‑delete temporary files) to control costs.'
-  },
-  {
-    q: 'AI Website Feedback — is it free?',
-    a: 'There is a limited free daily quota. If you hit the limit, try again later or contact us for extended access.'
-  },
-  {
-    q: 'How do payments work?',
-    a: 'We process secure one‑time payments via Stripe Checkout. You’ll receive an email receipt from Stripe. We never see or store your card details.'
-  },
-  {
-    q: 'Do you store my payment information?',
-    a: 'No. Stripe handles all payment details. Clearline Studio only receives confirmation and basic order metadata.'
-  },
-  {
-    q: 'What’s the typical project timeline?',
-    a: "Simple projects can usually be completed within a week or two, and more complex work can take up to 6–8 weeks depending on client feedback.",
-  },
-  {
-    q: 'How do I get support?',
-    a: 'Use the Contact page to reach our team. We typically respond within one business day.'
-  },
+const allFaqs = [
+  { q: 'How long does a standard engagement take?', a: 'Most standard sites are completed in 2–4 weeks depending on scope and feedback. Complex builds can take 6–8 weeks.' },
+  { q: 'What platforms/CMS do you support?', a: 'We build hand-coded, ownership-first sites. If you need a CMS, we integrate lightweight options that avoid lock-in.' },
+  { q: 'How do you ensure performance and SEO?', a: 'Core Web Vitals, caching/CDN, responsive images, and on-page SEO best practices from the start—measured pre/post launch.' },
+  { q: 'Do we own our code and assets?', a: 'Yes. You own the code, assets, and accounts. No proprietary platform or recurring lock-in.' },
+  { q: 'What happens after launch?', a: 'We offer care/optimization plans for updates, analytics reviews, and enhancements—no mandatory retainers.' },
+  { q: 'How do document uploads work?', a: 'We use secure, short‑lived signed URLs so files go directly from your browser to your storage provider. You keep ownership and control.' },
+  { q: 'Are uploads secure?', a: 'Yes. Uploads use short‑lived credentials (pre‑signed URLs/parameters). Your secret keys are never exposed to the browser.' },
+  { q: 'How do payments work?', a: 'Secure one‑time payments via Stripe Checkout. We never store card details; Stripe sends your receipt.' },
+  { q: 'Is the AI Website Feedback free?', a: 'There’s a limited daily quota. If you hit the limit, try later or contact us for extended access.' },
 ];
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
+  mainEntity: allFaqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 };
 
 const FAQPage = () => {
+  const [query, setQuery] = useState('');
+  const faqs = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return allFaqs;
+    return allFaqs.filter((f) => `${f.q} ${f.a}`.toLowerCase().includes(q));
+  }, [query]);
+
   const canonical = typeof window !== 'undefined' ? `${window.location.origin}/faq` : '/faq';
   return (
     <Layout>
       <Helmet>
-        <title>Frequently Asked Questions (FAQ) | Clearline Studio</title>
-        <meta name="description" content="Answers about uploads, security, Stripe payments, AI feedback limits, and timelines. Clearline Studio FAQ." />
+        <title>FAQ – Clearline Studio</title>
+        <meta name="description" content="Answers to common questions about scope, timelines, ownership, performance, and support." />
         <link rel="canonical" href={canonical} />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
-      <section className="py-16 md:py-20 bg-background">
+      <section className="py-16 md:py-20 bg-dp-bg text-dp-text">
         <div className="container mx-auto px-4">
           <header className="max-w-3xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground">Frequently Asked Questions</h1>
-            <p className="mt-4 text-muted-foreground">
-              Quick answers about uploads, security, payments, AI feedback, and timelines.
-            </p>
+            <h1 className="text-3xl md:text-4xl font-bold">Frequently Asked Questions</h1>
+            <p className="mt-4 text-muted-foreground">Straight answers about timelines, scope, and outcomes.</p>
           </header>
 
           <main className="mt-10 max-w-3xl mx-auto">
+            <label htmlFor="faq-search" className="sr-only">Search questions</label>
+            <input
+              id="faq-search"
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search questions..."
+              className="mt-6 mb-4 px-4 py-3 rounded-lg bg-dp-bg border border-dp-border text-dp-text focus:outline-none focus:ring-2 focus:ring-dp-accent w-full"
+            />
+
             <section aria-labelledby="faq-list">
               <h2 id="faq-list" className="sr-only">FAQ List</h2>
-              <Accordion type="single" collapsible className="space-y-4">
-                {faqs.map((f, i) => (
-                  <AccordionItem key={i} value={`item-${i}`} className="bg-muted/20 rounded-lg px-6">
-                    <AccordionTrigger className="text-left">{f.q}</AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">{f.a}</AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+              <div className="accordion divide-y divide-dp-border bg-dp-panel border border-dp-border rounded-2xl">
+                <Accordion type="single" collapsible className="space-y-0">
+                  {faqs.map((f, i) => (
+                    <AccordionItem key={i} value={`item-${i}`} className="row p-6">
+                      <AccordionTrigger className="text-left">{f.q}</AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground">{f.a}</AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
             </section>
 
             <aside className="mt-10 grid gap-4 sm:grid-cols-2">
-              <Link to="/services" className="block border border-border rounded-md p-4 hover:bg-muted/30 transition-smooth">
-                <span className="font-medium text-foreground">Explore Services</span>
-                <p className="text-sm text-muted-foreground">See what we offer and how we work.</p>
+              <Link to="/pricing" className="block border border-dp-border rounded-md p-4 hover:bg-muted/30 transition-smooth">
+                <span className="font-medium">View Pricing</span>
+                <p className="text-sm text-muted-foreground">Compare tiers and deliverables.</p>
               </Link>
-              <Link to="/contact" className="block border border-border rounded-md p-4 hover:bg-muted/30 transition-smooth">
-                <span className="font-medium text-foreground">Contact Us</span>
-                <p className="text-sm text-muted-foreground">Have a specific question? Get in touch.</p>
+              <Link to="/contact" className="block border border-dp-border rounded-md p-4 hover:bg-muted/30 transition-smooth">
+                <span className="font-medium">Contact Us</span>
+                <p className="text-sm text-muted-foreground">Didn’t see your question? Reach out.</p>
               </Link>
             </aside>
           </main>

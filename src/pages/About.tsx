@@ -5,45 +5,51 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 const founderPhotoUrl = '/lovable-uploads/aa7fbfa2-499c-4e0b-9795-9aec6456f870.png';
-const founderName = 'Max'; // Set your name here to show: "Hi, I’m {founderName}"
+
+const team = [
+  { name: 'Max', role: 'Founder, Lead Engineer', photo: founderPhotoUrl },
+  { name: 'Ava', role: 'Design & UX', photo: '/placeholder.svg' },
+  { name: 'Liam', role: 'SEO & Content Systems', photo: '/placeholder.svg' },
+];
+
+const milestones = [
+  { year: '2022', title: 'Clearline founded', desc: 'Hand-coded, ownership-first builds for services firms.' },
+  { year: '2023', title: '20+ launches', desc: 'Performance and SEO frameworks mature across niches.' },
+  { year: '2024', title: 'CWV “Good” baseline', desc: 'Systematic image pipelines, caching, and accessibility.' },
+  { year: 'Today', title: 'Outcomes focus', desc: 'Messaging, design systems, and CRO as a practice.' },
+];
 
 const About = () => {
-  const canonical = typeof window !== 'undefined' 
-    ? `${window.location.origin}/about` 
-    : '/about';
+  const canonical = typeof window !== 'undefined' ? `${window.location.origin}/about` : '/about';
 
-  const orgSchema = {
+  const aboutSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Clearline Studio',
-    url: typeof window !== 'undefined' ? window.location.origin : '',
+    '@type': 'AboutPage',
+    name: 'About Clearline Studio',
+    url: canonical,
   };
 
   return (
     <Layout>
       <Helmet>
-        <title>About Clearline Studio | Hand-Coded Websites</title>
-        <meta 
-          name="description" 
-          content="About Clearline Studio—Ex‑Google with 15+ years in mobile and web. I build fast, SEO‑first sites for professional services and local businesses." 
-        />
+        <title>About Us – Clearline Studio</title>
+        <meta name="description" content="Meet the studio behind premium, performance-first websites for professional services." />
         <link rel="canonical" href={canonical} />
-        <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(aboutSchema)}</script>
       </Helmet>
 
-      <header className="pt-20 md:pt-24 pb-8 gradient-subtle">
+      <header className="pt-20 md:pt-24 pb-8">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <Badge variant="secondary" className="mb-4">About</Badge>
-            <h1 className="mb-4">About Clearline Studio</h1>
-            <p className="text-lg text-muted-foreground">
-              Max and team build fast, secure, and conversion-focused websites—without lock-in or monthly platform fees.
-            </p>
+            <h1 className="mb-3">About Clearline Studio</h1>
+            <p className="text-lg text-muted-foreground">Craftsmanship, performance, and a partnership mindset.</p>
           </div>
         </div>
       </header>
 
       <main>
+        {/* Founder intro */}
         <section className="py-10">
           <div className="container mx-auto px-4">
             <article className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start max-w-6xl mx-auto">
@@ -51,59 +57,75 @@ const About = () => {
                 <figure>
                   <img
                     src={founderPhotoUrl}
-                    alt="Founder with his golden retriever, Chuck, in Los Angeles"
+                    alt="Founder portrait"
                     loading="lazy"
                     className="w-full h-auto rounded-xl border border-border shadow-large"
                   />
                   <figcaption className="mt-3 text-sm text-muted-foreground md:text-center leading-relaxed">
-                    Based in Los Angeles — when I’m not building fast websites, I’m exploring coffee spots with my golden retriever, Chuck.
+                    We build fast, secure, and conversion-focused websites—without lock-in or monthly platform fees.
                   </figcaption>
                 </figure>
               </div>
               <div>
-                <h2 className="mb-4">{founderName ? <>Hi, I’m {founderName}</> : 'Hi, I’m the founder behind Clearline'}</h2>
-                <p className="text-muted-foreground mb-4">
-                  Before Clearline, I spent nearly a decade at Google and have 15+ years working across the mobile app and website ecosystem.
-                  I bring a unique blend of consulting, business acumen, technical know-how, and SEO experience to every engagement.
-                </p>
-                <p className="text-muted-foreground mb-4">
-                  I partner with professional services and local businesses to launch websites that load instantly,
-                  rank well, and convert visitors into clients.
-                </p>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-semibold mb-2">Philosophy</h3>
-                    <p className="text-muted-foreground">
-                      Keep it clear, fast, and maintainable. I hand-code using modern tooling so your site stays
-                      lightweight, accessible, and easy to evolve.
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-2">How we’ll work</h3>
-                    <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                      <li>Discovery to align on goals and audience</li>
-                      <li>Messaging and design that communicate value</li>
-                      <li>Hand-coded build with a performance-first approach</li>
-                      <li>Launch with analytics, SEO, and a simple handoff</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-2">What you can expect</h3>
-                    <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                      <li>Clear roadmaps and transparent pricing</li>
-                      <li>Senior-level attention and thoughtful communication</li>
-                      <li>Performance, accessibility, and SEO baked in from day one</li>
-                      <li>Measurable results and practical recommendations</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="mt-6">
-          <Button asChild className="gradient-accent text-accent-foreground">
-            <Link to="/contact">Book your strategy call</Link>
-          </Button>
+                <h2 className="mb-4">Why we build the way we do</h2>
+                <p className="text-muted-foreground mb-4">We build by hand, optimize obsessively, and measure outcomes. Your site should be an asset you own—not a subscription you rent.</p>
+                <p className="text-muted-foreground">Integrity, quality, transparency, and ownership guide our process from discovery to launch.</p>
+                <div className="mt-6 flex gap-3">
+                  <Button asChild variant="outline"><Link to="/services">View Services</Link></Button>
+                  <Button asChild data-cta="about_start_project"><Link to="/contact">Start Your Project</Link></Button>
                 </div>
               </div>
             </article>
+          </div>
+        </section>
+
+        {/* Milestone timeline */}
+        <section className="py-10">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <h2 className="mb-6">Milestones</h2>
+            <ol className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {milestones.map((m) => (
+                <li key={m.title} className="bg-dp-panel border border-dp-border rounded-2xl p-6">
+                  <div className="text-sm text-muted-foreground">{m.year}</div>
+                  <div className="font-medium">{m.title}</div>
+                  <p className="text-muted-foreground mt-1">{m.desc}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* Team grid */}
+        <section className="py-4">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <h2 className="mb-6">Team</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-2">
+              {team.map((t) => (
+                <Card key={t.name} className="bg-dp-panel border-dp-border">
+                  <CardContent className="p-6">
+                    <img src={t.photo} alt={`${t.name} – ${t.role}`} className="w-full h-44 object-cover rounded-lg border border-border" loading="lazy" />
+                    <div className="mt-4">
+                      <div className="font-medium">{t.name}</div>
+                      <div className="text-sm text-muted-foreground">{t.role}</div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Ownership promise callout */}
+        <section className="py-12">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="bg-dp-panel border border-dp-border rounded-2xl p-8">
+              <h2 className="mb-2">Ownership, not lock‑in</h2>
+              <p className="text-muted-foreground">You own your code, content, and accounts. No proprietary platform, no recurring lock-ins—just a site engineered for speed, clarity, and control.</p>
+              <div className="mt-6 flex gap-3">
+                <Button asChild variant="outline"><Link to="/services">View Services</Link></Button>
+                <Button asChild data-cta="about_cta_contact"><Link to="/contact">Start Your Project</Link></Button>
+              </div>
+            </div>
           </div>
         </section>
       </main>

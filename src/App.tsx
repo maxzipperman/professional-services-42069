@@ -35,7 +35,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Pricing from "./pages/Pricing";
 import Resources from "./pages/Resources";
-
+import CaseStudy from "./pages/CaseStudy";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -51,6 +51,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/book" element={<Book />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/case/:slug" element={<CaseStudy />} />
             <Route path="/case-studies" element={<Portfolio />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/resources" element={<Resources />} />
