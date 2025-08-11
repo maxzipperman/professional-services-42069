@@ -6,36 +6,22 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle, Star, Users, Globe, Shield, Target, Zap, Award, BookOpen, DollarSign, Video, BarChart3 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import LeadMagnet from '@/components/LeadMagnet';
-
 const Index = () => {
-  const trustLogos = [
-    "AICPA Member",
-    "American Bar Association", 
-    "Forbes",
-    "Inc.",
-    "Chamber of Commerce"
-  ];
-
-  const valuePillars = [
-    {
-      title: "Niche-Specific Authority",
-      description: "We demonstrate a deep, insider-level understanding of your industry, from compliance standards to client expectations, reducing your risk and cognitive load.",
-      icon: <Target className="h-6 w-6 text-accent" />
-    },
-    {
-      title: "Quantifiable Trust Signals",
-      description: "We move beyond generic testimonials to showcase data-backed case studies, authoritative endorsements, and clear proof of your success to build unshakeable trust.",
-      icon: <BarChart3 className="h-6 w-6 text-accent" />
-    },
-    {
-      title: "Frictionless Client Journey",
-      description: "We design an intuitive, streamlined digital experience that guides visitors toward a specific, profitable action, making it effortless for them to engage your firm.",
-      icon: <Zap className="h-6 w-6 text-accent" />
-    }
-  ];
-
-  return (
-    <Layout>
+  const trustLogos = ["AICPA Member", "American Bar Association", "Forbes", "Inc.", "Chamber of Commerce"];
+  const valuePillars = [{
+    title: "Niche-Specific Authority",
+    description: "We demonstrate a deep, insider-level understanding of your industry, from compliance standards to client expectations, reducing your risk and cognitive load.",
+    icon: <Target className="h-6 w-6 text-accent" />
+  }, {
+    title: "Quantifiable Trust Signals",
+    description: "We move beyond generic testimonials to showcase data-backed case studies, authoritative endorsements, and clear proof of your success to build unshakeable trust.",
+    icon: <BarChart3 className="h-6 w-6 text-accent" />
+  }, {
+    title: "Frictionless Client Journey",
+    description: "We design an intuitive, streamlined digital experience that guides visitors toward a specific, profitable action, making it effortless for them to engage your firm.",
+    icon: <Zap className="h-6 w-6 text-accent" />
+  }];
+  return <Layout>
       <Helmet>
         <title>Websites That Drive Measurable Growth | Clearline Studio</title>
         <meta name="description" content="Strategy-led, performance-optimized digital platforms for ambitious businesses and nonprofits." />
@@ -47,12 +33,9 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-6">Professional Digital Presence</Badge>
-            <h1 className="mb-6 text-primary">
-              Websites That Drive Measurable Growth — Not Just Look Good
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Strategy-led, performance-optimized digital platforms for ambitious businesses and nonprofits.
-            </p>
+            <h1 className="mb-6 text-primary">Websites for Professionals
+Who Trade on Credibility</h1>
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">We build polished, high-performance digital platforms that close the trust gap, showcase your expertise, and convert discerning visitors into high-value clients.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Button asChild size="lg" className="gradient-accent text-accent-foreground font-semibold px-8">
                 <Link to="/book" className="flex items-center space-x-2">
@@ -99,11 +82,9 @@ const Index = () => {
           <div className="text-center">
             <p className="text-sm text-muted-foreground mb-4">Featured In & Trusted By</p>
             <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
-              {trustLogos.map((logo, index) => (
-                <div key={index} className="text-sm font-medium text-muted-foreground px-4 py-2 border border-border rounded-md">
+              {trustLogos.map((logo, index) => <div key={index} className="text-sm font-medium text-muted-foreground px-4 py-2 border border-border rounded-md">
                   {logo}
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
@@ -140,8 +121,7 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {valuePillars.map((pillar, index) => (
-              <Card key={index} className="hover-lift shadow-soft text-center">
+            {valuePillars.map((pillar, index) => <Card key={index} className="hover-lift shadow-soft text-center">
                 <CardHeader>
                   <div className="w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                     {pillar.icon}
@@ -153,8 +133,7 @@ const Index = () => {
                     {pillar.description}
                   </CardDescription>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -163,18 +142,7 @@ const Index = () => {
       <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <LeadMagnet
-              industry="professional services"
-              title="SMB’s Guide to Website ROI"
-              description="A concise playbook to measure, improve, and communicate your website’s ROI."
-              benefits={[
-                "ROI model template",
-                "10 CRO quick wins",
-                "Analytics setup checklist",
-                "Executive summary one-pager",
-              ]}
-              fileName="smb-website-roi.pdf"
-            />
+            <LeadMagnet industry="professional services" title="SMB’s Guide to Website ROI" description="A concise playbook to measure, improve, and communicate your website’s ROI." benefits={["ROI model template", "10 CRO quick wins", "Analytics setup checklist", "Executive summary one-pager"]} fileName="smb-website-roi.pdf" />
           </div>
         </div>
       </section>
@@ -229,23 +197,7 @@ const Index = () => {
               </div>
               
               <div className="relative">
-                <div className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl p-8 shadow-large">
-                  <div className="bg-white rounded-lg shadow-medium p-6 space-y-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-accent rounded-full"></div>
-                      <div className="font-semibold">Employment Law Specialists</div>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="h-4 bg-gray-200 rounded"></div>
-                      <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                    </div>
-                    <div className="flex space-x-2">
-                      <div className="bg-accent text-accent-foreground px-4 py-2 rounded text-sm">
-                        Schedule Consultation
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -290,27 +242,22 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                title: "Lawyers",
-                description: "Build credibility, showcase expertise, attract high-value cases",
-                href: "/lawyers",
-                icon: <BookOpen className="h-8 w-8 text-accent" />
-              },
-              {
-                title: "Accountants", 
-                description: "Demonstrate trust, highlight credentials, grow your practice",
-                href: "/accountants",
-                icon: <BarChart3 className="h-8 w-8 text-accent" />
-              },
-              {
-                title: "Consultants",
-                description: "Establish authority, prove ROI, convert prospects to clients",
-                href: "/consultants",
-                icon: <Target className="h-8 w-8 text-accent" />
-              }
-            ].map((industry, index) => (
-              <Card key={index} className="hover-lift shadow-soft group cursor-pointer text-center">
+            {[{
+            title: "Lawyers",
+            description: "Build credibility, showcase expertise, attract high-value cases",
+            href: "/lawyers",
+            icon: <BookOpen className="h-8 w-8 text-accent" />
+          }, {
+            title: "Accountants",
+            description: "Demonstrate trust, highlight credentials, grow your practice",
+            href: "/accountants",
+            icon: <BarChart3 className="h-8 w-8 text-accent" />
+          }, {
+            title: "Consultants",
+            description: "Establish authority, prove ROI, convert prospects to clients",
+            href: "/consultants",
+            icon: <Target className="h-8 w-8 text-accent" />
+          }].map((industry, index) => <Card key={index} className="hover-lift shadow-soft group cursor-pointer text-center">
                 <Link to={industry.href} className="block p-8">
                   <div className="w-16 h-16 bg-accent/10 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-accent/20 transition-smooth">
                     {industry.icon}
@@ -323,8 +270,7 @@ const Index = () => {
                   </p>
                   <ArrowRight className="h-5 w-5 text-accent mx-auto opacity-0 group-hover:opacity-100 transition-smooth" />
                 </Link>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -339,23 +285,13 @@ const Index = () => {
               attract premium clients, and provide a significant competitive advantage.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                asChild 
-                size="lg" 
-                variant="secondary"
-                className="hover-lift font-semibold bg-white text-primary hover:bg-white/90"
-              >
+              <Button asChild size="lg" variant="secondary" className="hover-lift font-semibold bg-white text-primary hover:bg-white/90">
                 <Link to="/contact" className="flex items-center space-x-2">
                   <span>Book Your Strategic Roadmap Call</span>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
-              <Button 
-                asChild 
-                size="lg"
-                variant="secondary"
-                className="hover-lift font-semibold bg-white text-primary hover:bg-white/90"
-              >
+              <Button asChild size="lg" variant="secondary" className="hover-lift font-semibold bg-white text-primary hover:bg-white/90">
                 <Link to="/ai-feedback" className="flex items-center space-x-2">
                   <span>Run a free AI site audit</span>
                   <ArrowRight className="h-5 w-5" />
@@ -365,8 +301,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default Index;

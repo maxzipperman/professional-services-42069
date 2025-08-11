@@ -2,17 +2,21 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { LOGO_URL } from '@/constants/brand';
-
 const Footer = () => {
-  const industries = [
-    { name: 'Local Businesses', href: '/local-businesses' },
-    { name: 'Nonprofits & Religious', href: '/nonprofits' },
-    { name: 'Independent Creatives', href: '/creatives' },
-    { name: 'Professional Services', href: '/professional-services' },
-  ];
-
-  return (
-    <footer className="bg-primary text-primary-foreground">
+  const industries = [{
+    name: 'Local Businesses',
+    href: '/local-businesses'
+  }, {
+    name: 'Nonprofits & Religious',
+    href: '/nonprofits'
+  }, {
+    name: 'Independent Creatives',
+    href: '/creatives'
+  }, {
+    name: 'Professional Services',
+    href: '/professional-services'
+  }];
+  return <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -42,34 +46,22 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-2">
               <li>
-                <Link 
-                  to="/services" 
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm"
-                >
+                <Link to="/services" className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm">
                   Website Tune-Up
                 </Link>
               </li>
               <li>
-                <Link 
-                  to="/services" 
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm"
-                >
+                <Link to="/services" className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm">
                   Brand Refresh
                 </Link>
               </li>
               <li>
-                <Link 
-                  to="/services" 
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm"
-                >
+                <Link to="/services" className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm">
                   Premium Brand Experience
                 </Link>
               </li>
               <li>
-                <Link 
-                  to="/payment" 
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm"
-                >
+                <Link to="/payment" className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm">
                   Brand & Performance Audit
                 </Link>
               </li>
@@ -78,18 +70,13 @@ const Footer = () => {
 
           {/* Industries */}
           <div>
-            <h4 className="font-semibold mb-4">Industries</h4>
+            <h4 className="font-semibold mb-4">Who We Serve</h4>
             <ul className="space-y-2">
-              {industries.map((industry) => (
-                <li key={industry.href}>
-                  <Link 
-                    to={industry.href}
-                    className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm"
-                  >
+              {industries.map(industry => <li key={industry.href}>
+                  <Link to={industry.href} className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth text-sm">
                     {industry.name}
                   </Link>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
 
@@ -99,12 +86,7 @@ const Footer = () => {
             <p className="text-primary-foreground/80 text-sm mb-4">
               Let's discuss your goals and the smartest next steps.
             </p>
-            <Button 
-              asChild 
-              className="w-full gradient-accent text-accent-foreground hover-lift"
-              data-cta="footer"
-              data-page="footer"
-            >
+            <Button asChild className="w-full gradient-accent text-accent-foreground hover-lift" data-cta="footer" data-page="footer">
               <Link to="/book">Book Your Strategy Call</Link>
             </Button>
             <p className="mt-2 text-xs text-primary-foreground/80">No hard pitch—30 minutes to map your best next steps.</p>
@@ -117,23 +99,15 @@ const Footer = () => {
             © 2024 Clearline Studio. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link 
-              to="/privacy" 
-              className="text-primary-foreground/60 hover:text-primary-foreground text-sm transition-smooth"
-            >
+            <Link to="/privacy" className="text-primary-foreground/60 hover:text-primary-foreground text-sm transition-smooth">
               Privacy Policy
             </Link>
-            <Link 
-              to="/terms" 
-              className="text-primary-foreground/60 hover:text-primary-foreground text-sm transition-smooth"
-            >
+            <Link to="/terms" className="text-primary-foreground/60 hover:text-primary-foreground text-sm transition-smooth">
               Terms of Service
             </Link>
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
