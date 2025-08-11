@@ -104,11 +104,11 @@ const Index = () => {
               <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 text-dp-text">
                 Professional Websites That Win Premium Clients
               </h1>
-              <p className="text-xl text-dp-text/80 mb-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-dp-text mb-8 max-w-3xl mx-auto leading-relaxed">
                 We build sophisticated digital platforms that establish authority, build unshakeable trust, 
                 and consistently attract high-value professional services clients.
               </p>
-              <p className="text-lg text-dp-text/70 mb-12 max-w-2xl mx-auto">
+              <p className="text-lg text-dp-text mb-12 max-w-2xl mx-auto">
                 For attorneys, accountants, and consultants who treat their website as a core business asset. 
                 Our ROI-driven builds increase qualified inquiries and signal expertise.
               </p>
