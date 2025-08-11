@@ -1,167 +1,152 @@
-
 import Layout from '@/components/Layout';
+import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
-import { useEffect } from 'react';
-
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { useEffect, useRef, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
+
 const CALENDLY_URL = 'https://calendly.com/maxzipperman';
+
 const Contact = () => {
-  const {
-    toast
-  } = useToast();
-  const contactInfo = [{
-    icon: <Mail className="h-5 w-5" />,
-    title: "Email",
-    content: "hello@clearlinestudio.com",
-    description: "We respond within 24 hours"
-  }, {
-    icon: <Phone className="h-5 w-5" />,
-    title: "Phone",
-    content: "(555) 987-6543",
-    description: "Mon-Fri, 9am-6pm EST"
-  }, {
-    icon: <Clock className="h-5 w-5" />,
-    title: "Response Time",
-    content: "24 hours",
-    description: "Free audit within 2 business days"
-  }];
-  const services = ["Website Design & Development", "Brand Messaging Strategy", "Website Optimization & Refresh", "Free Website Audit", "Other"];
-  const industries = ["Professional Services (Law, Accounting, Consulting)", "Local Business (Restaurant, Home Services, Retail)", "Nonprofit & Religious Organizations", "Independent Creatives (Photography, Art, Coaching)", "Other"];
+  const { toast } = useToast();
+  const [successOpen, setSuccessOpen] = useState(false);
+  const honeypotRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     const handler = async (e: MessageEvent) => {
       try {
         const evt = (e as any)?.data?.event;
-        console.log('Calendly postMessage received:', evt, e);
         if (evt === 'calendly.event_scheduled') {
-          console.log('Calendly event scheduled — redirecting to /payment');
           window.location.href = '/payment';
         }
       } catch (err: any) {
-        console.error('Failed to start checkout:', err);
         toast({
           title: 'Unable to start checkout',
           description: err?.message || 'Please try again or use the Payment page.',
-          variant: 'destructive'
+          variant: 'destructive',
         });
       }
     };
     window.addEventListener('message', handler);
     return () => window.removeEventListener('message', handler);
   }, [toast]);
-  return <Layout>
-      {/* Hero Section */}
-      <section className="pt-16 md:pt-20 pb-12 gradient-subtle">
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // simple honeypot check
+    if (honeypotRef.current && honeypotRef.current.value) {
+      return; // silently drop spam
+    }
+    setSuccessOpen(true);
+  };
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact Clearline Studio',
+    url: 'https://www.clearlinestudio.com/contact',
+  };
+
+  return (
+    <Layout>
+      <Helmet>
+        <title>Contact Clearline Studio</title>
+        <meta name="description" content="Discuss your project goals and timelines. Use our inquiry form or book a call." />
+        <link rel="canonical" href="/contact" />
+        <meta property="og:title" content="Contact Clearline Studio" />
+        <meta property="og:description" content="Premium websites for professional services. Start the conversation." />
+        <meta property="og:image" content="/clearline-contact-hero.jpg" />
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      </Helmet>
+
+      {/* Hero */}
+      <section className="py-20 md:py-28">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-4">Get Started</Badge>
-            <h1 className="mb-6">
-              Contact
-              <span className="text-accent"> Clearline Studio</span>
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Fill out the form or schedule directly — we’ll respond within 24 hours.
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="mb-3">Start a Conversation</h1>
+            <p className="text-lg text-muted-foreground">
+              Tell us about your goals; we’ll map the fastest route to value.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-14 lg:py-20">
+      {/* Two-column layout */}
+      <section className="py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Form */}
-            <Card className="shadow-medium">
+            {/* Form */}
+            <Card className="bg-dp-panel border border-dp-border rounded-2xl">
               <CardHeader>
-                <CardTitle className="text-2xl">Start the Process</CardTitle>
-                <CardDescription>
-                  Tell us about your project and we'll provide a comprehensive audit 
-                  with specific recommendations to improve your site's performance.
-                </CardDescription>
+                <CardTitle className="text-2xl">Submit Inquiry</CardTitle>
+                <CardDescription>Share a few details and we’ll respond within one business day.</CardDescription>
               </CardHeader>
-              
-              <CardContent className="space-y-6">
-                <form className="space-y-6">
-                  <div className="space-y-2">
+              <CardContent>
+                <form className="space-y-4" onSubmit={onSubmit} aria-describedby="privacy-note">
+                  <input ref={honeypotRef} type="text" name="company_website" aria-hidden="true" tabIndex={-1} className="hidden" autoComplete="off" />
+
+                  <div className="space-y-1">
                     <Label htmlFor="name">Name *</Label>
-                    <Input id="name" placeholder="Jane Doe" required />
+                    <Input id="name" required className="bg-dp-bg border border-dp-border text-dp-text rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-dp-accent" />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input id="email" type="email" placeholder="jane@example.com" required />
+                  <div className="space-y-1">
+                    <Label htmlFor="email">Email *</Label>
+                    <Input id="email" type="email" required className="bg-dp-bg border border-dp-border text-dp-text rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-dp-accent" />
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     <Label htmlFor="company">Company</Label>
-                    <Input id="company" placeholder="Your Company Name" />
+                    <Input id="company" className="bg-dp-bg border border-dp-border text-dp-text rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-dp-accent" />
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     <Label htmlFor="website">Website (optional)</Label>
-                    <Input id="website" placeholder="https://yourwebsite.com" />
+                    <Input id="website" className="bg-dp-bg border border-dp-border text-dp-text rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-dp-accent" />
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea id="message" placeholder="Tell us about your goals, challenges, and timeline..." rows={5} />
+                    <Textarea id="message" rows={5} className="bg-dp-bg border border-dp-border text-dp-text rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-dp-accent" />
                   </div>
 
-                  <Button type="submit" className="w-full gradient-accent text-accent-foreground font-semibold hover-lift">
-                    Send Message
+                  <p id="privacy-note" className="text-xs text-muted-foreground">We respect your privacy. No spam.</p>
+
+                  <Button type="submit" className="w-full gradient-accent text-accent-foreground" data-analytics-id="cta_submit_inquiry">
+                    Submit Inquiry
+                  </Button>
+                  <Button asChild variant="outline" className="w-full" data-analytics-id="cta_book_call">
+                    <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Book a Call</a>
                   </Button>
                 </form>
               </CardContent>
             </Card>
 
-            {/* Contact Info & Calendly Embed */}
-            <div className="space-y-8">
-              {/* Contact Information */}
-              
-
-              {/* Quick Stats */}
-              <Card className="shadow-soft gradient-accent text-accent-foreground">
+            {/* Details + Calendar */}
+            <div className="space-y-6">
+              <Card className="bg-dp-panel border border-dp-border rounded-2xl">
                 <CardHeader>
-                  <CardTitle className="text-accent-foreground">Why Choose Clearline Studio?</CardTitle>
+                  <CardTitle>Contact Details</CardTitle>
+                  <CardDescription>Email, phone, and optional booking link.</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">48hrs</div>
-                      <div className="text-sm opacity-90">Average response time</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">100%</div>
-                      <div className="text-sm opacity-90">Client satisfaction</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">90+</div>
-                      <div className="text-sm opacity-90">PageSpeed scores</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold">0</div>
-                      <div className="text-sm opacity-90">Monthly fees</div>
-                    </div>
-                  </div>
+                <CardContent className="space-y-3">
+                  <p><strong>Email:</strong> hello@clearlinestudio.com</p>
+                  <p><strong>Phone:</strong> (555) 987-6543</p>
+                  <p><a className="underline underline-offset-4" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Open Calendly</a></p>
                 </CardContent>
               </Card>
 
-              {/* Calendly Embed (replaces the previously selected card) */}
-              <Card className="shadow-soft">
+              <Card className="bg-dp-panel border border-dp-border rounded-2xl">
                 <CardHeader>
                   <CardTitle>Schedule a Consultation</CardTitle>
-                  <CardDescription>
-                    Initial 2-hour consultation: $499. After scheduling, you’ll be redirected to secure Stripe checkout to complete payment. One-hour consultations are available for $299.
-                  </CardDescription>
+                  <CardDescription>Use the embedded calendar to book time that works for you.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="rounded-lg border border-border overflow-hidden bg-background">
+                  <div className="rounded-lg border border-dp-border overflow-hidden bg-dp-bg">
                     <iframe
                       title="Calendly Scheduling"
                       src={`${CALENDLY_URL}?hide_landing_page_details=1&hide_gdpr_banner=1`}
@@ -169,15 +154,27 @@ const Contact = () => {
                       loading="lazy"
                     />
                   </div>
-                  <p className="mt-3 text-xs text-muted-foreground">
-                    Prefer a full page view? <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="underline">Open Calendly</a>.
-                  </p>
                 </CardContent>
               </Card>
             </div>
           </div>
         </div>
       </section>
-    </Layout>;
+
+      {/* Success Modal */}
+      <Dialog open={successOpen} onOpenChange={setSuccessOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Thanks — we received your inquiry</DialogTitle>
+            <DialogDescription>We’ll get back to you within one business day.</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={() => setSuccessOpen(false)}>Close</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </Layout>
+  );
 };
+
 export default Contact;
