@@ -13,10 +13,16 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   useAnalytics();
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-dp-bg text-dp-text antialiased">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-dp-accent bg-dp-accent text-dp-bg"
+      >
+        Skip to main content
+      </a>
       <Navigation />
       <ScrollToTop />
-      <main className="flex-1">
+      <main id="main-content" role="main" tabIndex={-1} className="flex-1">
         {children}
       </main>
       <Footer />

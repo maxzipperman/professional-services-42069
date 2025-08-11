@@ -62,7 +62,8 @@ const Index = () => {
       <Helmet>
         <title>Professional Website Design for Lawyers, Accountants & Consultants | Clearline Studio</title>
         <meta name="description" content="Premium websites that establish authority and win high-value clients. Specialized in professional services with proven ROI. Book your strategic roadmap call." />
-        <link rel="canonical" href="/" />
+        <link rel="canonical" href="https://www.clearlinestudio.com/" />
+        <link rel="preload" as="image" href={heroImage} />
         <meta property="og:title" content="Professional Websites That Win Premium Clients | Clearline Studio" />
         <meta property="og:description" content="Sophisticated digital platforms for attorneys, accountants, and consultants. ROI-driven approach with proven results." />
         <meta property="og:image" content={heroImage} />
@@ -114,13 +115,13 @@ const Index = () => {
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
                 <Button asChild size="lg" className="inline-flex items-center justify-center bg-dp-accent text-dp-bg px-8 py-4 rounded-xl font-semibold text-lg transition-colors hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-dp-accent">
-                  <Link to="/contact" className="flex items-center space-x-2">
+                  <Link to="/contact" data-cta="hero_primary_cta - Book Your Strategic Roadmap Call" className="flex items-center space-x-2">
                     <span>Book Your Strategic Roadmap Call</span>
                     <ArrowRight className="h-5 w-5" />
                   </Link>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="inline-flex items-center justify-center border border-dp-accent/40 text-dp-accent px-8 py-4 rounded-xl font-semibold text-lg hover:bg-dp-panel focus:outline-none focus:ring-2 focus:ring-dp-accent">
-                  <Link to="/ai-feedback">Run a Free AI Site Audit</Link>
+                  <Link to="/ai-feedback" data-cta="hero_secondary_cta - Run a Free AI Site Audit">Run a Free AI Site Audit</Link>
                 </Button>
               </div>
               
@@ -241,7 +242,7 @@ const Index = () => {
                     </div>
                     
                     <Button asChild variant="outline" className="mt-8 border-dp-accent/40 text-dp-accent hover:bg-dp-panel">
-                      <Link to="/portfolio" className="flex items-center space-x-2">
+                      <Link to="/portfolio" data-cta="case_study_portfolio - View Our Professional Portfolio" className="flex items-center space-x-2">
                         <span>View Our Professional Portfolio</span>
                         <ArrowRight className="h-4 w-4" />
                       </Link>
@@ -280,7 +281,7 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {specializations.map((industry, index) => (
                 <Card key={index} className="bg-dp-panel border border-dp-border rounded-2xl shadow-dp-card hover:shadow-lg transition-shadow group cursor-pointer text-center">
-                  <Link to={industry.href} className="block p-8">
+                  <Link to={industry.href} data-cta={`specialization - ${industry.title}`} className="block p-8">
                     <div className="w-16 h-16 bg-dp-accent/20 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-dp-accent/30 transition-colors">
                       {industry.icon}
                     </div>
@@ -348,13 +349,13 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" className="bg-dp-accent text-dp-bg px-8 py-4 rounded-xl font-semibold text-lg hover:brightness-110">
-                  <Link to="/contact" className="flex items-center space-x-2">
+                  <Link to="/contact" data-cta="final_primary_cta - Book Your Strategic Roadmap Call" className="flex items-center space-x-2">
                     <span>Book Your Strategic Roadmap Call</span>
                     <ArrowRight className="h-5 w-5" />
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-dp-accent/40 text-dp-accent px-8 py-4 rounded-xl font-semibold text-lg hover:bg-dp-panel">
-                  <Link to="/ai-feedback" className="flex items-center space-x-2">
+                  <Link to="/ai-feedback" data-cta="final_secondary_cta - Run a Free AI Site Audit" className="flex items-center space-x-2">
                     <span>Run a Free AI Site Audit</span>
                     <ArrowRight className="h-5 w-5" />
                   </Link>
