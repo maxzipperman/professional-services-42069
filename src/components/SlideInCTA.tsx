@@ -40,7 +40,7 @@ const SlideInCTA = () => {
         <p className="mt-1 text-sm text-muted-foreground">No hard pitch—30 minutes to map your best next steps.</p>
         <div className="mt-3">
           <Button asChild className="w-full gradient-accent text-accent-foreground">
-            <Link to="/book" data-cta="slidein" data-page="global">Book Now</Link>
+            <Link to="/contact" data-cta="slidein" data-page="global">Book Now</Link>
           </Button>
         </div>
       </div>

@@ -9,7 +9,7 @@ const StickyMobileCTA = () => {
     <div className="fixed md:hidden bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="container mx-auto px-4 py-3">
         <Button asChild size="lg" className="w-full gradient-accent text-accent-foreground" >
-          <Link to="/book" data-cta="sticky" data-page="global">
+          <Link to="/contact" data-cta="sticky" data-page="global">
             Book Your Strategy Call
           </Link>
         </Button>

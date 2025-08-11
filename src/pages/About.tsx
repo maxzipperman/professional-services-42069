@@ -99,7 +99,7 @@ const About = () => {
                 </div>
                 <div className="mt-6">
           <Button asChild className="gradient-accent text-accent-foreground">
-            <Link to="/book">Book your strategy call</Link>
+            <Link to="/contact">Book your strategy call</Link>
           </Button>
                 </div>
               </div>

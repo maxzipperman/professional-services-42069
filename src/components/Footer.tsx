@@ -87,7 +87,7 @@ const Footer = () => {
               Let's discuss your goals and the smartest next steps.
             </p>
             <Button asChild className="w-full gradient-accent text-accent-foreground hover-lift" data-cta="footer" data-page="footer">
-              <Link to="/book">Book Your Strategy Call</Link>
+              <Link to="/contact">Book Your Strategy Call</Link>
             </Button>
             <p className="mt-2 text-xs text-primary-foreground/80">No hard pitch—30 minutes to map your best next steps.</p>
           </div>

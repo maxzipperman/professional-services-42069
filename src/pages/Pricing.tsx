@@ -148,7 +148,7 @@ const Pricing = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild className="gradient-accent text-accent-foreground">
-              <Link to="/book">Schedule a Strategy Call</Link>
+              <Link to="/contact">Schedule a Strategy Call</Link>
             </Button>
             <Button asChild variant="outline">
               <Link to="/contact">Ask a question</Link>

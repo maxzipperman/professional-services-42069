@@ -63,7 +63,7 @@ export const IndustryHero = ({
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
             <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-accent hover-scale transition-smooth">
-              <Link to="/book" className="inline-flex items-center gap-2">
+              <Link to="/contact" className="inline-flex items-center gap-2">
                 {primaryCtaText}
                 <ArrowRight className="h-4 w-4" />
               </Link>

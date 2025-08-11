@@ -38,7 +38,7 @@ Who Trade on Credibility</h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">We build polished, high-performance digital platforms that close the trust gap, showcase your expertise, and convert discerning visitors into high-value clients.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Button asChild size="lg" className="gradient-accent text-accent-foreground font-semibold px-8">
-                <Link to="/book" className="flex items-center space-x-2">
+                <Link to="/contact" className="flex items-center space-x-2">
                   <span>Schedule a Strategy Call</span>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
