@@ -107,6 +107,13 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Dark Premium Design System */
+    --dp-bg: 222 84% 5%;
+    --dp-text: 210 40% 98%;
+    --dp-panel: 217 33% 8%;
+    --dp-accent: 45 86% 58%;
+    --dp-border: 217 33% 15%;
   }
 }
 
@@ -189,4 +196,9 @@ All colors MUST be HSL.
   .transition-bounce {
     transition: var(--transition-bounce);
   }
+
+  .shadow-dp-card {
+    box-shadow: 0 10px 25px -5px hsl(222 84% 5% / 0.3), 0 4px 6px -2px hsl(222 84% 5% / 0.1);
+  }
+}
 }
