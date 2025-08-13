@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ChevronDown } from 'lucide-react';
@@ -8,6 +8,17 @@ import { LOGO_URL } from '@/constants/brand';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
   const industries = [{
     name: 'Lawyers',
     href: '/lawyers'
@@ -86,13 +97,19 @@ const Navigation = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-foreground hover:text-accent transition-smooth">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 text-foreground hover:text-accent transition-smooth"
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-nav"
+          >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && <div className="md:hidden border-t border-border">
+        {isOpen && <div id="mobile-nav" className="md:hidden border-t border-border">
             <div className="px-2 pt-2 pb-3 space-y-1">
               <Link to="/services" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
                 Services
