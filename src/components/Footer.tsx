@@ -29,16 +29,16 @@ const Footer = () => {
             <p className="text-primary-foreground/80 mb-6 leading-relaxed">
               Boutique consultancy creating high-performance, custom websites with strategic messaging that converts.
             </p>
-            <div className="space-y-2">
+            <address className="space-y-2 not-italic">
               <div className="flex items-center space-x-2 text-primary-foreground/80">
                 <Mail className="h-4 w-4" />
-                <span className="text-sm">hello@clearlinestudio.com</span>
+                <a href="mailto:hello@clearlinestudio.com" className="text-sm">hello@clearlinestudio.com</a>
               </div>
               <div className="flex items-center space-x-2 text-primary-foreground/80">
                 <Phone className="h-4 w-4" />
-                <span className="text-sm">(555) 987-6543</span>
+                <a href="tel:5559876543" className="text-sm">(555) 987-6543</a>
               </div>
-            </div>
+            </address>
           </div>
 
           {/* Services */}
