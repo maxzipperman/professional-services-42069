@@ -31,7 +31,7 @@ const Navigation = () => {
   return <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center group shrink-0" aria-label="Clearline Studio home">
+          <Link to="/" className="flex items-center group shrink-0 focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label="Clearline Studio home">
             <div className="relative flex items-center h-8 md:h-10 max-w-[160px] md:max-w-[200px]">
               <img src={LOGO_URL} alt="Clearline Studio logo" className="h-full w-auto object-contain object-left" loading="eager" decoding="async" fetchPriority="high" />
             </div>
@@ -39,35 +39,35 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/services" className={`transition-smooth hover:text-accent ${isActive('/services') ? 'text-accent font-medium' : 'text-foreground'}`}>
+            <Link to="/services" className={`transition-smooth hover:text-accent focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${isActive('/services') ? 'text-accent font-medium' : 'text-foreground'}`}>
               Services
             </Link>
-            <Link to="/pricing" className={`transition-smooth hover:text-accent ${isActive('/pricing') ? 'text-accent font-medium' : 'text-foreground'}`}>
+            <Link to="/pricing" className={`transition-smooth hover:text-accent focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${isActive('/pricing') ? 'text-accent font-medium' : 'text-foreground'}`}>
               Pricing
             </Link>
             
             {/* Who We Serve Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center space-x-1 transition-smooth hover:text-accent text-foreground">
+              <DropdownMenuTrigger className="flex items-center space-x-1 transition-smooth hover:text-accent text-foreground focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
                 <span>Who We Serve</span>
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-56">
                 {industries.map(industry => <DropdownMenuItem key={industry.href} asChild>
-                    <Link to={industry.href} className="w-full cursor-pointer">
+                    <Link to={industry.href} className="w-full cursor-pointer focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
                       {industry.name}
                     </Link>
                   </DropdownMenuItem>)}
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link to="/case-studies" className={`transition-smooth hover:text-accent ${isActive('/case-studies') ? 'text-accent font-medium' : 'text-foreground'}`}>
+            <Link to="/case-studies" className={`transition-smooth hover:text-accent focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${isActive('/case-studies') ? 'text-accent font-medium' : 'text-foreground'}`}>
               Case Studies
             </Link>
-            <Link to="/faq" className={`transition-smooth hover:text-accent ${isActive('/faq') ? 'text-accent font-medium' : 'text-foreground'}`}>
+            <Link to="/faq" className={`transition-smooth hover:text-accent focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${isActive('/faq') ? 'text-accent font-medium' : 'text-foreground'}`}>
               FAQ
             </Link>
-            <Link to="/about" className={`transition-smooth hover:text-accent ${isActive('/about') ? 'text-accent font-medium' : 'text-foreground'}`}>
+            <Link to="/about" className={`transition-smooth hover:text-accent focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${isActive('/about') ? 'text-accent font-medium' : 'text-foreground'}`}>
               About
             </Link>
           </div>
@@ -86,7 +86,7 @@ const Navigation = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-foreground hover:text-accent transition-smooth">
+          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-foreground hover:text-accent transition-smooth focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
@@ -94,28 +94,28 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isOpen && <div className="md:hidden border-t border-border">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link to="/services" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+              <Link to="/services" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => setIsOpen(false)}>
                 Services
               </Link>
-              <Link to="/pricing" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+              <Link to="/pricing" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => setIsOpen(false)}>
                 Pricing
               </Link>
               <div className="px-3 py-2">
                 <div className="text-sm font-medium text-muted-foreground mb-2">Who We Serve</div>
-                {industries.map(industry => <Link key={industry.href} to={industry.href} className="block px-3 py-1 text-sm text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+                {industries.map(industry => <Link key={industry.href} to={industry.href} className="block px-3 py-1 text-sm text-foreground hover:text-accent transition-smooth focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => setIsOpen(false)}>
                     {industry.name}
                   </Link>)}
               </div>
-              <Link to="/case-studies" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+              <Link to="/case-studies" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => setIsOpen(false)}>
                 Case Studies
               </Link>
-              <Link to="/faq" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+              <Link to="/faq" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => setIsOpen(false)}>
                 FAQ
               </Link>
-              <Link to="/about" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+              <Link to="/about" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => setIsOpen(false)}>
                 About
               </Link>
-              <Link to="/payment" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth" onClick={() => setIsOpen(false)}>
+              <Link to="/payment" className="block px-3 py-2 text-foreground hover:text-accent transition-smooth focus-visible:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => setIsOpen(false)}>
                 Make Payment
               </Link>
               <div className="pt-4 space-y-2">
