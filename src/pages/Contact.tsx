@@ -134,9 +134,26 @@ const Contact = () => {
                   <CardDescription>Email, phone, and optional booking link.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <p><strong>Email:</strong> hello@clearlinestudio.com</p>
-                  <p><strong>Phone:</strong> (555) 987-6543</p>
-                  <p><a className="underline underline-offset-4" href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">Open Calendly</a></p>
+                  <address className="space-y-3 not-italic">
+                    <p>
+                      <strong>Email:</strong>{' '}
+                      <a href="mailto:hello@clearlinestudio.com">hello@clearlinestudio.com</a>
+                    </p>
+                    <p>
+                      <strong>Phone:</strong>{' '}
+                      <a href="tel:5559876543">(555) 987-6543</a>
+                    </p>
+                  </address>
+                  <p>
+                    <a
+                      className="underline underline-offset-4"
+                      href={CALENDLY_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open Calendly
+                    </a>
+                  </p>
                 </CardContent>
               </Card>
 
